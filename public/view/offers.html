@@ -1,0 +1,159 @@
+<div class="search-bar">
+	<div class="container">
+		<div class="col-md-12">
+			<div class="col-md-1 search-icon-daddy"><i class="fa fa-search turn-search"></i></div>
+			<div class="col-md-10">
+				<input type="text" placeholder="search offers" class="search-input" />
+			</div>
+		</div>
+	</div>
+</div>
+<div class="side-bar">
+	<div class="container">
+		<!-- <div class="col-md-12">
+			<h2>categories</h2>
+		</div>
+		<div class="col-md-12">
+			<div class="col-md-8">
+				<h2>agriculture</h2>
+			</div>
+			<div class="col-md-2">
+				<img src="img/agric.png" />
+			</div>
+		</div> -->
+
+		<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="img/categories.png"/></a>
+  
+  <div class=""><h2>categories</h2></div>
+
+  <ul>
+  	<li>
+  		<p>agriculture</p>
+  		<img src="img/agric.png" />
+  	</li>
+  	<li>
+  		<p>art &amp; entertainment</p>
+  		<img src="img/entertainment.png" />
+  	</li>
+  	<li>
+  		<p>baby, toys &amp; kids</p>
+  		<img src="img/baby.png" />
+  	</li>
+  	<li>
+  		<p>beauty &amp; care</p>
+  		<img src="img/beauty.png" />
+  	</li>
+  	<li>
+  		<p>education</p>
+  		<img src="img/education.png" />
+  	</li>
+  	<li>
+  		<p>fashion</p>
+  		<img src="img/fashion.png" />
+  	</li>
+  	<li>
+  		<p>food &amp; drinks</p>
+  		<img src="img/fodd.png" />
+  	</li>
+  	<li>
+  		<p>gadgets &amp; appliances</p>
+  		<img src="img/gadgets.png" />
+  	</li>
+  	<li>
+  		<p>games &amp; books</p>
+  		<img src="img/games.png" />
+  	</li>
+  	<li>
+  		<p>healthcare</p>
+  		<img src="img/health.png" />
+  	</li>
+  	<li>
+  		<p>office &amp; school</p>
+  		<img src="img/office.png" />
+  	</li>
+  	<li>
+  		<p>home &amp; kitchen</p>
+  		<img src="img/kitchen.png" />
+  	</li>
+  	<li>
+  		<p>software</p>
+  		<img src="img/software.png" />
+  	</li>
+  	<li>
+  		<p>ports &amp; nutrition</p>
+  		<img src="img/sport.png" />
+  	</li>
+  	<li>
+  		<p>others</p>
+  		<img src="img/more.png" class="others-more" />
+  	</li>
+  </ul>
+</div>
+	</div>
+</div>
+<div class="trendin" id="main">
+	<div class="container">
+		<div class="col-md-12 offer-tab">
+			<span><a href="" onclick="openNav()"><img src="img/categories.png"/></span></a>
+			<span>
+				<ul>
+					<a href=""><li class="selected">all</li></a>
+					<a href=""><li>free</li></a>
+					<a href=""><li>Discounted</li></a>
+				</ul>
+			</span>
+		</div>
+	</div>
+		<div class="offer-line"></div>
+	<div class="container">
+		<div class="col-md-12 trending-products">
+			<single-product ng-repeat="manyProducts in listProduct(12)"></single-product>
+		</div>
+	</div>
+</div>
+<div class="trending-all">
+	<div class="trending-top"><h1 class="trend">Trending</h1></div>
+	<div class="trending">
+		<div class="container">
+			<div class="col-md-12 all-header">
+				<div class="col-md-4 no-padding"><h2>trending offers</h2></div>
+				<div class="col-md-8 vertical-divide"></div>
+			</div>
+			<div class="col-md-12 trending-products">
+				<single-product ng-repeat="productCounts in trendingProduct(4)"></single-product>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="top-free-all">
+	<div class="trending-top"><h1 class="tf">Top&nbspnew</h1></div>
+	<div class="top-free">
+		<div class="container">
+			<div class="col-md-12 all-header">
+				<div class="col-md-3 no-padding"><h2>top new</h2></div>
+				<div class="col-md-9 vertical-divide"></div>
+				<div class="see-all btn">See all <i class="fa fa-caret-right" aria-hidden="true"></i></div>
+			</div>
+			<div class="col-md-12 trending-products">
+				<single-product ng-repeat="productCounts in newProduct(4)"></single-product>
+			</div>
+		</div>
+	</div>
+</div>
+
+<get-app></get-app>
+
+<below-footie></below-footie>
+
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "25%";
+    document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+}
+</script>

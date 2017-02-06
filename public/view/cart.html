@@ -1,0 +1,38 @@
+<header></header>
+
+<div class="creater">
+	
+		<div class="account-header">
+			<div class="my-cart">
+				<img src="img/cart.png" />
+				<h2>my cart</h2>
+			</div>
+		</div>
+		<div class="create-account-line"></div>
+	
+</div>
+
+<div class="section-parent account-section">
+		<div class="container section-block">
+			<div class="col-md-12 offer-tab product-feat-tab">
+				<span>
+					<ul>
+						<a href="" ng-click="shoppingCartOn()"><li class="selected">shopping cart</li></a>
+						<a href="" ng-click="signinOn()"><li>sign in</li></a>
+						<a href="" ng-click="shippingDetailOn()"><li>shipping details</li></a>
+						<a href="" ng-click="paymentOn()"><li>payment method</li></a>
+					</ul>
+				</span>
+			</div>
+
+			<shopping-cart ng-show="shoppingCart"></shopping-cart>
+			<shopping-sign ng-show="signin"></shopping-sign>
+			<shipping-details ng-show="shippingDetail"></shipping-details>
+			<payment-method ng-show="payment"></payment-method>
+
+		</div>
+	</div>
+
+<get-app></get-app>
+
+<below-footie></below-footie>
