@@ -1,4 +1,4 @@
-pronita.controller('cartController',['$scope',function($scope){
+pronita.controller('cartController',['$scope','$location','mockService',function($scope,$location,mockService){
 
 	$scope.shoppingCart = 1;
 	$scope.signin = 0;
@@ -7,6 +7,9 @@ pronita.controller('cartController',['$scope',function($scope){
 	$scope.currentCartPos = 0;
 	$scope.on = 1;
 	$scope.off = 0;
+	$scope.bar = 1;
+
+	// $scope.selectedProduct = [{}];
 
 	$scope.shoppingCartOn = function(){
 		$scope.payment = $scope.off;
@@ -15,7 +18,7 @@ pronita.controller('cartController',['$scope',function($scope){
 
 		if ($scope.shoppingCart == $scope.off){
 			return $scope.shoppingCart = $scope.on;	
-		}
+		}		
 	};
 
 	$scope.signinOn = function(){
@@ -44,5 +47,25 @@ pronita.controller('cartController',['$scope',function($scope){
 		return $scope.payment = $scope.on;
 
 	};
+
+
+
+	$scope.selectedProduct = function(){
+
+		if (mockService.productBag.length > 0){
+			return mockService.productBag;
+		}
+
+		
+		// return [{productImg:"img/product-display.png", productName: "Rosaline flower pot", productTestPeriod: "1 month", productDelivery: "1-3 working days", productQunatity: "1", proudctPrice: "28000", discountedPrice: "25000"},
+		// {productImg:"img/product-display.png", productName: "correct Flower pot", productTestPeriod: "1 month", productDelivery: "1-3 working days", productQunatity: "1", proudctPrice: "25000", discountedPrice: "25000"}];
+	
+	}
+
+	$scope.closeOrder = function(){
+		console.log("POP");
+		mockService.productBag.pop();
+	}
+
 
 }]);

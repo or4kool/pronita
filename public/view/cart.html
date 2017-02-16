@@ -17,15 +17,15 @@
 			<div class="col-md-12 offer-tab product-feat-tab">
 				<span>
 					<ul>
-						<a href="" ng-click="shoppingCartOn()"><li class="selected">shopping cart</li></a>
-						<a href="" ng-click="signinOn()"><li>sign in</li></a>
-						<a href="" ng-click="shippingDetailOn()"><li>shipping details</li></a>
-						<a href="" ng-click="paymentOn()"><li>payment method</li></a>
+						<a href="" ng-click="shoppingCartOn()"><li ng-class="{'selected': shoppingCart}">shopping cart</li></a>
+						<a href="" ng-click="signinOn()"><li ng-class="{'selected': signin}">sign in</li></a>
+						<a href="" ng-click="shippingDetailOn()"><li ng-class="{'selected': shippingDetail}">shipping details</li></a>
+						<a href="" ng-click="paymentOn()"><li ng-class="{'selected': payment}">payment method</li></a>
 					</ul>
 				</span>
 			</div>
 
-			<shopping-cart ng-show="shoppingCart"></shopping-cart>
+			<shopping-cart ng-show="shoppingCart" product-name= "selectedProduct()" button-close= "closeOrder()"></shopping-cart>
 			<shopping-sign ng-show="signin"></shopping-sign>
 			<shipping-details ng-show="shippingDetail"></shipping-details>
 			<payment-method ng-show="payment"></payment-method>

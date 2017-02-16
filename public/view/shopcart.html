@@ -15,19 +15,19 @@
 				<p>unit price</p>
 			</div>
 		</div>
-		<div class="listing-product">
+		<div class="listing-product" ng-repeat="products in productName()">
 			<div class="col-md-5">
 				<img src="img/product-display.png" class="product-img" />
 				<div class="listed-product-info">
-					<h2>Rosaline flower pot</h2>
-					<p>testing period:<strong>1 month</strong></p>
+					<h2>{{products.productName}}</h2>
+					<p>testing period:<strong>{{products.productTestPeriod}}</strong></p>
 				</div>
 			</div>
 			<div class="col-md-2 listing-statement">
-				<p>1-3 working days</p>
+				<p>{{products.productDelivery}}</p>
 			</div>
 			<div class="col-md-2 listing-statement">
-				<p>1</p>
+				<p>{{products.productQunatity}}</p>
 				<div class="up-down-btn">
 					<img src="" />
 					<img src="" />
@@ -35,60 +35,11 @@
 			</div>
 			<div class="col-md-3 listing-statement lisitng-product-price">
 				<p><strike>N28,000</strike></p>
-				<p>N25,000</p>
-				<p class="btn">X</p>
+				<p>{{products.proudctPrice}}</p>
+				<p class="btn" ng-click="buttonClose()">X</p>
 			</div>
 		</div>
 
-		<div class="listing-product">
-			<div class="col-md-5">
-				<img src="img/product-display.png" class="product-img" />
-				<div class="listed-product-info">
-					<h2>Rosaline flower pot</h2>
-					<p>testing period:<strong>1 month</strong></p>
-				</div>
-			</div>
-			<div class="col-md-2 listing-statement">
-				<p>1-3 working days</p>
-			</div>
-			<div class="col-md-2 listing-statement">
-				<p>1</p>
-				<div class="up-down-btn">
-					<img src="" />
-					<img src="" />
-				</div>
-			</div>
-			<div class="col-md-3 listing-statement lisitng-product-price">
-				<p><strike>N28,000</strike></p>
-				<p>N25,000</p>
-				<p class="btn">X</p>
-			</div>
-		</div>
-
-		<div class="listing-product">
-			<div class="col-md-5">
-				<img src="img/product-display.png" class="product-img" />
-				<div class="listed-product-info">
-					<h2>Rosaline flower pot</h2>
-					<p>testing period:<strong>1 month</strong></p>
-				</div>
-			</div>
-			<div class="col-md-2 listing-statement">
-				<p>1-3 working days</p>
-			</div>
-			<div class="col-md-2 listing-statement">
-				<p>1</p>
-				<div class="up-down-btn">
-					<img src="" />
-					<img src="" />
-				</div>
-			</div>
-			<div class="col-md-3 listing-statement lisitng-product-price">
-				<p><strike>N28,000</strike></p>
-				<p>N25,000</p>
-				<p class="btn">X</p>
-			</div>
-		</div>
 	</div>
 	<div class="col-md-12">
 		<div class="product-summary listing-product">

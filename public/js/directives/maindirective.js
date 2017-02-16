@@ -33,7 +33,18 @@ pronita.directive('shoppingCart', function(){
 		restric: 'E',
 		templateUrl: '../view/shopcart.html',
 		replace: true,
-		scope: {}
+		scope: {
+			productName: "&",
+			buttonClose: "&"
+		}
+
+		// link: function($scope, element, attrs){
+
+		// 	var coh = $scope;
+		// 	console.log(coh.selectedProduct[0].productImg);
+		// }
+
+		
 	};
 });
 

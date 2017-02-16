@@ -1,5 +1,7 @@
 pronita.service('mockService', ['$http','$q',function($http,$q){
 
+	this.productBag = [];
+
 	var deffered = $q.defer();
 		
 	this.poster = function(sendData, url){
@@ -22,7 +24,7 @@ pronita.service('mockService', ['$http','$q',function($http,$q){
 		});
 
 		return deffered.promise;
-	};
+	};	
 
 
 }]);

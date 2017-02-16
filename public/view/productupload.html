@@ -1,9 +1,14 @@
 <div class="container">
 	<div class="col-md-12">
-		<form ng-submit="toUpload()">
-			<input type="text" placeholder="Product name" /></br></br>
-			<input type="text" placeholder="ratings" /></br></br>
-			<textarea placeholder="Description" rows="20" cols="20">
+		<form ng-submit="triggerUpload()">
+			<input type="text" placeholder="Product name" ng-model="allProductInfo.productInfo.name"/></br></br>
+			<input type="text" placeholder="startup name" ng-model="allProductInfo.productInfo.type"/></br></br>
+			<input type="text" placeholder="price" ng-model="allProductInfo.productPrice.price"/></br></br>
+			<input type="text" placeholder="discount" ng-model="allProductInfo.productPrice.discount"/></br></br>
+			<input type="text" placeholder="ratings" ng-model="allProductInfo.productInfo.rate"/></br></br>
+			<input type="text" placeholder="key feature title" ng-model="allProductInfo.keyfeat.title"/></br></br>
+			<input type="text" placeholder="key feature descirption" ng-model="allProductInfo.keyfeat.description"/></br></br>
+			<textarea placeholder="Description" rows="20" cols="20" ng-model="allProductInfo.productInfo.description">
 				
 			</textarea></br>
 			<input type="submit" value="upload" /></br></br>
