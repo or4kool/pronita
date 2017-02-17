@@ -30,35 +30,35 @@ var inventorySchema= new Schema({
 var keyFeaturesSchema= new Schema({
     title: String,
     description: String,
-    propertyId:{type:Schema.Types.ObjectId, ref:'inventory'},
+    inventoryId:{type:Schema.Types.ObjectId, ref:'inventory'},
     dateCreated:{type: Date, default: Date.now}
 });
 var specificationSchema= new Schema({
     title: String,
     description: String,
-    propertyId:{type:Schema.Types.ObjectId, ref:'inventory'},
+    inventoryId:{type:Schema.Types.ObjectId, ref:'inventory'},
     dateCreated:{type: Date, default: Date.now}
 });
 var offerDetailsSchema= new Schema({
     title: String,
     description: String,
-    propertyId:{type:Schema.Types.ObjectId, ref:'inventory'},
+    inventoryId:{type:Schema.Types.ObjectId, ref:'inventory'},
     dateCreated:{type: Date, default: Date.now}
 });
 var offerConditionsSchema= new Schema({
     title: String,
     description: String,
-    propertyId:{type:Schema.Types.ObjectId, ref:'inventory'},
+    inventoryId:{type:Schema.Types.ObjectId, ref:'inventory'},
     dateCreated:{type: Date, default: Date.now}
 });
 var likesSchema= new Schema({
     user: {type:Schema.Types.ObjectId, ref:'user'},
-    propertyId:{type:Schema.Types.ObjectId, ref:'inventory'},
+    inventoryId:{type:Schema.Types.ObjectId, ref:'inventory'},
     dateCreated:{type: Date, default: Date.now}
 });
 var commentsSchema= new Schema({
     user: {type:Schema.Types.ObjectId, ref:'user'},
-    propertyId:{type:Schema.Types.ObjectId, ref:'inventory'},
+    inventoryId:{type:Schema.Types.ObjectId, ref:'inventory'},
     comment:String,
     dateCreated:{type: Date, default: Date.now}
 });
@@ -66,7 +66,7 @@ var inventorySettingsSchema= new Schema({
     price: Number,
     discount: Number,
     expiryDate:String,
-    propertyId:{type:Schema.Types.ObjectId, ref:'inventory'},
+    inventoryId:{type:Schema.Types.ObjectId, ref:'inventory'},
     dateCreated:{type: Date, default: Date.now}
 });
 var categorySchema= new Schema({
@@ -125,7 +125,7 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
     });
 };
 var tagSchema= new Schema({
-    propertyId:{type:Schema.Types.ObjectId, ref:'inventory'},
+    inventoryId:{type:Schema.Types.ObjectId, ref:'inventory'},
     tags:String,
     dateCreated:{ type: Date, default: Date.now },
     lastUpdated:{ type: Date, default: Date.now }
