@@ -191,18 +191,26 @@ router.get('/userProfile/:id', function(req, res, next) {
 // router.post('/multer', upload.single('file'));
 router.post('/inventory', function(req, res, next){
     adminSchema.inventory.create(req.body, function(err, post){
-        if(err) return next(err)
-        req.body.propertyId=post._id;
-        adminSchema.inventorySettings.create(req.body, function(err, newPost){
-            var updates={inventorySettings:newPost._id}
-            var posttag={tags:req.body.tag, propertyId:post._id }
-            adminSchema.tag.create(posttag, function(err, tag){
-                updates.inventoryTags=tag._id;
-                adminSchema.inventory.findByIdAndUpdate(post._id, updates, function(err, update){
-                    if(err)return next(err)
-                    res.json(update)
+        if(err) return next(err);
+        //get the just added inventory's Id
+        req.body.inventoryId=post._id;
+        updates={}
+
+        //iterate over all the keys in the object
+        for(key in req.body){
+            if(Object.prototype.toString.call( req.body[key] ) === '[object Array]' ) {
+                req.body[key].inventoryId=post._id;
+                //add each to the database
+                adminSchema[key].create(req.body[key][keys], function(errOther, otherPost){
+                    if(errOther) return (errOther);
+                    updates[key]=otherPost._id;
                 })
-            })
+            }
+        }
+        // update the inventory with added ids
+        adminSchema.inventory.findByIdAndUpdate(post._id, updates, function(err, update){
+            if(err)return next(err)
+            res.json(update)
         })
     })
 });
