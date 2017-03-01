@@ -6,6 +6,13 @@ pronita.controller('offerController', ['$scope', function($scope){
 	$scope.listProductCounter = 0;
 	$scope.trendingProductCounter = 0;
 	$scope.newProductCounter = 0;
+	$scope.offerLink = {
+		all: 1,
+		free: 0,
+		discounted: 0
+	}
+
+	// $scope.all = 
 	
 	// $scope.topnewHeader = 'top new';
 
@@ -41,6 +48,25 @@ pronita.controller('offerController', ['$scope', function($scope){
 		}
 		$scope.newProductCounter = 1;
 		return $scope.listNewProductPopulate;
+	}
+
+	$scope.checkPos = function(pos){
+		console.log("Clicked");
+		if(pos == 0 && $scope.offerLink.all == 0){
+			$scope.offerLink.all = 1;
+			$scope.offerLink.free = 0;
+			$scope.offerLink.discounted = 0;
+		}
+		else if(pos == 1 && $scope.offerLink.free == 0){
+			$scope.offerLink.free = 1;
+			$scope.offerLink.all = 0;
+			$scope.offerLink.discounted = 0;
+		}
+		else{
+			$scope.offerLink.discounted = 1;
+			$scope.offerLink.all = 0;
+			$scope.offerLink.free = 0;
+		}
 	}
 
 }]);

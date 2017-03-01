@@ -15,7 +15,8 @@ pronita.service('mockService', ['$http','$q',function($http,$q){
 		}).then(function successCallback(response){
 
 				// console.log(response.data.error);
-				deffered.resolve(response.data);
+				deffered.resolve(response);
+				// deffered.resolve(response.data);
 
 				// console.log(deffered.promise);
 

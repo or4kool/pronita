@@ -29,8 +29,16 @@ a {
   background-color: transparent;
   font-weight: 600; }
 
+.navbar-default .inner-nav > .active > a, .navbar-default .inner-nav > .active > a:focus, .navbar-default .inner-nav > .active > a:hover {
+  color: #39334d;
+  background-color: transparent;
+  font-weight: 600; }
+
 .navbar-default .navbar-nav > li > a {
   color: #ffe7ac; }
+
+.navbar-default .inner-nav > li > a {
+  color: #39334d; }
 
 .post-offer, .sign-in {
   border: 1px solid;
@@ -41,6 +49,7 @@ a {
 .sign-in {
   background-color: #f4d06f;
   color: #62471c;
+  border: 1px solid #f4d06f;
   padding: 9px 25px !important;
   margin-left: 20px; }
 
@@ -109,6 +118,36 @@ a {
     padding-left: 0px !important;
     padding-right: 15px !important;
     margin-top: 50px; }
+
+.offer-next {
+  float: left;
+  margin-top: 50px;
+  width: 100%; }
+  .offer-next .the-next {
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 10px;
+    margin-right: 15px;
+    color: #392f5a; }
+  .offer-next img {
+    width: 45px; }
+  .offer-next .offer-next-divide {
+    border-bottom: 1px solid #392f5a;
+    margin-left: 32.5%;
+    margin-top: -11px;
+    position: absolute;
+    width: 100%; }
+
+.paginationed {
+  float: right;
+  margin-right: 15px;
+  margin-top: 25px; }
+  .paginationed p {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 15px; }
+  .paginationed p:last-child {
+    margin-left: 10px; }
 
 .product-info {
   background: #fff;
@@ -251,6 +290,9 @@ a {
 
 .footer-third {
   text-align: center; }
+  .footer-third img {
+    width: 75px;
+    margin-top: 30px; }
   .footer-third p {
     color: rgba(255, 255, 255, 0.78);
     font-weight: 300;
@@ -308,8 +350,9 @@ a {
 
 .offer-line {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  margin-left: 25%;
-  margin-top: -3px; }
+  margin-left: 23.8%;
+  margin-top: -3px;
+  width: 100%; }
 
 .search-bar {
   background: #fff8f0;
@@ -783,7 +826,7 @@ a {
   width: 0;
   position: absolute;
   z-index: 1;
-  top: 133px;
+  top: initial;
   left: 0;
   background-color: #f4f4f4;
   overflow-x: hidden;
@@ -795,7 +838,7 @@ a {
     letter-spacing: 2px;
     font-size: 15px;
     padding-left: 100px;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid #392f5a;
     padding-bottom: 20px;
     margin-bottom: 40px; }
   .sidenav ul {
@@ -841,7 +884,8 @@ a {
 
 #main {
   transition: margin-left .5s;
-  padding: 16px; }
+  padding: 16px;
+  overflow: hidden; }
 
 .create-account-bg {
   background-color: #f9f9f9; }
