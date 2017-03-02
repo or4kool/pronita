@@ -1,4 +1,10 @@
-pronita.controller('offerController', ['$scope', function($scope){
+pronita.controller('offerController', offerDetails);
+
+	offerDetails.$inject = ['$scope'];
+
+	function offerDetails($scope){
+
+	
 
 	$scope.listProductPopulate = [];
 	$scope.listNewProductPopulate = [];
@@ -69,4 +75,4 @@ pronita.controller('offerController', ['$scope', function($scope){
 		}
 	}
 
-}]);
+};
