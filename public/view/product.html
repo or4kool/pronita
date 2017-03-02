@@ -76,11 +76,11 @@
 			<div class="col-md-12 offer-tab product-feat-tab">
 				<span>
 					<ul>
-						<a href=""><li class="selected">key features</li></a>
-						<a href=""><li>specifications</li></a>
-						<a href=""><li>offer details</li></a>
-						<a href=""><li>offer conditions</li></a>
-						<a href=""><li>reviews</li></a>
+						<a href="" ng-click="link(0)"><li ng-class="{'selected': keyFeatures}">key features</li></a>
+						<a href="" ng-click="link(1)"><li ng-class="{'selected': specifications}">specifications</li></a>
+						<a href="" ng-click="link(2)"><li ng-class="{'selected': offerDetails}">offer details</li></a>
+						<a href="" ng-click="link(3)"><li ng-class="{'selected': offerConditions}">offer conditions</li></a>
+						<a href="" ng-click="link(4)"><li ng-class="{'selected': reviews}">reviews</li></a>
 					</ul>
 				</span>
 			</div>

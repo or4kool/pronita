@@ -1,4 +1,8 @@
-pronita.service('mockService', ['$http','$q',function($http,$q){
+pronita.service('mockService', mainServiceDetail);
+
+	mainServiceDetail.$inject = ['$http','$q', '$rootScope'];
+
+	function mainServiceDetail($http,$q,$rootScope){
 
 	this.productBag = [];
 
@@ -28,4 +32,4 @@ pronita.service('mockService', ['$http','$q',function($http,$q){
 	};	
 
 
-}]);
+};

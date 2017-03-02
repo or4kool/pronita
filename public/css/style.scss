@@ -918,6 +918,13 @@ a {
 	    margin-top: 50px;
 	    margin-bottom: 50px;
 	}
+
+	.forgot{
+		margin-top: 20px;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		font-size: 11px;
+	}
 }
 
 .account-section{
@@ -1013,6 +1020,36 @@ a {
 		text-transform: uppercase;
 		font-size: 12px;
 		letter-spacing: 1px;
+
+		.product-num{
+			display: inline-block;
+		    transform: translateY(-5px);
+		}
+
+		.up-down-btn{
+			display: inline-block;
+			.up-btn{
+				display: block;
+				transform: rotateZ(180deg);
+				border: 1px solid #c3c3c3;
+				padding: 2px;
+				border-bottom-right-radius: 10px;
+				border-bottom-left-radius: 10px;
+				margin-bottom: -2px;
+				width: 13px;
+			}
+			.down-btn{
+				padding: 2px;
+				border-bottom-right-radius: 10px;
+				border-bottom-left-radius: 10px;
+				border: 1px solid #c3c3c3;
+				margin-top: -3px;
+				padding-top: 0;
+				border-top: 0px;
+				padding-top: 3px;
+			    width: 13px;
+			}
+		}
 	}
 
 	.lisitng-product-price{
@@ -1359,4 +1396,29 @@ color: #f1f1f1;
 .modal-open .modal {
     overflow-x: initial !important;
     overflow-y: initial !important;
+}
+
+
+.housemaster{
+	float: left;
+	width: 100%;
+	margin-top: 25px;
+}
+
+.shipping-form-main{
+	margin-top: 50px;
+}
+
+.get-acc{
+	font-size: 25px !important;
+	font-weight: 300;
+}
+
+.signup-btn{
+	border: 2px solid #f3e7cf;
+    padding: 12px 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 11px;
+    border-radius: 5px;
 }

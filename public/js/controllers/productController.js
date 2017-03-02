@@ -11,7 +11,7 @@ pronita.controller('productController', productDetail);
 	pc.recommendationList = [];
 	pc.recommendationCount = 0;
 
-	$scope.inventory = {
+	pc.inventory = {
 		productImg:"img/product-display.png",
 		productName:"Rosaline flower pot",
 		productTestPeriod: "1 month",
@@ -20,6 +20,53 @@ pronita.controller('productController', productDetail);
 		proudctPrice: "28000",
 		discountedPrice: "25000"
 	}
+
+	$scope.keyFeatures = 1;
+	$scope.specifications = 0;
+	$scope.offerDetails = 0;
+	$scope.offerConditions = 0;
+	$scope.review = 0;
+
+	$scope.link = function (loc){
+			
+
+			if (loc == 0){
+					$scope.keyFeatures = 1;
+					$scope.specifications = 0;
+					$scope.offerDetails = 0;
+					$scope.offerConditions = 0;
+					$scope.reviews = 0;
+			}
+			else if (loc == 1){
+				$scope.keyFeatures = 0;
+				$scope.specifications = 1;
+				$scope.offerDetails = 0;
+				$scope.offerConditions = 0;
+				$scope.reviews = 0;
+			}
+			else if (loc == 2){
+				$scope.keyFeatures = 0;
+				$scope.specifications = 0;
+				$scope.offerDetails = 1;
+				$scope.offerConditions = 0;
+				$scope.reviews = 0;
+			}else if(loc ==3){
+				$scope.keyFeatures = 0;
+				$scope.specifications = 0;
+				$scope.offerDetails = 0;
+				$scope.offerConditions = 1;
+				$scope.reviews = 0;
+			}else{
+				$scope.keyFeatures = 0;
+				$scope.specifications = 0;
+				$scope.offerDetails = 0;
+				$scope.offerConditions = 0;
+				$scope.reviews = 1;
+			}
+
+			// return productDetailLinks;
+	}
+
 
 
 	$scope.recommender = function(num){
@@ -42,13 +89,13 @@ pronita.controller('productController', productDetail);
 
 		
 		mockService.productBag.push({
-			productImg:$scope.inventory.productName,
-			productName:$scope.inventory.productName,
-			productTestPeriod:$scope.inventory.productTestPeriod,
-			productDelivery:$scope.inventory.productDelivery,
-			productQunatity:$scope.inventory.productQunatity,
-			proudctPrice:$scope.inventory.proudctPrice,
-			discountedPrice:$scope.inventory.discountedPrice
+			productImg:pc.inventory.productName,
+			productName:pc.inventory.productName,
+			productTestPeriod:pc.inventory.productTestPeriod,
+			productDelivery:pc.inventory.productDelivery,
+			productQunatity:pc.inventory.productQunatity,
+			proudctPrice:pc.inventory.proudctPrice,
+			discountedPrice:pc.inventory.discountedPrice
 		});
 		console.log(mockService.productBag);
 
