@@ -21,53 +21,15 @@ pronita.controller('productController', productDetail);
 		discountedPrice: "25000"
 	}
 
-	$scope.keyFeatures = 1;
-	$scope.specifications = 0;
-	$scope.offerDetails = 0;
-	$scope.offerConditions = 0;
-	$scope.review = 0;
+	$scope.productInfo = {
+		keyFeatures: 1,
+		specifications: 0,
+		offerDetails: 0,
+		offerConditions: 0,
+		review: 0
 
-	$scope.link = function (loc){
-			
-
-			if (loc == 0){
-					$scope.keyFeatures = 1;
-					$scope.specifications = 0;
-					$scope.offerDetails = 0;
-					$scope.offerConditions = 0;
-					$scope.reviews = 0;
-			}
-			else if (loc == 1){
-				$scope.keyFeatures = 0;
-				$scope.specifications = 1;
-				$scope.offerDetails = 0;
-				$scope.offerConditions = 0;
-				$scope.reviews = 0;
-			}
-			else if (loc == 2){
-				$scope.keyFeatures = 0;
-				$scope.specifications = 0;
-				$scope.offerDetails = 1;
-				$scope.offerConditions = 0;
-				$scope.reviews = 0;
-			}else if(loc ==3){
-				$scope.keyFeatures = 0;
-				$scope.specifications = 0;
-				$scope.offerDetails = 0;
-				$scope.offerConditions = 1;
-				$scope.reviews = 0;
-			}else{
-				$scope.keyFeatures = 0;
-				$scope.specifications = 0;
-				$scope.offerDetails = 0;
-				$scope.offerConditions = 0;
-				$scope.reviews = 1;
-			}
-
-			// return productDetailLinks;
 	}
-
-
+	
 
 	$scope.recommender = function(num){
 

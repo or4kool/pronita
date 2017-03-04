@@ -112,4 +112,55 @@ pronita.directive('popUp', function(){
 			
 		}
 	}
-})
+});
+
+pronita.directive('linker', function(){
+
+	this.handleLink = function(scope, element, attr){
+		element.bind('click', function(){
+			
+			if (attr.loc == 0){
+				scope.productInfo.keyFeatures = 1;
+				scope.productInfo.specifications = 0;
+				scope.productInfo.offerDetails = 0;
+				scope.productInfo.offerConditions = 0;
+				scope.productInfo.reviews = 0;
+			}
+			else if (attr.loc == 1){
+				scope.productInfo.keyFeatures = 0;
+				scope.productInfo.specifications = 1;
+				scope.productInfo.offerDetails = 0;
+				scope.productInfo.offerConditions = 0;
+				scope.productInfo.reviews = 0;
+			}
+			else if (attr.loc == 2){
+				scope.productInfo.keyFeatures = 0;
+				scope.productInfo.specifications = 0;
+				scope.productInfo.offerDetails = 1;
+				scope.productInfo.offerConditions = 0;
+				scope.productInfo.reviews = 0;
+			}else if(attr.loc ==3){
+				scope.productInfo.keyFeatures = 0;
+				scope.productInfo.specifications = 0;
+				scope.productInfo.offerDetails = 0;
+				scope.productInfo.offerConditions = 1;
+				scope.productInfo.reviews = 0;
+			}else{
+				scope.productInfo.keyFeatures = 0;
+				scope.productInfo.specifications = 0;
+				scope.productInfo.offerDetails = 0;
+				scope.productInfo.offerConditions = 0;
+				scope.productInfo.reviews = 1;
+			}
+
+			scope.$apply("productInfo");
+
+
+		})
+	}
+
+	return {
+		restric: 'A',
+		link: handleLink
+	}
+});

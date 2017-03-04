@@ -66,7 +66,7 @@
 			<div class="col-md-6 product-peep">
 				<img src="img/product-display.png" />
 			</div>
-		</div>
+		</div> 
 	</div>
 
 	
@@ -76,15 +76,17 @@
 			<div class="col-md-12 offer-tab product-feat-tab">
 				<span>
 					<ul>
-						<a href="" ng-click="link(0)"><li ng-class="{'selected': keyFeatures}">key features</li></a>
-						<a href="" ng-click="link(1)"><li ng-class="{'selected': specifications}">specifications</li></a>
-						<a href="" ng-click="link(2)"><li ng-class="{'selected': offerDetails}">offer details</li></a>
-						<a href="" ng-click="link(3)"><li ng-class="{'selected': offerConditions}">offer conditions</li></a>
-						<a href="" ng-click="link(4)"><li ng-class="{'selected': reviews}">reviews</li></a>
+						<a href="" linker loc=0><li ng-class="{'selected': productInfo.keyFeatures}">key features</li></a>
+						<a href="" linker loc=1><li ng-class="{'selected': productInfo.specifications}">specifications</li></a>
+						<a href="" linker loc=2><li ng-class="{'selected': productInfo.offerDetails}">offer details</li></a>
+						<a href="" linker loc=3><li ng-class="{'selected': productInfo.offerConditions}">offer conditions</li></a>
+						<a href="" linker loc=4><li ng-class="{'selected': productInfo.reviews}">reviews</li></a>
+
 					</ul>
 				</span>
 			</div>
 			<div class="col-md-12">
+			
 				<div class="col-md-6 feat-info-block">
 					<h2>This is an introductory text</h2>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
