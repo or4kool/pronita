@@ -39,7 +39,7 @@ var server = require('http').Server(app);
 
 //socket configurations for websockets
 var io = require('socket.io')(server);
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 5000;
 io.on('connection', function(socket){
     console.log('a user connected');
     socket.on('disconnect', function(){

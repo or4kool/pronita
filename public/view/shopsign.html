@@ -1,8 +1,8 @@
 <div class="housemaster">
 
 
-	<div class="col-md-12 signin-shop">
-	<h2 class="signup-header"> Sign Up</h2>
+	<div class="col-md-12 signin-shop" ng-hide="noAccount">
+	<h2 class="signup-header"> Sign In</h2>
 		<div class="signup-form">
 			<form>
 				<span><input type="email" placeholder="email" class="n-input" /></span>
@@ -16,7 +16,7 @@
 
 				<div class="signin-area">
 					<p class="get-acc">Don't have a pronita account?</p>
-					<h2 class="btn signup-btn">sign up</h2>
+					<h2 class="btn signup-btn" ng-click="noAccount = true">sign up</h2>
 				</div>
 			</div>
 		</div>
@@ -24,8 +24,8 @@
 
 
 	
-	<div class="col-md-12">
-		<h2 class="signup-header"> Sign In</h2>
+	<div class="col-md-12" ng-show="noAccount">
+		<h2 class="signup-header"> Sign Up</h2>
 		<div class="signup-form">
 			<form>
 				<span><input type="text" placeholder="Full name" class="n-input" /></span>
@@ -43,7 +43,7 @@
 
 				<div class="signin-area">
 					<span><p>Already have a pronita account?</p></span>
-					<span><h2 class="btn sign-btn">sign in</h2></span>
+					<span><h2 class="btn sign-btn" ng-click="noAccount = false">sign in</h2></span>
 				</div>
 			</div>
 		</div>

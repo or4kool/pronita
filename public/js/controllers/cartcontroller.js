@@ -8,6 +8,7 @@ pronita.controller('cartController',['$scope','$location','mockService',function
 	$scope.on = 1;
 	$scope.off = 0;
 	$scope.bar = 1;
+	$scope.noAccount = false;
 
 	// $scope.selectedProduct = [{}];
 
