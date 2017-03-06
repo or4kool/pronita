@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var app = require('./app');
+var app = require('../app');
 var debug = require('debug')('3aauctionAPI:server');
 var http = require('http');
 config = require('../config/config');
