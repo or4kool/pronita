@@ -6,6 +6,9 @@
     "node_modules",
     "components"
   ],
+  "scripts": {
+  "postinstall": "node_modules/bower/bin/bower install -F"
+},
   "dependencies": {
     "angular": "^1.5.8",
     "angular-resource": "^1.5.8",
