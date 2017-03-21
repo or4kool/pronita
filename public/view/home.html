@@ -52,13 +52,13 @@
 					<div class="col-md-8 vertical-divide"></div>
 				</div>
 				<div class="col-md-12 trending-products">
-					<single-product ng-repeat="productCounts in productCount"></single-product>
+					<single-product product-detail = "addCarter()" product-data = "productData"></single-product>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="top-free-all">
-		<div class="trending-top"><h1 class="tf">Top&nbspFree</h1></div>
+		<div class="trending-top"><h1 class="tf">Top&amp;nbspFree</h1></div>
 		<div class="top-free">
 			<div class="container">
 				<div class="col-md-12 all-header">
@@ -67,7 +67,7 @@
 					<div class="see-all btn">See all <i class="fa fa-caret-right" aria-hidden="true"></i></div>
 				</div>
 				<div class="col-md-12 trending-products">
-					<single-product ng-repeat="productCounts in productCount"></single-product>
+					<single-product product-data = "productData"></single-product>
 				</div>
 			</div>
 		</div>
@@ -82,7 +82,7 @@
 					<div class="see-all btn">See all</div>
 				</div>
 				<div class="col-md-12 trending-products">
-					<single-product ng-repeat="productCounts in productCount"></single-product>
+					<single-product product-data = "productData"></single-product>
 					
 				</div>
 			</div>

@@ -1,9 +1,9 @@
 pronita.controller('productController', productDetail);
 
 
-	productDetail.$inject = ['$scope','$location', 'mockService'];
+	productDetail.$inject = ['$scope','$location', 'mockService', 'addCart'];
 
-	function productDetail($scope,$location, mockService){
+	function productDetail($scope,$location, mockService, addCart){
 
 		var pc = this;
 
@@ -11,15 +11,15 @@ pronita.controller('productController', productDetail);
 	pc.recommendationList = [];
 	pc.recommendationCount = 0;
 
-	pc.inventory = {
-		productImg:"img/product-display.png",
-		productName:"Rosaline flower pot",
-		productTestPeriod: "1 month",
-		productDelivery: "1-3 working days",
-		productQunatity: "1",
-		proudctPrice: "28000",
-		discountedPrice: "25000"
-	}
+	// pc.inventory = {
+	// 	productImg:"img/product-display.png",
+	// 	productName:"Rosaline flower pot",
+	// 	productTestPeriod: "1 month",
+	// 	productDelivery: "1-3 working days",
+	// 	productQunatity: "1",
+	// 	proudctPrice: "28000",
+	// 	discountedPrice: "25000"
+	// }
 
 	$scope.productInfo = {
 		keyFeatures: 1,
@@ -47,20 +47,9 @@ pronita.controller('productController', productDetail);
 	var add = 0;
 
 
-	$scope.addCart = function(){
+	$scope.addCarter = function(){
 
-		
-		mockService.productBag.push({
-			productImg:pc.inventory.productName,
-			productName:pc.inventory.productName,
-			productTestPeriod:pc.inventory.productTestPeriod,
-			productDelivery:pc.inventory.productDelivery,
-			productQunatity:pc.inventory.productQunatity,
-			proudctPrice:pc.inventory.proudctPrice,
-			discountedPrice:pc.inventory.discountedPrice
-		});
-		console.log(mockService.productBag);
-
+		addCart.addIt();
 		$location.url("/cart");
 	}
 

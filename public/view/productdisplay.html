@@ -1,12 +1,12 @@
-<div class="col-md-3">
+<div class="col-md-3" ng-repeat="productsData in productData | limitTo:4">
 	<div class="all-sha">
-		<img src="img/product_one.png" />
+		<img src="{{productsData.img}}" />
 		<div class="product-info">
-			<h2 class="product-name">Green Flower</h2>
-			<p>home kit | lagos</p>
+			<h2 class="product-name">{{productsData.name}}</h2>
+			<p>{{productsData.category}}| {{productsData.location}}</p>
 			<div class="price-btn">
-				<h2>&#8358;15,000</h2>
-				<div class="btn">discover</div>
+				<h2>&#8358;{{productsData.amount}}</h2>
+				<div class="btn" ng-click="productDetail()">discover</div>
 			</div>
 		</div>
 	</div>

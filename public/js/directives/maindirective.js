@@ -13,7 +13,10 @@ pronita.directive('singleProduct', function(){
 		restric: 'E',
 		templateUrl: '../view/productdisplay.html',
 		replace: true,
-		scope: {}
+		scope: {
+			productDetail: "&",
+			productData: "="
+		}
 	};
 });
 

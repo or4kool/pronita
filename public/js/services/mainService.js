@@ -4,7 +4,7 @@ pronita.service('mockService', mainServiceDetail);
 
 	function mainServiceDetail($http,$q,$rootScope){
 
-	this.productBag = [];
+	// this.productBag = [];
 
 	var deffered = $q.defer();
 		
@@ -33,3 +33,79 @@ pronita.service('mockService', mainServiceDetail);
 
 
 };
+
+pronita.service('dataFetcher', dataFetcherDetail);
+
+	dataFetcherDetail.$inject = ['$http', '$q', '$rootScope'];
+
+	function dataFetcherDetail($http, $q, $rootScope){
+		
+		this.fetchData = function(url){
+
+			var deffered = $q.defer();
+
+			$http({
+					method: 'GET',
+					url: url,
+					headers : {'Content-Type': 'application/json'}
+
+			}).then(function successCallback(response){
+
+					deffered.resolve(response);
+					
+			}, function errorCallback(response){
+
+			});
+
+			return deffered.promise;
+		};
+
+	};
+
+
+
+
+
+pronita.service('addCart', addCartDetails);
+
+		addCartDetails.$inject = ['$rootScope'];
+
+		function addCartDetails($rootScope){
+
+			var ad = this;
+
+			ad.inventory = {
+				productImg:"img/product-display.png",
+				productName:"Rosaline flower pot",
+				productTestPeriod: "1 month",
+				productDelivery: "1-3 working days",
+				productQunatity: "1",
+				proudctPrice: "28000",
+				discountedPrice: "25000"
+			}
+
+			ad.productBag = [];
+
+			ad.addIt = function(){
+
+				
+				ad.productBag.push({
+					productImg:ad.inventory.productName,
+					productName:ad.inventory.productName,
+					productTestPeriod:ad.inventory.productTestPeriod,
+					productDelivery:ad.inventory.productDelivery,
+					productQunatity:ad.inventory.productQunatity,
+					proudctPrice:ad.inventory.proudctPrice,
+					discountedPrice:ad.inventory.discountedPrice
+				});
+				console.log(ad.productBag);
+
+				
+			}
+
+		};
+
+
+	
+
+	
