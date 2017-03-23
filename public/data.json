@@ -8,6 +8,7 @@
 			"location": "Lagos",
 			"amount": "15,000",
 			"img": "../img/product_one.png",
+			"part": "top free",
 			"ratings": [
 				1,
 				4,
@@ -131,6 +132,7 @@
 			"location": "Lagos",
 			"amount": "40,500",
 			"img": "../img/product_two.jpg",
+			"part": "top discounted",
 			"ratings": [
 				1,
 				4,
@@ -254,6 +256,7 @@
 			"location": "Lagos",
 			"amount": "25,000",
 			"img": "../img/product_three.jpg",
+			"part": "top new",
 			"ratings": [
 				1,
 				4,
@@ -377,6 +380,7 @@
 			"location": "Lagos",
 			"amount": "75,000",
 			"img": "../img/product_four.jpg",
+			"part": "top free",
 			"ratings": [
 				1,
 				4,
@@ -500,6 +504,7 @@
 			"location": "Lagos",
 			"amount": "1,115,000",
 			"img": "../img/product_five.jpg",
+			"part": "top trending",
 			"ratings": [
 				1,
 				4,
@@ -623,6 +628,7 @@
 			"location": "Lagos",
 			"amount": "550,000",
 			"img": "../img/product_one.png",
+			"part": "top free",
 			"ratings": [
 				1,
 				4,
@@ -746,6 +752,7 @@
 			"location": "Lagos",
 			"amount": "45,000",
 			"img": "../img/product_three.jpg",
+			"part": "top discounted",
 			"ratings": [
 				1,
 				4,
@@ -869,6 +876,7 @@
 			"location": "Lagos",
 			"amount": "1,115,000",
 			"img": "../img/product_five.jpg",
+			"part": "top trending",
 			"ratings": [
 				1,
 				4,

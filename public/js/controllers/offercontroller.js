@@ -1,9 +1,14 @@
 pronita.controller('offerController', offerDetails);
 
-	offerDetails.$inject = ['$scope'];
+	offerDetails.$inject = ['$scope', 'getproduct'];
 
-	function offerDetails($scope){
+	function offerDetails($scope,getproduct){
 
+
+	var oc = this;
+
+
+	oc.url = "../../data.json";
 	
 
 	$scope.listProductPopulate = [];
@@ -74,5 +79,14 @@ pronita.controller('offerController', offerDetails);
 			$scope.offerLink.free = 0;
 		}
 	}
+
+
+	var pd = getproduct.getAllProduct(oc.url);
+
+	pd.then(function(result){
+		$scope.productData = result;
+	});
+	
+	  
 
 };

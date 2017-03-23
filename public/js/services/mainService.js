@@ -106,6 +106,39 @@ pronita.service('addCart', addCartDetails);
 		};
 
 
+
+pronita.service('getproduct', getproductDetails);
+
+getproductDetails.$inject = ['dataFetcher','$rootScope', '$q'];
+
+function getproductDetails(dataFetcher, rootScope, $q){
+
+	  this.getAllProduct = function(url){
+
+	  	var def = $q.defer();
+
+	  	this.productData = '';
+
+	  	var productLists = dataFetcher.fetchData(url);
+
+	  	productLists.then(function(result){
+	  		console.log(result.data.products);
+	  		if (result.data.status == 'success'){
+		  		this.productData = result.data.products;
+	  			console.log(productData);
+	  			def.resolve(productData);
+		  		// return productData;
+	  		}
+	  	});
+
+	  	// console.log(productData);
+		 return def.promise;
+
+	  }
+
+}
+
+
 	
 
 	

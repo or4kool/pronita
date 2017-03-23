@@ -110,7 +110,7 @@
 		<div class="offer-line" id="liner"></div>
 	<div class="container">
 		<div class="col-md-12 trending-products offer-show">
-			<single-product ng-repeat="manyProducts in listProduct(12)"></single-product>
+			<single-product product-data = "productData"></single-product>
 		  <div class="offer-next">
         <span class="the-next">next page</span>
         <span><img src="img/next-card.png" /></span>
@@ -131,7 +131,7 @@
 				<div class="col-md-8 vertical-divide"></div>
 			</div>
 			<div class="col-md-12 trending-products">
-				<single-product ng-repeat="productCounts in trendingProduct(4)"></single-product>
+				<single-product product-data = "productData"></single-product>
 			</div>
 		</div>
 	</div>
@@ -146,7 +146,7 @@
 				<div class="see-all btn">See all <i class="fa fa-caret-right" aria-hidden="true"></i></div>
 			</div>
 			<div class="col-md-12 trending-products">
-				<single-product ng-repeat="productCounts in newProduct(4)"></single-product>
+				<single-product product-data = "productData"></single-product>
 			</div>
 		</div>
 	</div>
@@ -158,7 +158,7 @@
 
 <script>
 function openNav() {
-    document.getElementById("mySidenav").style.width = "25%";
+    document.getElementById("mySidenav").style.width = "350px";
     document.getElementById("main").style.marginLeft = "250px";
     document.getElementById("open_close").src = "img/cross.png";
 }

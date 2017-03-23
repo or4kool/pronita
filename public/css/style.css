@@ -881,9 +881,9 @@ a {
     font-size: 13px;
     letter-spacing: 2px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-    padding-left: 100px;
+    padding-left: 30px;
     padding-bottom: 25px;
-    width: 320px;
+    width: 250px;
     margin-right: 20px; }
   .sidenav img {
     display: inline-block;
