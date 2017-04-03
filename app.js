@@ -22,7 +22,6 @@ var storage = multer.diskStorage({
     }
 });
 
-
 var upload = multer({ storage: storage }).array('files');
 var routes = require('./routes/index');
 
@@ -33,7 +32,11 @@ var appActions = require('./routes/appActions');
 //mongoose configurations
 var mongoose=require('mongoose');
 mongoose.Promise=global.Promise;
-mongoose.connect('mongodb://localhost/pronitaexpress-development').then(() => console.log('database connected')).catch((err) => console.error(err))
+mongoose.connect('mongodb://localhost/pronitaexpress-development')
+.then(() => console.log('database connected'))
+.catch((err) => console.error(err))
+
+
 var app = express();
 var server = require('http').Server(app);
 

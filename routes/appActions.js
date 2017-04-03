@@ -84,6 +84,28 @@ function prepareEmail(from, to, subject, message, bcc){
         return 'Message sent: ' + info.response;
     });
 }
+
+function addDocument(key, postData){
+    // console.log(postData[key])
+    console.log(adminSchema.keyFeatures)
+    adminSchema[key].create(postData[key], function(errOther, posts){
+        if(errOther){
+            console.log('errOther'); return (errOther);
+        }
+        console.log(posts)
+        return posts;
+    })
+}
+
+function updateDocument(id, update, document){
+    adminSchema[document].findByIdAndUpdate(id,
+        {$push:update},
+        {safe: true, new : true},
+        function(err, updates){
+           if(err)return next(err)
+        }
+    )
+}
 /* GET users listing. */
 
 router.get('/serverDate', function(req, res, next) {
@@ -177,50 +199,51 @@ router.get('/userProfile/:id', function(req, res, next) {
         res.json(user)
     })
 });
-// router.get('/userLogin/:id', function(req, res, next) {
-//     console.log(req.query)
-//     adminSchema.user.find({password:req.query.password, $or:[{email:req.query.identity}, {userName:req.query.identity}]})
-//     //.populate('userTests')
-//     .exec (function(err, user){
-//         if(err) return next(err);
-//         res.json(user)
-//     })
-// });
+
+// send a post
 
 
-//send a post
-// router.post('/multer', upload.single('file'));
 router.post('/inventory', function(req, res, next){
-    adminSchema.inventory.create(req.body, function(err, post){
-        if(err) return next(err);
-        //get the just added inventory's Id
-        req.body.inventoryId=post._id;
-        updates={}
+    appSchema.inventory.create( req.body, function(err, inventory){
+        if(err) res.send(err);
+        else{
+            inventoryExtra=req.body.others
+            let update={};
+            a=0;
+            for(var  key in inventoryExtra){
+                updateD=key;
 
-        //iterate over all the keys in the object
-        for(key in req.body){
-            if(Object.prototype.toString.call( req.body[key] ) === '[object Array]' ) {
-                req.body[key].inventoryId=post._id;
-                //add each to the database
-                adminSchema[key].create(req.body[key][keys], function(errOther, otherPost){
-                    if(errOther) return (errOther);
-                    updates[key]=otherPost._id;
-                })
+                inventoryExtra[key].inventoryId=inventory._id;
+                // add each to the database
+                addDocument(key, inventoryExtra[key], function(err, result, dkey){
+                    if(err) res.send(err)
+                    else{
+                        update[dkey]=result._id
+                        updateDocument(inventory._id, update, 'inventory', function(err, updates){
+                            if(err) res.send(err)
+                            else{
+                                inventory=updates;
+                                if(a==Object.keys(inventoryExtra).length-1){
+                                    res.json({message:"Inventory successfully Added!", inventory});
+                                }
+                                a++
+                            }
+                        });
+                    }
+                });
+
             }
         }
-        // update the inventory with added ids
-        adminSchema.inventory.findByIdAndUpdate(post._id, updates, function(err, update){
-            if(err)return next(err)
-            res.json(update)
-        })
     })
 });
+
 router.post('/category', function(req, res, next){
     adminSchema.category.create(req.body, function(err, post){
-        if(err) return next(err)
+        if(err) return next(err);
         res.json(post);
     })
 });
+
 router.post('/subcategory', function(req, res, next){
     adminSchema.subcategory.create(req.body, function(err, post){
         if(err) return next(err)
@@ -228,11 +251,12 @@ router.post('/subcategory', function(req, res, next){
     })
 
 });
+
 router.post('/biddings', function(req, res, next){
     adminSchema.productManager.create(req.body, function(err, post){
         if(err) return next(err)
         adminSchema.inventory.findByIdAndUpdate(
-            req.body.inventory,
+            req.body.inventoryId,
             {$push:{productManager:post}},
             {safe: true, upsert: true, new : true},
             function(err, inventory){
@@ -248,8 +272,8 @@ router.post('/biddings', function(req, res, next){
             }
         )
     })
-
 });
+
 router.post('/user', function(req, res, next){
     adminSchema.user.find({$or:[{userName:req.body.userName}, {email:req.body.email}]})
     .exec(function(err, user){
@@ -275,6 +299,7 @@ router.post('/user', function(req, res, next){
         else{   res.json({error:'User Already Exist', data:user});   }
     })
 });
+
 router.post('/contact', function(req, res, next){
     var params=req.body;
     console.log(params)
