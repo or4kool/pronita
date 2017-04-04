@@ -25,7 +25,7 @@
 				</span>
 			</div>
 
-			<shopping-cart ng-show="shoppingCart" product-name= "selectedProduct()" button-close= "closeOrder()"></shopping-cart>
+			<shopping-cart ng-show="shoppingCart" product-name= "selectedProduct()" button-close= "closeOrder($index)"></shopping-cart>
 			<shopping-sign ng-show="signin"></shopping-sign>
 			<shipping-details ng-show="shippingDetail"></shipping-details>
 			<payment-method ng-show="payment"></payment-method>

@@ -8,7 +8,7 @@ pronita.directive('belowFootie', function(){
 });
 
 pronita.directive('singleProduct', function(){
-	// Runs during compile
+	
 	return {
 		restric: 'E',
 		templateUrl: '../view/productdisplay.html',
@@ -94,13 +94,29 @@ pronita.directive('paymentMethod', function(){
 
 pronita.directive('headie', function(){
 
+	var cartOn = ['$scope','addCart', function($scope, addCart){
+		
+		// console.log(addCart.cartDot);
+
+		
+
+		$scope.isProduct = function(){
+			if (addCart.cartDot == '1'){
+				// console.log("BAND");
+				return 'cart-dot';
+			}
+		}
+	}];
+
+
 	return{
 		restric: 'E',
 		templateUrl: '../view/header.html',
 		replace: true,
 		scope: {
 
-		}
+		},
+		controller: cartOn
 	}
 
 });

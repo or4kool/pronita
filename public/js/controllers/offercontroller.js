@@ -1,8 +1,8 @@
 pronita.controller('offerController', offerDetails);
 
-	offerDetails.$inject = ['$scope', 'getproduct'];
+	offerDetails.$inject = ['$scope', 'getproduct', '$filter'];
 
-	function offerDetails($scope,getproduct){
+	function offerDetails($scope,getproduct,$filter){
 
 
 	var oc = this;
@@ -18,10 +18,12 @@ pronita.controller('offerController', offerDetails);
 	$scope.trendingProductCounter = 0;
 	$scope.newProductCounter = 0;
 	$scope.offerLink = {
-		all: 1,
+		trending: 1,
 		free: 0,
 		discounted: 0
 	}
+
+	$scope.filt = "top trending";
 
 	// $scope.all = 
 	
@@ -61,22 +63,28 @@ pronita.controller('offerController', offerDetails);
 		return $scope.listNewProductPopulate;
 	}
 
-	$scope.checkPos = function(pos){
+	$scope.checkPos = function(pos, filter){
 		console.log("Clicked");
-		if(pos == 0 && $scope.offerLink.all == 0){
-			$scope.offerLink.all = 1;
+		if(pos == 0 && $scope.offerLink.trending == 0){
+			$scope.offerLink.trending = 1;
 			$scope.offerLink.free = 0;
 			$scope.offerLink.discounted = 0;
+			$scope.filt = 'top ' + filter;
+			console.log($scope.filt);
 		}
 		else if(pos == 1 && $scope.offerLink.free == 0){
 			$scope.offerLink.free = 1;
-			$scope.offerLink.all = 0;
+			$scope.offerLink.trending = 0;
 			$scope.offerLink.discounted = 0;
+			$scope.filt = 'top ' +  filter;
+			console.log($scope.filt);
 		}
 		else{
 			$scope.offerLink.discounted = 1;
-			$scope.offerLink.all = 0;
+			$scope.offerLink.trending = 0;
 			$scope.offerLink.free = 0;
+			$scope.filt = 'top ' + filter;
+			console.log($scope.filt);
 		}
 	}
 
@@ -84,6 +92,8 @@ pronita.controller('offerController', offerDetails);
 	var pd = getproduct.getAllProduct(oc.url);
 
 	pd.then(function(result){
+		// console.log($filter('dataFetcher')('top free'));
+		
 		$scope.productData = result;
 	});
 	

@@ -52,7 +52,20 @@
 					<div class="col-md-8 vertical-divide"></div>
 				</div>
 				<div class="col-md-12 trending-products">
-					<single-product product-detail = "addCarter()" product-data = "productData"></single-product>
+					<!-- <single-product product-detail = "addCarter()" product-data = "productData"></single-product> -->
+					<div class="col-md-3" ng-repeat="productsData in productData | topFreeProduct: 'top trending' | limitTo: 4">
+						<div class="all-sha">
+							<img src="{{productsData.img}}" />
+							<div class="product-info">
+								<h2 class="product-name">{{productsData.name}}</h2>
+								<p>{{productsData.category}} | {{productsData.location}}</p>
+								<div class="price-btn">
+									<h2>&#8358;{{productsData.amount}}</h2>
+									<div class="btn" ng-click="productDetail()">discover</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -64,10 +77,23 @@
 				<div class="col-md-12 all-header">
 					<div class="col-md-3 no-padding"><h2>top free</h2></div>
 					<div class="col-md-9 vertical-divide"></div>
-					<div class="see-all btn">See all <i class="fa fa-caret-right" aria-hidden="true"></i></div>
+					<a href="#/offers"><div class="see-all btn">See all <i class="fa fa-caret-right" aria-hidden="true"></i></div></a>
 				</div>
 				<div class="col-md-12 trending-products">
-					<single-product product-data = "productData"></single-product>
+					<!-- <top-free product-data = "productData"></top-free> -->
+					<div class="col-md-3" ng-repeat="productsData in productData | topFreeProduct: 'top free' | limitTo: 4">
+						<div class="all-sha">
+							<img src="{{productsData.img}}" />
+							<div class="product-info">
+								<h2 class="product-name">{{productsData.name}}</h2>
+								<p>{{productsData.category}} | {{productsData.location}}</p>
+								<div class="price-btn">
+									<h2>&#8358;{{productsData.amount}}</h2>
+									<div class="btn" ng-click="productDetail()">discover</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -79,11 +105,23 @@
 				<div class="col-md-12 all-header">
 					<div class="col-md-4 no-padding"><h2>top discounted</h2></div>
 					<div class="col-md-8 vertical-divide"></div>
-					<div class="see-all btn">See all</div>
+					<a href="#/offers"><div class="see-all btn">See all<i class="fa fa-caret-right" aria-hidden="true"></i></div></a>
 				</div>
 				<div class="col-md-12 trending-products">
-					<single-product product-data = "productData"></single-product>
-					
+					<!-- <top-discounted product-data = "productData"></top-discounted> -->
+					<div class="col-md-3" ng-repeat="productsData in productData | topFreeProduct: 'top discounted' | limitTo: 4">
+						<div class="all-sha">
+							<img src="{{productsData.img}}" />
+							<div class="product-info">
+								<h2 class="product-name">{{productsData.name}}</h2>
+								<p>{{productsData.category}} | {{productsData.location}}</p>
+								<div class="price-btn">
+									<h2>&#8358;{{productsData.amount}}</h2>
+									<div class="btn" ng-click="productDetail()">discover</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

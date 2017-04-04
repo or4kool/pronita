@@ -1,9 +1,9 @@
-<div class="col-md-3" ng-repeat="productsData in productData | topFreeProduct: 'top free'">
+<div class="col-md-3" ng-repeat="productsData in productData | topFreeProduct: 'top new'">
 	<div class="all-sha">
 		<img src="{{productsData.img}}" />
 		<div class="product-info">
 			<h2 class="product-name">{{productsData.name}}</h2>
-			<p>{{productsData.category}}| {{productsData.location}}</p>
+			<p>{{productsData.category}} | {{productsData.location}}</p>
 			<div class="price-btn">
 				<h2>&#8358;{{productsData.amount}}</h2>
 				<div class="btn" ng-click="productDetail()">discover</div>

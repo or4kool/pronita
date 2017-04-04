@@ -74,6 +74,8 @@ pronita.service('addCart', addCartDetails);
 
 			var ad = this;
 
+			ad.cartDot = '';
+
 			ad.inventory = {
 				productImg:"img/product-display.png",
 				productName:"Rosaline flower pot",
@@ -122,10 +124,10 @@ function getproductDetails(dataFetcher, rootScope, $q){
 	  	var productLists = dataFetcher.fetchData(url);
 
 	  	productLists.then(function(result){
-	  		console.log(result.data.products);
+	  		// console.log(result.data.products);
 	  		if (result.data.status == 'success'){
 		  		this.productData = result.data.products;
-	  			console.log(productData);
+	  			// console.log(productData);
 	  			def.resolve(productData);
 		  		// return productData;
 	  		}

@@ -11,6 +11,9 @@ pronita.controller('productController', productDetail);
 	pc.recommendationList = [];
 	pc.recommendationCount = 0;
 
+	$scope.selectedproduct = {Rocknrool : 'want one'};
+
+
 	// pc.inventory = {
 	// 	productImg:"img/product-display.png",
 	// 	productName:"Rosaline flower pot",
@@ -50,8 +53,15 @@ pronita.controller('productController', productDetail);
 	$scope.addCarter = function(){
 
 		addCart.addIt();
-		$location.url("/cart");
+		// $location.url("/cart");
 	}
 
+	$scope.pushToCart = function(){
+		// addCart.addToCart(product);
+		addCart.cartDot = 1;
+		addCart.addIt();
+	}
+
+	// $scope.pushToCart();
 	
 };

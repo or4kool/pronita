@@ -100,9 +100,9 @@
 			<span><a href="" onclick="cntrlNav()"><img id="open_close" src="img/categories.png"/></span></a>
 			<span>
 				<ul>
-					<a href="" ng-click="checkPos(0)"><li ng-class="{'selected': offerLink.all}">all</li></a>
-					<a href="" ng-click="checkPos(1)"><li ng-class="{'selected': offerLink.free}">free</li></a>
-					<a href="" ng-click="checkPos(2)"><li ng-class="{'selected': offerLink.discounted}">Discounted</li></a>
+					<a href="" ng-click="checkPos(0, 'trending')"><li ng-class="{'selected': offerLink.trending}">all</li></a>
+					<a href="" ng-click="checkPos(1, 'free')"><li ng-class="{'selected': offerLink.free}">free</li></a>
+					<a href="" ng-click="checkPos(2, 'discounted')"><li ng-class="{'selected': offerLink.discounted}">Discounted</li></a>
 				</ul>
 			</span>
 		</div>
@@ -110,7 +110,20 @@
 		<div class="offer-line" id="liner"></div>
 	<div class="container">
 		<div class="col-md-12 trending-products offer-show">
-			<single-product product-data = "productData"></single-product>
+			<!-- <single-product product-data = "productData"></single-product> -->
+      <div class="col-md-3" ng-repeat="productsData in productData | topFreeProduct: filt | limitTo: 12">
+        <div class="all-sha">
+          <img src="{{productsData.img}}" />
+          <div class="product-info">
+            <h2 class="product-name">{{productsData.name}}</h2>
+            <p>{{productsData.category}} | {{productsData.location}}</p>
+            <div class="price-btn">
+              <h2>&#8358;{{productsData.amount}}</h2>
+              <div class="btn" ng-click="productDetail()">discover</div>
+            </div>
+          </div>
+        </div>
+      </div>
 		  <div class="offer-next">
         <span class="the-next">next page</span>
         <span><img src="img/next-card.png" /></span>
@@ -131,7 +144,20 @@
 				<div class="col-md-8 vertical-divide"></div>
 			</div>
 			<div class="col-md-12 trending-products">
-				<single-product product-data = "productData"></single-product>
+				<!-- <single-product product-data = "productData"></single-product> -->
+        <div class="col-md-3" ng-repeat="productsData in productData | topFreeProduct: 'top trending' | limitTo: 4">
+          <div class="all-sha">
+            <img src="{{productsData.img}}" />
+            <div class="product-info">
+              <h2 class="product-name">{{productsData.name}}</h2>
+              <p>{{productsData.category}} | {{productsData.location}}</p>
+              <div class="price-btn">
+                <h2>&#8358;{{productsData.amount}}</h2>
+                <div class="btn" ng-click="productDetail()">discover</div>
+              </div>
+            </div>
+          </div>
+        </div>
 			</div>
 		</div>
 	</div>
@@ -146,7 +172,20 @@
 				<div class="see-all btn">See all <i class="fa fa-caret-right" aria-hidden="true"></i></div>
 			</div>
 			<div class="col-md-12 trending-products">
-				<single-product product-data = "productData"></single-product>
+				<!-- <single-product product-data = "productData"></single-product> -->
+        <div class="col-md-3" ng-repeat="productsData in productData | topFreeProduct: 'top free' | limitTo: 4">
+          <div class="all-sha">
+            <img src="{{productsData.img}}" />
+            <div class="product-info">
+              <h2 class="product-name">{{productsData.name}}</h2>
+              <p>{{productsData.category}} | {{productsData.location}}</p>
+              <div class="price-btn">
+                <h2>&#8358;{{productsData.amount}}</h2>
+                <div class="btn" ng-click="productDetail()">discover</div>
+              </div>
+            </div>
+          </div>
+        </div>
 			</div>
 		</div>
 	</div>
