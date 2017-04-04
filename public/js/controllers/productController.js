@@ -11,6 +11,10 @@ pronita.controller('productController', productDetail);
 	pc.recommendationList = [];
 	pc.recommendationCount = 0;
 
+	pc.liked = 'fa fa-heart';
+	pc.unliked = 'fa fa-heart-o';
+	$scope.confirmLike = pc.unliked;
+
 	$scope.selectedproduct = {Rocknrool : 'want one'};
 
 
@@ -58,10 +62,25 @@ pronita.controller('productController', productDetail);
 
 	$scope.pushToCart = function(){
 		// addCart.addToCart(product);
+
+		// if ()
 		addCart.cartDot = 1;
 		addCart.addIt();
 	}
 
 	// $scope.pushToCart();
+
+	$scope.productLiked = function(){
+
+		if ($scope.confirmLike == pc.unliked){
+			$scope.confirmLike = pc.liked;
+		}
+		else{
+			$scope.confirmLike = pc.unliked;
+		}
+
+		return $scope.confirmLike;
+
+	}
 	
 };

@@ -4,10 +4,12 @@ pronita.controller('userController', ['$scope','mockService', function($scope,mo
 
 	var loginUrl = "/appActions/userLogin";
 
-	$scope.showVal = function(){
+	var showVal = function(){
 
 		console.log($scope.userDetail);
 	};
+
+	
 
 
 	$scope.loginUser = function(){
@@ -18,6 +20,8 @@ pronita.controller('userController', ['$scope','mockService', function($scope,mo
 			});
 
 	};
+
+	showVal();
 	
 		
 
