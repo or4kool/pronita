@@ -1,6 +1,6 @@
 pronita.controller('createAccountController', ['$scope','mockService','$q', function($scope,mockService,$q){
 		
-		var userinfo = {};
+		$scope.userInfo = {};
 
 
 		var createUserUrl = '/appActions/user';
@@ -13,18 +13,20 @@ pronita.controller('createAccountController', ['$scope','mockService','$q', func
 			var firstName = parts[0];
 			var lastName = parts[1];
 
-			userinfo.firstName = firstName;
-			userinfo.lastName = lastName;
+			$scope.userInfo.firstName = firstName;
+			$scope.userInfo.lastName = lastName;
 
-			var pros = mockService.poster(userinfo, createUserUrl);
+			console.log($scope.userInfo)
+			var pros = mockService.poster($scope.userInfo, createUserUrl);
 			pros.then(function(result){
-				console.log(result.data[0].userName);
+				console.log(result);
 				$scope.alreadyUser = result.data[0].userName;
+				console.log($scope.alreadyUser);
 
-				if ($scope.userinfo.userName != $scope.alreadyUser){
+				if ($scope.userInfo.userName != $scope.alreadyUser){
 					$scope.fullname = "";
 					$scope.alreadyUser = "";
-					$scope.userinfo = {};
+					$scope.userInfo = {};
 				}
 			});	
 

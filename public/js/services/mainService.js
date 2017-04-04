@@ -9,7 +9,8 @@ pronita.service('mockService', mainServiceDetail);
 	var deffered = $q.defer();
 		
 	this.poster = function(sendData, url){
-
+		console.log(url + "\n");
+		console.log(sendData);
 		$http({
 				method: 'POST',
 				url: url,
@@ -19,7 +20,7 @@ pronita.service('mockService', mainServiceDetail);
 		}).then(function successCallback(response){
 
 				// console.log(response.data.error);
-				deffered.resolve(response);
+				deffered.resolve(response.data);
 				// deffered.resolve(response.data);
 
 				// console.log(deffered.promise);
