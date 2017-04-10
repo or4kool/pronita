@@ -82,7 +82,7 @@ pronita.service('addCart', addCartDetails);
 				productName:"Rosaline flower pot",
 				productTestPeriod: "1 month",
 				productDelivery: "1-3 working days",
-				productQunatity: "1",
+				productQunatity: 1,
 				proudctPrice: "28000",
 				discountedPrice: "25000"
 			}
@@ -90,9 +90,17 @@ pronita.service('addCart', addCartDetails);
 			ad.productBag = [];
 
 			ad.addIt = function(){
+				console.log(ad.productBag.length);
+				if (ad.productBag.length > 0){
+					console.log("YEP EXTRA");
+					for (var i=0; i<ad.productBag.length; i++ ){
+						if (ad.productBag[i].productName){
+							ad.productBag[i].productQunatity += 1;
+						}
+					}
 
-				
-				ad.productBag.push({
+				}else{
+					ad.productBag.push({
 					productImg:ad.inventory.productName,
 					productName:ad.inventory.productName,
 					productTestPeriod:ad.inventory.productTestPeriod,
@@ -101,7 +109,10 @@ pronita.service('addCart', addCartDetails);
 					proudctPrice:ad.inventory.proudctPrice,
 					discountedPrice:ad.inventory.discountedPrice
 				});
-				console.log(ad.productBag);
+				}
+				
+				
+				// console.log(ad.productBag);
 
 				
 			}

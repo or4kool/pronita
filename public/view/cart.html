@@ -25,10 +25,219 @@
 				</span>
 			</div>
 
-			<shopping-cart ng-show="shoppingCart" product-name= "selectedProduct()" button-close= "closeOrder($index)"></shopping-cart>
-			<shopping-sign ng-show="signin"></shopping-sign>
-			<shipping-details ng-show="shippingDetail"></shipping-details>
-			<payment-method ng-show="payment"></payment-method>
+			<!-- <shopping-cart ng-show="shoppingCart" product-name= "selectedProduct()" button-close= "closeOrder($index)"></shopping-cart> -->
+
+
+
+			<!-- PRODUCT INSIDE OF THE CART -->
+			<div ng-show="shoppingCart">
+				
+				<div class="col-md-12">
+					<div class="listing-header">
+						<div class="col-md-5 listing-header-product lh-child">
+							<p>product</p>
+						</div>
+						<div class="col-md-2 listing-header-delivery lh-child">
+							<p>delivery</p>
+						</div>
+						<div class="col-md-2 listing-header-quantity lh-child">
+							<p>quantity</p>
+						</div>
+						<div class="col-md-3 listing-header-price lh-child">
+							<p>unit price</p>
+						</div>
+					</div>
+					<div class="listing-product" ng-repeat="products in selectedProduct()">
+						<div class="col-md-5">
+							<img src="img/product-display.png" class="product-img" />
+							<div class="listed-product-info">
+								<h2>{{products.productName}}</h2>
+								<p>testing period:<strong>{{products.productTestPeriod}}</strong></p>
+							</div>
+						</div>
+						<div class="col-md-2 listing-statement">
+							<p>{{products.productDelivery}}</p>
+						</div>
+						<div class="col-md-2 listing-statement">
+							<p class="product-num">{{products.productQunatity}}</p>
+							<div class="up-down-btn">
+								<a href="" ng-click="moreQuantity()"><img src="img/drop_down.png" class="up-btn " /></a>
+								<a href="" ng-click="lessQuantity()"><img src="img/drop_down.png" class="down-btn" /></a>
+							</div>
+						</div>
+						<div class="col-md-3 listing-statement lisitng-product-price">
+							<p><strike>N28,000</strike></p>
+							<p>{{products.proudctPrice}}</p>
+							<p class="btn" ng-click="closeOrder($index)">X</p>
+						</div>
+					</div>
+
+				</div>
+				<div class="col-md-12">
+					<div class="product-summary listing-product">
+						<div class="col-md-6">
+						<div class="number-product">
+							<h2> 3 products</h2>
+						</div>
+						</div>
+						<div class="col-md-6">
+							<div class="product-total">
+								<p>total:</p>
+								<h2>N410,000.00</h2>
+							</div>
+						</div>
+					</div>
+
+					<div class="get-more-product listing-product">
+						<div class="col-md-6">
+							<p class="btn more-offers">browse more offers <span><i class="fa fa-caret-right"></i></p>
+						</div>
+						<div class="col-md-6">
+							<div class="coupon">
+								<input type="text" placeholder="discount coupon" />
+								<p class="btn">continue</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+
+			<!-- <shopping-sign ng-show="signin"></shopping-sign> -->
+
+
+			<!-- SIGNIN PART OF CART -->
+			<div class="housemaster" ng-show="signin">
+
+
+				<div class="col-md-12 signin-shop" ng-hide="noAccount">
+				<h2 class="signup-header"> Sign In</h2>
+					<div class="signup-form">
+						<form>
+							<span><input type="email" placeholder="email" class="n-input" /></span>
+							<span><input type="password" placeholder="password" class="n-input" /></span>
+						</form>
+						<div class="form-others">
+							<h2 class="btn create-btn">continue</h2>
+							<p class="forgot">Forgot Password?</p>
+
+							<div class="vertical-divide acount-divide"></div>
+
+							<div class="signin-area">
+								<p class="get-acc">Don't have a pronita account?</p>
+								<h2 class="btn signup-btn" ng-click="noAccount = true">sign up</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- CREATE ACCOUNT SESSION OF SIGNIN OF PART OG CART :) -->
+				<div class="col-md-12" ng-show="noAccount">
+					<h2 class="signup-header"> Sign Up</h2>
+					<div class="signup-form">
+						<form>
+							<span><input type="text" placeholder="Full name" class="n-input" /></span>
+							<span><input type="text" placeholder="username" class="n-input" /></span>
+							<span><input type="text" placeholder="location" class="n-input" /></span>
+							<span><input type="email" placeholder="email" class="n-input" /></span>
+							<span><input type="password" placeholder="password" class="two n-input" />
+							<input type="password" placeholder="confirm password" class="two n-input" /></span>
+						</form>
+						<div class="form-others">
+							<p>By Checking out you agree with our <strong><a href="#">Terms&Conditions</a></strong></p>
+							<h2 class="btn create-btn">create account</h2>
+
+							<div class="vertical-divide acount-divide"></div>
+
+							<div class="signin-area">
+								<span><p>Already have a pronita account?</p></span>
+								<span><h2 class="btn sign-btn" ng-click="noAccount = false">sign in</h2></span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+			<!-- <shipping-details ng-show="shippingDetail"></shipping-details> -->
+
+
+			<!-- SHIPPING PART OF CART -->
+			<div class="housemaster" ng-show="shippingDetail">
+				
+				<div class="col-md-12 shipping-form-main">
+					<div class="signup-form">
+						<form>
+							<span><input type="text" placeholder="Full name" class="n-input" /></span>
+							
+							<span><input type="password" placeholder="email" class="two n-input" />
+							<input type="password" placeholder="phone" class="two n-input" /></span>
+
+
+							<span><input type="text" placeholder="street address" class="n-input" /></span>
+							<span><input type="password" placeholder="city/town" class="two n-input" />
+							<input type="password" placeholder="zip/postal code" class="two n-input" /></span>
+
+							<span>
+								<select class="two n-input">
+									<option>State</option>
+								</select>
+								<select class="two n-input">
+									<option>Country</option>
+								</select>
+							</span>
+						</form>
+						<div class="form-others">
+							<h2 class="btn create-btn">Continue</h2>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+			<!-- <payment-method ng-show="payment"></payment-method> -->
+
+			<!-- PAYMNET PART OF CART -->
+			<div ng-show="payment">
+				
+				<div class="col-md-12">
+					<div class="payment-icon">
+						<span><img src="img/Mastercard.png" /></span>
+						<span><img src="img/visa.png" /></span>
+						<span><img src="img/verve.png" /></span>
+					</div>
+					<div class="signup-form">
+						<form>
+							<span><input type="text" placeholder="card name" class="n-input" /></span>
+							<span><input type="text" placeholder="card number" class="n-input" /></span>
+
+
+							<span>
+								<div class="two n-input plenty-two">
+									<input type="text" placeholder="expiration" class="three n-input expiration" />
+									<select class="three n-input exp exp-mnth">
+										<option>MM</option>
+									</select>
+									<select class="three n-input exp exp-year">
+										<option>YY</option>
+									</select>	
+								</div>
+								<input type="text" placeholder="Security code" class="two n-input" />
+							</span>
+						</form>
+						<div class="form-others">
+							<p>By checking you agree with out <strong><a href="#">Terms and Conditions</a></strong></p>
+							<h2 class="btn create-btn">Check out</h2>
+						</div>
+					</div>
+				</div>
+
+			</div>
 
 		</div>
 	</div>

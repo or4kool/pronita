@@ -31,6 +31,7 @@ pronita.directive('getApp', function(){
 });
 
 pronita.directive('shoppingCart', function(){
+
 	// Runs during compile
 	return {
 		restric: 'E',
@@ -40,71 +41,83 @@ pronita.directive('shoppingCart', function(){
 			productName: "&",
 			buttonClose: "&"
 		}
-
-		// link: function($scope, element, attrs){
-
-		// 	var coh = $scope;
-		// 	console.log(coh.selectedProduct[0].productImg);
-		// }
-
 		
 	};
 });
 
-pronita.directive('shoppingSign', function(){
+// pronita.directive('shoppingSign', function(){
 
-	return {
-		restric: 'E',
-		templateUrl: '../view/shopsign.html',
-		replace: true,
-		scope: {
+// 	return {
+// 		restric: 'E',
+// 		templateUrl: '../view/shopsign.html',
+// 		replace: true,
+// 		scope: {
 			
-		}
-	};
+// 		}
+// 	};
 
-});
+// });
 
-pronita.directive('shippingDetails', function(){
+// pronita.directive('shippingDetails', function(){
 
-	return{
-		restric: 'E',
-		templateUrl: '../view/shipping.html',
-		replace: true,
-		scope: {
+// 	return{
+// 		restric: 'E',
+// 		templateUrl: '../view/shipping.html',
+// 		replace: true,
+// 		scope: {
 
-		}
+// 		}
 
-	};
+// 	};
 
-});
+// });
 
-pronita.directive('paymentMethod', function(){
+// pronita.directive('paymentMethod', function(){
 
-	return {
-		restric: 'E',
-		templateUrl: '../view/payment.html',
-		replace: true,
-		scope: {
+// 	return {
+// 		restric: 'E',
+// 		templateUrl: '../view/payment.html',
+// 		replace: true,
+// 		scope: {
 
-		}
+// 		}
 
-	};
+// 	};
 
-});
+// });
 
 pronita.directive('headie', function(){
 
-	var cartOn = ['$scope','addCart', function($scope, addCart){
-		
-		// console.log(addCart.cartDot);
+	var cartOn = ['$scope','addCart', '$location', function($scope, addCart, $location){
 
-		
+		$scope.isDot = '';
+		// $scope.on = 1;
+		// $scope.off = 0;
 
 		$scope.isProduct = function(){
 			if (addCart.cartDot == '1'){
-				// console.log("BAND");
-				return 'cart-dot';
+				
+				$scope.isDot = 'cart-dot';
+				console.log("ISPRODUCT::" + $scope.isDot);
+				// if ($location.path() == '/cart'){
+				// 	$scope.isDot = '';
+				// }
+				return $scope.isDot;
 			}
+		}
+
+		// $scope.gocart = function(){
+		// 	$scope.isDot = '';
+		// 	console.log("GOCART::" + $scope.isDot);
+		// 	$location.url('/cart');
+		// 	console.log($location.path());
+		// 	return $scope.isDot;
+		// }
+		$scope.gocart = function(){
+			addCart.cartDot = 0;
+			$scope.isDot = '';
+			$location.url('/cart');
+			return $scope.isDot;
 		}
 	}];
 

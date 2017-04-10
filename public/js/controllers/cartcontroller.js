@@ -58,6 +58,10 @@ pronita.controller('cartController',cartControllerDetails);
 		$scope.selectedProduct = function(){
 
 			if (addCart.productBag.length > 0){
+				console.log(addCart.productBag);
+				if (addCart.productBag.productName){
+
+				}
 				return addCart.productBag;
 			}
 
@@ -67,9 +71,20 @@ pronita.controller('cartController',cartControllerDetails);
 		
 		}
 
-		$scope.closeOrder = function(){
-			console.log("POP");
-			addCart.productBag.pop();
+		$scope.closeOrder = function(index){
+			console.log(index);
+			addCart.productBag.pop(index);
+		}
+
+		$scope.moreQuantity = function(){
+			addCart.productBag[0].productQunatity += 1;
+		}
+
+		$scope.lessQuantity = function(){
+
+			if (addCart.productBag[0].productQunatity > 1){
+				addCart.productBag[0].productQunatity -= 1;
+			}
 		}
 
 	}

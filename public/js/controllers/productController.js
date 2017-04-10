@@ -15,7 +15,9 @@ pronita.controller('productController', productDetail);
 	pc.unliked = 'fa fa-heart-o';
 	$scope.confirmLike = pc.unliked;
 
-	$scope.selectedproduct = {Rocknrool : 'want one'};
+	// $scope.selectedproduct = {Rocknrool : 'want one'};
+
+	$scope.isLike = 118;
 
 
 	// pc.inventory = {
@@ -61,9 +63,8 @@ pronita.controller('productController', productDetail);
 	}
 
 	$scope.pushToCart = function(){
-		// addCart.addToCart(product);
-
-		// if ()
+		
+		// CALL SERVICE TO ADD SELECTED PRODUCT TO CART BAG
 		addCart.cartDot = 1;
 		addCart.addIt();
 	}
@@ -74,9 +75,14 @@ pronita.controller('productController', productDetail);
 
 		if ($scope.confirmLike == pc.unliked){
 			$scope.confirmLike = pc.liked;
+
+			//add one to the like array for product
+			$scope.isLike += 1;
 		}
 		else{
 			$scope.confirmLike = pc.unliked;
+			$scope.isLike -= 1
+			//pop one from the like array for product
 		}
 
 		return $scope.confirmLike;
