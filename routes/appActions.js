@@ -1,5 +1,4 @@
 var express = require('express');
-// var router = express();
 var router = express.Router();
 var mongoose=require('mongoose');
 var adminSchema=require('../app/models/appSchema.js');
@@ -202,11 +201,10 @@ router.get('/userProfile/:id', function(req, res, next) {
 
 // send a post
 
-
 router.post('/inventory', function(req, res, next){
-    appSchema.inventory.create( req.body, function(err, inventory){
+    adminSchema.inventory.create( req.body, function(err, inventory){
         if(err) res.send(err);
-        else{
+        else if(req.body.others){
             inventoryExtra=req.body.others
             var update={};
             a=0;
@@ -233,6 +231,9 @@ router.post('/inventory', function(req, res, next){
                 });
 
             }
+        }
+        else{
+            res.json({message:"Inventory successfully Added!", inventory});
         }
     })
 });
