@@ -3,12 +3,12 @@ var Schema = mongoose.Schema
 var bcrypt= require('bcrypt-nodejs');
 var SALT_WORK_FACTOR=10;
 var inventorySchema= new Schema({
-    category: {type:Schema.Types.ObjectId, ref:'category'},
+    category: {type:Schema.Types.ObjectId,  ref:'category'},
     subCategory:{type:Schema.Types.ObjectId, ref:'subcategory'},
     productManager:{type:Schema.Types.ObjectId, ref:'user'},
-    type:String,
-    name:String,
-    description:String,
+    type:{type:String, required:true},
+    name:{type:String, required:true},
+    description:{type:String, required:true},
     address:String,
     lg:String,
     state:String,
@@ -19,7 +19,7 @@ var inventorySchema= new Schema({
     rate:Number,
     keyFeatures:[{type:Schema.Types.ObjectId, ref:'keyFeatures'}],
     inventorySettings:{type:Schema.Types.ObjectId, ref:'inventorySettings'},
-    specification:[{type:Schema.Types.ObjectId, ref:'specification'}],
+    specifications:[{type:Schema.Types.ObjectId, ref:'specifications'}],
     offerDetails:[{type:Schema.Types.ObjectId, ref:'offerDetails'}],
     offerConditions:[{type:Schema.Types.ObjectId, ref:'offerConditions'}],
     likes:[{type:Schema.Types.ObjectId, ref:'likes'}],
@@ -144,7 +144,7 @@ module.exports.user = mongoose.model('user', userSchema);
 module.exports.tags = mongoose.model('tags', tagSchema);
 module.exports.emailSubscriber = mongoose.model('emailSubscriber', emailSubscriberSchema);
 module.exports.keyFeatures = mongoose.model('keyFeatures', keyFeaturesSchema);
-module.exports.specification= mongoose.model('specification', specificationSchema);
+module.exports.specifications= mongoose.model('specifications', specificationSchema);
 module.exports.offerDetails = mongoose.model('offerDetails', offerDetailsSchema);
 module.exports.offerConditions = mongoose.model('offerConditions', offerConditionsSchema);
 module.exports.likes = mongoose.model('likes', likesSchema);

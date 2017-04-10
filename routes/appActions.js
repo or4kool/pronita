@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose=require('mongoose');
-var adminSchema=require('../app/models/appSchema.js');
+var appSchema=require('../app/models/appSchema.js');
 var nodemailer = require('nodemailer');
 //passport for authentication
 var passport = require('passport')
@@ -14,7 +14,7 @@ passport.use(new LocalStrategy({
   },
   function(username, password, done) {
 
-    adminSchema.user.findOne({$or:[{userName:username}, {email:username}]}, function(err, userData) {
+    appSchema.user.findOne({$or:[{userName:username}, {email:username}]}, function(err, userData) {
         if (err) return done(err);
         if (!userData){
             return done(null, false, {message: "Wrong Username"} )
@@ -40,7 +40,7 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (id, done) {
-    adminSchema.user.findById(id, function(err, user) {
+    appSchema.user.findById(id, function(err, user) {
     done(err, user);
   });
 
@@ -84,24 +84,24 @@ function prepareEmail(from, to, subject, message, bcc){
     });
 }
 
-function addDocument(key, postData){
-    // console.log(postData[key])
-    console.log(adminSchema.keyFeatures)
-    adminSchema[key].create(postData[key], function(errOther, posts){
+function addDocument(key, postData, result){
+    // console.log(key);
+    appSchema[key].create(postData, function(errOther, posts){
+        // console.log(errOther, posts)
         if(errOther){
-            console.log('errOther'); return (errOther);
+            result(errOther, null)
         }
-        console.log(posts)
-        return posts;
+        else{result(null, posts, key)}
     })
 }
 
-function updateDocument(id, update, document){
-    adminSchema[document].findByIdAndUpdate(id,
-        {$push:update},
-        {safe: true, new : true},
+function updateDocument(id, update, document, result){
+    appSchema[document].findByIdAndUpdate(id,
+        update,
+        { upsert:true, new : true},
         function(err, updates){
-           if(err)return next(err)
+           if(err) result(err, null);
+           else { result(null, updates)}
         }
     )
 }
@@ -118,7 +118,7 @@ router.get('/logOut', function(req, res, next) {
     res.send(200);
 })
 router.get('/inventory', function(req, res, next) {
-    adminSchema.inventory.find({status:'active'})
+    appSchema.inventory.find({status:'active'})
     .populate(
         {
             path:'productManager',
@@ -149,7 +149,7 @@ router.get('/inventory', function(req, res, next) {
 router.get('/category', function(req, res, next){
 
 
-    adminSchema.category.find()
+    appSchema.category.find()
     .populate('subCategories')
     .exec(function(err, category)
     {
@@ -158,7 +158,7 @@ router.get('/category', function(req, res, next){
     })
 });
 router.get('/subcategory', function(req, res, next) {
-    adminSchema.subcategory.find()
+    appSchema.subcategory.find()
     .populate('category')
     .exec(function(err, subcategory){
         if(err) return next(err);
@@ -168,19 +168,19 @@ router.get('/subcategory', function(req, res, next) {
 
 //get a particular post
 router.get('/:id', function(req, res, next){
-    adminSchema.inventory.findById(req.params.id, function(err, inventory){
+    appSchema.inventory.findById(req.params.id, function(err, inventory){
         if(err)return next(err)
         res.json(post);
     })
 });
 router.get('/category/:id', function(req, res, next) {
-    adminSchema.category.findById(req.params.id, function(err, category){
+    appSchema.category.findById(req.params.id, function(err, category){
         if(err) return next(err);
         res.json(category)
     })
 });
 router.get('/subcategory/:id', function(req, res, next) {
-    adminSchema.subcategory.find({category:req.params.id})
+    appSchema.subcategory.find({category:req.params.id})
     .populate('category')
     .exec (function(err, subcategory){
         if(err) return next(err);
@@ -188,7 +188,7 @@ router.get('/subcategory/:id', function(req, res, next) {
     })
 });
 router.get('/userProfile/:id', function(req, res, next) {
-    adminSchema.user.findById(req.params.id)
+    appSchema.user.findById(req.params.id)
     .populate({
         path:'userTests',
         populate:{path: 'inventorySettings productManager'}
@@ -201,12 +201,12 @@ router.get('/userProfile/:id', function(req, res, next) {
 
 // send a post
 
-router.post('/inventory', function(req, res, next){
-    adminSchema.inventory.create( req.body, function(err, inventory){
+router.post('/inventory',  function(req, res, next){
+    appSchema.inventory.create( req.body, function(err, inventory){
         if(err) res.send(err);
         else if(req.body.others){
             inventoryExtra=req.body.others
-            var update={};
+            let update={};
             a=0;
             for(var  key in inventoryExtra){
                 updateD=key;
@@ -221,6 +221,7 @@ router.post('/inventory', function(req, res, next){
                             if(err) res.send(err)
                             else{
                                 inventory=updates;
+                                // console.log(a, Object.keys(inventoryExtra).length)
                                 if(a==Object.keys(inventoryExtra).length-1){
                                     res.json({message:"Inventory successfully Added!", inventory});
                                 }
@@ -235,18 +236,20 @@ router.post('/inventory', function(req, res, next){
         else{
             res.json({message:"Inventory successfully Added!", inventory});
         }
+
     })
 });
 
+
 router.post('/category', function(req, res, next){
-    adminSchema.category.create(req.body, function(err, post){
+    appSchema.category.create(req.body, function(err, post){
         if(err) return next(err);
         res.json(post);
     })
 });
 
 router.post('/subcategory', function(req, res, next){
-    adminSchema.subcategory.create(req.body, function(err, post){
+    appSchema.subcategory.create(req.body, function(err, post){
         if(err) return next(err)
         res.json(post);
     })
@@ -254,15 +257,15 @@ router.post('/subcategory', function(req, res, next){
 });
 
 router.post('/biddings', function(req, res, next){
-    adminSchema.productManager.create(req.body, function(err, post){
+    appSchema.productManager.create(req.body, function(err, post){
         if(err) return next(err)
-        adminSchema.inventory.findByIdAndUpdate(
+        appSchema.inventory.findByIdAndUpdate(
             req.body.inventoryId,
             {$push:{productManager:post}},
             {safe: true, upsert: true, new : true},
             function(err, inventory){
                 if(err)return next(err)
-                adminSchema.user.findByIdAndUpdate(
+                appSchema.user.findByIdAndUpdate(
                     req.body.userId,
                     {$push:{userTests:inventory}},
                     function(err, user){
@@ -276,15 +279,15 @@ router.post('/biddings', function(req, res, next){
 });
 
 router.post('/user', function(req, res, next){
-    adminSchema.user.find({$or:[{userName:req.body.userName}, {email:req.body.email}]})
+    appSchema.user.find({$or:[{userName:req.body.userName}, {email:req.body.email}]})
     .exec(function(err, user){
         if(err) return next(err);
         if(user.length==0){
-                var newuser= new adminSchema.user(req.body);
+                var newuser= new appSchema.user(req.body);
                 newuser.save(function(err){
                     if (err) throw err;
                     // fetch user and test password verification
-                    adminSchema.user.findOne({$or:[{userName:req.body.userName}, {email:req.body.email}]}, function(err, userData) {
+                    appSchema.user.findOne({$or:[{userName:req.body.userName}, {email:req.body.email}]}, function(err, userData) {
                         if (err) throw err;
 
                         // test a matching password
@@ -325,7 +328,7 @@ router.post('/contact', function(req, res, next){
 });
 router.post('/addSubscriber', function(req, res, next){
     console.log(req.body.emailAddress)
-    adminSchema.emailSubscriber.find({emailAddress:req.body.emailAddress})
+    appSchema.emailSubscriber.find({emailAddress:req.body.emailAddress})
     .exec(function(err, emailSubscriber){
         if(err) return next(err);
         console.log(emailSubscriber.length);
@@ -333,7 +336,7 @@ router.post('/addSubscriber', function(req, res, next){
         var emailbody;
 
         if(emailSubscriber.length==0){
-            adminSchema.emailSubscriber.create(req.body, function(err, emailSubscriber){
+            appSchema.emailSubscriber.create(req.body, function(err, emailSubscriber){
                 if(err) return next(err)
                 //res.json(emailSubscriber);
                 // setup e-mail data with unicode symbols
