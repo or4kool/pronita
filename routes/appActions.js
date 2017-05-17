@@ -126,11 +126,11 @@ router.get('/inventory', function(req, res, next) {
         })
     .populate(
         {
-            path:'inventorySettings',
-            match:{
-                startTimeStamp:{$lte:Date.now()},
-                closeTimeStamp:{$gte:Date.now()}
-            }
+            path:'inventorySettings'
+            // match:{
+            //     startTimeStamp:{$lte:Date.now()},
+            //     closeTimeStamp:{$gte:Date.now()}
+            // }
         }
     )
     //  .where('inventorySettings.startTimeStamp').$lte(Date.now())
@@ -221,7 +221,6 @@ router.post('/inventory',  function(req, res, next){
                             if(err) res.send(err)
                             else{
                                 inventory=updates;
-                                // console.log(a, Object.keys(inventoryExtra).length)
                                 if(a==Object.keys(inventoryExtra).length-1){
                                     res.json({message:"Inventory successfully Added!", inventory});
                                 }
