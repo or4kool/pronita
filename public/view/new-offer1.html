@@ -1,0 +1,261 @@
+<div class="offers-banner">
+    <div class="container offer-banner-inner">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 offer-profile-img">
+            <img src="img/profile.png" alt="">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 offer-username">
+            <p>kemi olaosebikan</p><span><i class="fa fa-check-circle-o"></i></span>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 offer-tested">
+            <p>Offers <span>6</span></p> |
+            <p>Tested <span>0</span></p>
+        </div>
+    </div>
+</div>
+<div class="section-parent">
+    <div class="container section-block">
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 offer-header">
+            <h2>Add a New offer</h2>
+        </div>
+        <div class="nexted-sections" ng-show="showNext">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 offer-pro-details">
+                <h2>product Details</h2>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
+                    <input type="text" name="" ng-model="productData.productName" placeholder="Enter Product Name">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner double-inner">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <input type="text" name="" ng-model="productData.productAmount" placeholder="0.00">
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <select ng-options="duration for duration in durations" ng-model="productData.duration">
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
+                    <select ng-options="productType for productType in productTypes" ng-model="productData.productType">
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner double-inner">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <select ng-options="category for category in categories" ng-model="productData.category">
+                        </select>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <select ng-options="subCategory for subCategory in subCategories" ng-model="productData.subCategory">
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
+                    <select ng-options="location for location in locations" ng-model="productData.location">
+                    </select>
+                </div>
+
+            </div>
+
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12  offer-pro-details">
+                    <h2>Product Key Features</h2>
+                </div>
+
+            </div>
+
+            <div class="featured-all" ng-repeat="feature in productData.others.features">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
+                        <input type="text" name="" ng-model="productData.others.features[$index].title" placeholder="Feature Title">
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
+                        <textarea rows="10" cols="" ng-model="productData.others.features[$index].description" placeholder="Feature Description"></textarea>
+                    </div>
+
+                </div>
+                <div ng-click="removeFeatures($index)" ng-if="$index > 0" class="feature-close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </div>
+            </div>
+
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
+                    <div class="add-offer" ng-click="addFeatures()">
+                        <i class="fa fa-plus"></i>
+                        <p>Add another feature</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12  offer-pro-details">
+                    <h2>Product Specification</h2>
+                </div>
+
+            </div>
+
+            <div class="featured-all" ng-repeat="specification in productData.others.specification">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
+                        <input type="text" name="" ng-model="productData.others.specification[$index].title" placeholder="specifications Title">
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
+                        <textarea rows="10" cols="" ng-model="productData.others.specification[$index].description" placeholder="specifications Description"></textarea>
+                    </div>
+
+                </div>
+                <div ng-click="removeSpecifications($index)" ng-if="$index > 0" class="feature-close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </div>
+            </div>
+
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
+                    <div class="add-offer" ng-click="addSpecifications()">
+                        <i class="fa fa-plus"></i>
+                        <p>Add another specification</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 btn-area ">
+                <div class="btn post-btn " ng-click="changeBack()">
+                    NEXT
+                </div>
+            </div>
+        </div>
+
+        <div class="nexted-sections" ng-show="showBack">
+            <!--<div class="back-arrow">
+
+            </div>-->
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12  offer-pro-details">
+                    <i class="fa fa-angle-double-left back-arrow" ng-click="changeBack()" aria-hidden="true"></i>
+                    <h2>Offer Details</h2>
+                </div>
+
+            </div>
+
+            <div class="featured-all" ng-repeat="offerDetail in productData.others.offerDetails">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
+                        <input type="text" name="" ng-model="productData.others.offerDetails[$index].title" placeholder="Offer Detail Title">
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
+                        <textarea rows="10" cols="" ng-model="productData.others.offerDetails[$index].description" placeholder="Offer Detail Description"></textarea>
+                    </div>
+
+                </div>
+                <div ng-click="removeOfferDetails($index)" ng-if="$index > 0" class="feature-close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </div>
+            </div>
+
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
+                    <div class="add-offer" ng-click="addOfferDetails()">
+                        <i class="fa fa-plus"></i>
+                        <p>Add another Offer Condition</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12  offer-pro-details">
+                    <h2>Offer Condition</h2>
+                </div>
+
+            </div>
+
+            <div class="featured-all" ng-repeat="offerCondition in productData.others.offerConditions">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
+                        <input type="text" name="" ng-model="productData.others.offerConditions[$index].title" placeholder="Offer Condition Title">
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
+                        <textarea rows="10" cols="" ng-model="productData.others.offerConditions[$index].description" placeholder="Offer Condition Description"></textarea>
+                    </div>
+
+                </div>
+                <div ng-click="removeOfferConditions($index)" ng-if="$index > 0" class="feature-close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </div>
+            </div>
+
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
+                    <div class="add-offer" ng-click="addOfferConditions()">
+                        <i class="fa fa-plus"></i>
+                        <p>Add another Offer Condition</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 btn-area ">
+                <div class="btn post-btn " ng-click="uploadProduct()">
+                    UPLOAD PRODUCT
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

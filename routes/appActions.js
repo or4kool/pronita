@@ -206,7 +206,9 @@ router.post('/inventory',  function(req, res, next){
         if(err) res.send(err);
         else if(req.body.others){
             inventoryExtra=req.body.others
-            let update={};
+            // OVER HERE
+            var update={};
+            // let update={};
             a=0;
             for(var  key in inventoryExtra){
                 updateD=key;

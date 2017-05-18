@@ -1,0 +1,93 @@
+<div class="offers-banner">
+    <div class="container offer-banner-inner">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 offer-profile-img">
+            <img src="img/profile.png" alt="">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 offer-username">
+            <p>kemi olaosebikan</p><span><i class="fa fa-check-circle-o"></i></span>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 offer-tested">
+            <p>Offers <span>6</span></p> |
+            <p>Tested <span>0</span></p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 profile-parent-tabbed no-padding">
+
+        <a href="#" class="">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 profile-tabbed no-padding">
+                <p class="tabbed">My Offers</p>
+            </div>
+        </a>
+        <a href="#" class="">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 profile-tabbed no-padding">
+                <p>Tested Offers</p>
+            </div>
+        </a>
+
+    </div>
+
+</div>
+
+<!--LIST OUT PRODUCTS-->
+
+<div class="">
+    <div class="container">
+
+        <div class="col-md-12 trending-products">
+            <!-- <single-product product-data = "productData"></single-product> -->
+            <div class="col-md-3" ng-repeat="dProduct in allProducts | topFreeProduct: 'top trending' | limitTo: 6">
+                <div class="all-sha">
+                    <img src="{{dProduct.img}}" />
+                    <div class="product-info">
+                        <h2 class="product-name">{{dProduct.name}}</h2>
+                        <p>{{dProduct.category}} | {{dProduct.location}}</p>
+                        <div class="price-btn">
+                            <h2>&#8358;{{dProduct.amount}}</h2>
+                            <div class="btn" ng-click="productDetail()">discover</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--ADD MORE OFFERS-->
+            <div class="col-md-3">
+                <div class="add-more-offer">
+                    <p>
+                        <i class="fa fa-plus"></i></br> Add New</br>Offer
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="trending off-bg">
+    <div class="container">
+        <div class="col-md-12 all-header">
+            <div class="col-md-4 no-padding">
+                <h2>Recommendations</h2>
+            </div>
+            <div class="col-md-8 vertical-divide"></div>
+        </div>
+        <div class="col-md-12 trending-products">
+            <!-- <single-product product-data = "productData"></single-product> -->
+            <div class="col-md-3" ng-repeat="recProduct in allProducts | topFreeProduct: 'top free' | limitTo: 4">
+                <div class="all-sha">
+                    <img src="{{recProduct.img}}" />
+                    <div class="product-info">
+                        <h2 class="product-name">{{recProduct.name}}</h2>
+                        <p>{{recProduct.category}} | {{recProduct.location}}</p>
+                        <div class="price-btn">
+                            <h2>&#8358;{{recProduct.amount}}</h2>
+                            <div class="btn" ng-click="productDetail()">discover</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="">
+	<input type="test" placeholder="name of product" ng-model="inventoryData.name"/>
+	<select ng-model="inventoryData.type" ng-options="productType for productType in productTypes"></select>
+	<textarea rows="7" ng-model="inventoryData.description" placeholder="product description"></textarea>
+	<label>Key Features</label>
+	<input type="text" placeholder="title" ng-model="inventoryData.others.keyFeatures.title"/>
+	<textarea placeholder="description" rows="10" ng-model="inventoryData.others.keyFeatures.description"></textarea>
+
+	<button ng-click="sendInventory()">send inventory</button>
+</div>
