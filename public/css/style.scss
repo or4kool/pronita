@@ -1651,3 +1651,8 @@ a:hover {
     color: #69637b;
     transition: all 0.4s;
 }
+
+.disabledStyle {
+    cursor: not-allowed !important;
+    border-color: #ffb3b3 !important;
+}

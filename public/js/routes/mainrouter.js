@@ -11,7 +11,9 @@ pronita.config(function($routeProvider) {
         .when('/new-offer', { templateUrl: 'view/new-offers.html', controller: '' })
         .when('/new-offer1', { templateUrl: 'view/new-offer1.html', controller: 'newOffer1Ctrl' })
         .when('/profile', { templateUrl: 'view/profile.html', controller: 'profileController' })
-        .when('/inventory', { templateUrl: 'view/inventory.html', controller: 'inventoryCtrl' });
+        .when('/inventory', { templateUrl: 'view/inventory.html', controller: 'inventoryCtrl' })
+        .when('/category', { templateUrl: 'view/category.html', controller: 'categoryCtrl' })
+        .when('/subcategory', { templateUrl: 'view/subcategory.html', controller: 'subcategoryCtrl' });
 
 
 });

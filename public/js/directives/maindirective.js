@@ -1,49 +1,68 @@
-pronita.directive('belowFootie', function(){
-	// Runs during compile
-	return {
-		restric: 'E',
-		templateUrl: '../view/foot.html',
-		replace: true
-	};
+pronita.directive('belowFootie', function() {
+    // Runs during compile
+    return {
+        restric: 'E',
+        templateUrl: '../view/foot.html',
+        replace: true
+    };
 });
 
-pronita.directive('singleProduct', function(){
-	
-	return {
-		restric: 'E',
-		templateUrl: '../view/productdisplay.html',
-		replace: true,
-		scope: {
-			productDetail: "&",
-			productData: "="
-		}
-	};
+pronita.directive('singleProduct', function() {
+
+    return {
+        restric: 'E',
+        templateUrl: '../view/productdisplay.html',
+        replace: true,
+        scope: {
+            productDetail: "&",
+            productData: "="
+        }
+    };
 });
 
-pronita.directive('getApp', function(){
-	// Runs during compile
-	return {
-		restric: 'E',
-		templateUrl: '../view/apparea.html',
-		replace: true,
-		scope: {}
-	};
+pronita.directive('getApp', function() {
+    // Runs during compile
+    return {
+        restric: 'E',
+        templateUrl: '../view/apparea.html',
+        replace: true,
+        scope: {}
+    };
 });
 
-pronita.directive('shoppingCart', function(){
+pronita.directive('shoppingCart', function() {
 
-	// Runs during compile
-	return {
-		restric: 'E',
-		templateUrl: '../view/shopcart.html',
-		replace: true,
-		scope: {
-			productName: "&",
-			buttonClose: "&"
-		}
-		
-	};
+    // Runs during compile
+    return {
+        restric: 'E',
+        templateUrl: '../view/shopcart.html',
+        replace: true,
+        scope: {
+            productName: "&",
+            buttonClose: "&"
+        }
+
+    };
 });
+
+pronita.directive('cater', function() {
+    var entered = function(scope, elem, attr) {
+        elem.bind("keydown keypress", function(event) {
+            if (event.which === 13) {
+                scope.$apply(function() {
+                    scope.$eval(scope.postFn);
+                })
+                event.preventDefault();
+            }
+        })
+    }
+    return {
+        scope: {
+            postFn: '&'
+        },
+        link: entered
+    }
+})
 
 // pronita.directive('shoppingSign', function(){
 
@@ -52,7 +71,7 @@ pronita.directive('shoppingCart', function(){
 // 		templateUrl: '../view/shopsign.html',
 // 		replace: true,
 // 		scope: {
-			
+
 // 		}
 // 	};
 
@@ -86,113 +105,111 @@ pronita.directive('shoppingCart', function(){
 
 // });
 
-pronita.directive('headie', function(){
+pronita.directive('headie', function() {
 
-	var cartOn = ['$scope','addCart', '$location', function($scope, addCart, $location){
+    var cartOn = ['$scope', 'addCart', '$location', function($scope, addCart, $location) {
 
-		$scope.isDot = '';
-		// $scope.on = 1;
-		// $scope.off = 0;
+        $scope.isDot = '';
+        // $scope.on = 1;
+        // $scope.off = 0;
 
-		$scope.isProduct = function(){
-			if (addCart.cartDot == '1'){
-				
-				$scope.isDot = 'cart-dot';
-				console.log("ISPRODUCT::" + $scope.isDot);
-				// if ($location.path() == '/cart'){
-				// 	$scope.isDot = '';
-				// }
-				return $scope.isDot;
-			}
-		}
+        $scope.isProduct = function() {
+            if (addCart.cartDot == '1') {
 
-		// $scope.gocart = function(){
-		// 	$scope.isDot = '';
-		// 	console.log("GOCART::" + $scope.isDot);
-		// 	$location.url('/cart');
-		// 	console.log($location.path());
-		// 	return $scope.isDot;
-		// }
-		$scope.gocart = function(){
-			addCart.cartDot = 0;
-			$scope.isDot = '';
-			$location.url('/cart');
-			return $scope.isDot;
-		}
-	}];
+                $scope.isDot = 'cart-dot';
+                console.log("ISPRODUCT::" + $scope.isDot);
+                // if ($location.path() == '/cart'){
+                // 	$scope.isDot = '';
+                // }
+                return $scope.isDot;
+            }
+        }
+
+        // $scope.gocart = function(){
+        // 	$scope.isDot = '';
+        // 	console.log("GOCART::" + $scope.isDot);
+        // 	$location.url('/cart');
+        // 	console.log($location.path());
+        // 	return $scope.isDot;
+        // }
+        $scope.gocart = function() {
+            addCart.cartDot = 0;
+            $scope.isDot = '';
+            $location.url('/cart');
+            return $scope.isDot;
+        }
+    }];
 
 
-	return{
-		restric: 'E',
-		templateUrl: '../view/header.html',
-		replace: true,
-		scope: {
+    return {
+        restric: 'E',
+        templateUrl: '../view/header.html',
+        replace: true,
+        scope: {
 
-		},
-		controller: cartOn
-	}
+        },
+        controller: cartOn
+    }
 
 });
 
-pronita.directive('popUp', function(){
+pronita.directive('popUp', function() {
 
-	return{
-		restirc: 'E',
-		templateUrl: '../view/loginpopup.html',
-		replace: true,
-		scope:{
-			
-		}
-	}
+    return {
+        restirc: 'E',
+        templateUrl: '../view/loginpopup.html',
+        replace: true,
+        scope: {
+
+        }
+    }
 });
 
-pronita.directive('linker', function(){
+pronita.directive('linker', function() {
 
-	this.handleLink = function(scope, element, attr){
-		element.bind('click', function(){
-			
-			if (attr.loc == 0){
-				scope.productInfo.keyFeatures = 1;
-				scope.productInfo.specifications = 0;
-				scope.productInfo.offerDetails = 0;
-				scope.productInfo.offerConditions = 0;
-				scope.productInfo.reviews = 0;
-			}
-			else if (attr.loc == 1){
-				scope.productInfo.keyFeatures = 0;
-				scope.productInfo.specifications = 1;
-				scope.productInfo.offerDetails = 0;
-				scope.productInfo.offerConditions = 0;
-				scope.productInfo.reviews = 0;
-			}
-			else if (attr.loc == 2){
-				scope.productInfo.keyFeatures = 0;
-				scope.productInfo.specifications = 0;
-				scope.productInfo.offerDetails = 1;
-				scope.productInfo.offerConditions = 0;
-				scope.productInfo.reviews = 0;
-			}else if(attr.loc ==3){
-				scope.productInfo.keyFeatures = 0;
-				scope.productInfo.specifications = 0;
-				scope.productInfo.offerDetails = 0;
-				scope.productInfo.offerConditions = 1;
-				scope.productInfo.reviews = 0;
-			}else{
-				scope.productInfo.keyFeatures = 0;
-				scope.productInfo.specifications = 0;
-				scope.productInfo.offerDetails = 0;
-				scope.productInfo.offerConditions = 0;
-				scope.productInfo.reviews = 1;
-			}
+    this.handleLink = function(scope, element, attr) {
+        element.bind('click', function() {
 
-			scope.$apply("productInfo");
+            if (attr.loc == 0) {
+                scope.productInfo.keyFeatures = 1;
+                scope.productInfo.specifications = 0;
+                scope.productInfo.offerDetails = 0;
+                scope.productInfo.offerConditions = 0;
+                scope.productInfo.reviews = 0;
+            } else if (attr.loc == 1) {
+                scope.productInfo.keyFeatures = 0;
+                scope.productInfo.specifications = 1;
+                scope.productInfo.offerDetails = 0;
+                scope.productInfo.offerConditions = 0;
+                scope.productInfo.reviews = 0;
+            } else if (attr.loc == 2) {
+                scope.productInfo.keyFeatures = 0;
+                scope.productInfo.specifications = 0;
+                scope.productInfo.offerDetails = 1;
+                scope.productInfo.offerConditions = 0;
+                scope.productInfo.reviews = 0;
+            } else if (attr.loc == 3) {
+                scope.productInfo.keyFeatures = 0;
+                scope.productInfo.specifications = 0;
+                scope.productInfo.offerDetails = 0;
+                scope.productInfo.offerConditions = 1;
+                scope.productInfo.reviews = 0;
+            } else {
+                scope.productInfo.keyFeatures = 0;
+                scope.productInfo.specifications = 0;
+                scope.productInfo.offerDetails = 0;
+                scope.productInfo.offerConditions = 0;
+                scope.productInfo.reviews = 1;
+            }
+
+            scope.$apply("productInfo");
 
 
-		})
-	}
+        })
+    }
 
-	return {
-		restric: 'A',
-		link: handleLink
-	}
+    return {
+        restric: 'A',
+        link: handleLink
+    }
 });

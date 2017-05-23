@@ -1,0 +1,43 @@
+<div class="container">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" cater post-fn="postCat()" style="margin-bottom: 50px;">
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;">
+            <input type="text" name="" value="" ng-model="catData.SubCategoryname" style="width: 50%; margin-top: 50px; padding: 8px;" placeholder="Enter Title">
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;">
+            <textarea rows="10" cols="10" ng-model="catData.description" style="width: 50%; margin-top: 50px;" placeholder="Enter Descprition"></textarea>
+        </div>
+
+
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;">
+            <select style="width: 50%; margin-top: 50px; padding: 10px;" ng-options="category.name for category in categoryOptions track by category.id" ng-model="categoryId"><select>
+                <!--{{categoryId.id}}-->
+        </div>
+
+        
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;">
+            <p class="btn" ng-click="postSubCat(categoryId.id)" style="background: #24d1d2; color: #fff; padding: 8px 30px; margin-top: 40px; font-size: 16px;">Hit me ;)</p>
+        </div>
+        
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="sendSuccess">
+            <p>Saved Category</p>
+        </div>
+
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-repeat="allSubCat in allSubCats" ng-if="catResults.length > 0" style="margin-bottom: 20px;">
+
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="box-shadow: 2px 2px 16px -6px rgba(0, 0, 0, 0.51);border-radius: 5px; border: 1px solid rgba(0, 0, 0, 0.1);padding: 10px; margin: 0 auto; float: none;">
+            <ul style="list-style: none; padding: 10px 20px; margin: 0px;">
+                <li style="border-bottom: 1px solid #dcdcdc; margin-bottom: 10px;padding-bottom: 5px;"><strong>{{allSubCat.category.name}}</strong></li>
+                <li>{{allSubCat.SubCategoryname}}</li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
