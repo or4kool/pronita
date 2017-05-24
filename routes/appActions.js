@@ -118,11 +118,10 @@ router.get('/logOut', function(req, res, next) {
     res.send(200);
 })
 router.get('/inventory', function(req, res, next) {
-    appSchema.inventory.find({status:'active'})
+    appSchema.inventory.find({status:'Active'})
     .populate(
         {
-            path:'productManager',
-            populate:{path: 'userId'}
+            path:'productManager'
         })
     .populate(
         {
