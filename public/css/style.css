@@ -602,7 +602,8 @@ a {
 
 .form-others {
   margin-top: 30px;
-  text-align: center; }
+  text-align: center;
+  position: relative; }
   .form-others p {
     font-size: 11.5px; }
   .form-others .create-btn {
@@ -1107,7 +1108,8 @@ a.liker {
   height: 250px;
   border-radius: 10px;
   background: #fff8f0;
-  color: #3a2f5a; }
+  color: #3a2f5a;
+  cursor: pointer; }
   .add-img .add-main {
     text-align: center;
     font-size: 20px; }
@@ -1304,5 +1306,121 @@ a:hover p {
 .disabledStyle {
   cursor: not-allowed !important;
   border-color: #ffb3b3 !important; }
+
+.pwderrormsg {
+  text-align: center;
+  margin-top: 20px;
+  color: #ff5b5b; }
+
+.successReg {
+  margin-top: 20px;
+  font-size: 15px !important;
+  opacity: 1;
+  color: #18cc18;
+  transition: all 0.4s; }
+
+.noReg {
+  margin-top: 20px;
+  font-size: 15px !important;
+  color: #ff5b5b;
+  opacity: 1;
+  transition: all 0.4s; }
+
+.progress-container {
+  left: 50%;
+  position: absolute;
+  bottom: 0px;
+  transform: translate(-50%, -50%); }
+
+.progress {
+  background-color: #f5f5f5;
+  height: 0.25em;
+  position: relative;
+  width: 22em;
+  box-shadow: none; }
+
+.progress-bar {
+  background-size: 27em 0.25em;
+  height: 100%;
+  position: relative;
+  background-image: linear-gradient(to right, #f4d16f, #ffcc00, #fa972d, #7367a0, #544b7a, #453975);
+  background-image: -o-linear-gradient(to right, #f4d16f, #ffcc00, #fa972d, #7367a0, #544b7a, #453975);
+  background-image: -ms-linear-gradient(to right, #f4d16f, #ffcc00, #fa972d, #7367a0, #544b7a, #453975);
+  background-image: -webkit-linear-gradient(to right, #f4d16f, #ffcc00, #fa972d, #7367a0, #544b7a, #453975);
+  background-image: -moz-linear-gradient(to right, #f4d16f, #ffcc00, #fa972d, #7367a0, #544b7a, #453975);
+  animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
+  -o-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
+  -ms-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
+  -webkit-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
+  -moz-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
+  box-shadow: none; }
+
+.progress-shadow {
+  display: none;
+  height: 5em;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  transform: skew(45deg);
+  -o-transform: skew(45deg);
+  -ms-transform: skew(45deg);
+  -webkit-transform: skew(45deg);
+  -moz-transform: skew(45deg);
+  transform-origin: 0 0;
+  -o-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+  -moz-transform-origin: 0 0;
+  background-image: linear-gradient(to bottom, rgba(234, 236, 238, 0), transparent);
+  background-image: -o-linear-gradient(to bottom, rgba(234, 236, 238, 0), transparent);
+  background-image: -ms-linear-gradient(to bottom, rgba(234, 236, 238, 0), transparent);
+  background-image: -webkit-linear-gradient(to bottom, rgba(234, 236, 238, 0), transparent);
+  background-image: -moz-linear-gradient(to bottom, rgba(234, 236, 238, 0), transparent); }
+
+@keyframes cssload-width {
+  0%,
+    100% {
+    transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85); }
+  0% {
+    width: 0; }
+  100% {
+    width: 100%; } }
+@-o-keyframes cssload-width {
+  0%,
+    100% {
+    -o-transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85); }
+  0% {
+    width: 0; }
+  100% {
+    width: 100%; } }
+@-ms-keyframes cssload-width {
+  0%,
+    100% {
+    -ms-transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85); }
+  0% {
+    width: 0; }
+  100% {
+    width: 100%; } }
+@-webkit-keyframes cssload-width {
+  0%,
+    100% {
+    -webkit-transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85); }
+  0% {
+    width: 0; }
+  100% {
+    width: 100%; } }
+@-moz-keyframes cssload-width {
+  0%,
+    100% {
+    -moz-transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85); }
+  0% {
+    width: 0; }
+  100% {
+    width: 100%; } }
+.image-input-upload input {
+  display: none; }
+
+.img-upload {
+  width: 100%; }
 
 /*# sourceMappingURL=style.css.map */

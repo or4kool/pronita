@@ -1,8 +1,8 @@
 pronita.controller('newOffer1Ctrl', newOffer1Detail);
 
-newOffer1Detail.$inject = ['$scope', 'dataFetcher'];
+newOffer1Detail.$inject = ['$scope', 'dataFetcher', 'mockService'];
 
-function newOffer1Detail($scope, dataFetcher) {
+function newOffer1Detail($scope, dataFetcher, mockService) {
 
     var noc = this;
 
@@ -17,6 +17,10 @@ function newOffer1Detail($scope, dataFetcher) {
     noc.offerConditionsCount = 0;
 
     noc.catUrl = '/appActions/category';
+    noc.uploadUrl = '/appActions/inventory';
+    noc.userUrl = '/appActions/checkLoggedin'
+
+    // noc.testUrl = 'http://api.getcentre.com/v1/getairports/LOS'
 
     $scope.disabled = 0;
     $scope.showDiscounted = 0;
@@ -67,12 +71,13 @@ function newOffer1Detail($scope, dataFetcher) {
     $scope.productData = {
         name: '',
         description: $scope.productTypes[0],
-        rate: $scope.durations[0],
+        rate: 0,
         type: $scope.offerTypes[0],
         category: $scope.categories[0],
         subCategory: $scope.subCategories[0],
+        productManager: '',
         location: $scope.locations[0],
-        status: '',
+        status: 'Active',
         others: {
             keyFeatures: {
                 title: '',
@@ -103,6 +108,17 @@ function newOffer1Detail($scope, dataFetcher) {
     $scope.showNext = 1;
     $scope.showBack = 0;
 
+    $scope.getUserInfo = function() {
+        var userInfo = dataFetcher.fetchData(noc.userUrl);
+        userInfo.then(function(result) {
+            console.log(result.data.user)
+            noc.userData = result.data.user;
+        })
+    }
+
+    // INVOKE FUNC
+    $scope.getUserInfo();
+
     $scope.changeBack = function() {
 
         if ($scope.showNext == 0 && $scope.showBack == 1) {
@@ -119,7 +135,13 @@ function newOffer1Detail($scope, dataFetcher) {
     $scope.uploadProduct = function() {
         $scope.productData.category = $scope.productData.category.id || null;
         $scope.productData.subCategory = $scope.productData.subCategory.id || null;
+        $scope.productData.productManager = noc.userData || '';
         console.log($scope.productData);
+        var doProductUpload = mockService.poster($scope.productData, noc.uploadUrl);
+        doProductUpload.then(function(result) {
+            console.log(result);
+        })
+
     }
 
     $scope.addFeatures = function() {
@@ -199,7 +221,6 @@ function newOffer1Detail($scope, dataFetcher) {
     }
 
     $scope.handleOfferType = function(selectedofferType) {
-        console.log(selectedofferType);
         switch (selectedofferType) {
             case 'Free':
                 $scope.disabledStyle = 'disabledStyle';
@@ -222,5 +243,14 @@ function newOffer1Detail($scope, dataFetcher) {
                 $scope.disabled = 0;
         }
     }
+
+
+    $scope.loadInventory = function() {
+        var getInventory = dataFetcher.fetchData(noc.uploadUrl);
+        getInventory.then(function(result) {
+            console.log(result);
+        })
+    }
+    $scope.loadInventory();
 
 }

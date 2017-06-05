@@ -1,49 +1,68 @@
 <headie></headie>
 <div class="container-fluid">
-	<div class="row create-account-bg">
-	
-	<div class="creater">
-	
-			<div class="account-header">
-				<h2>create account</h2>
-			</div>
-			<div class="create-account-line"></div>
-		
-	</div>
+    <div class="row create-account-bg">
 
-	<div class="section-parent account-section">
-			<div class="container section-block">
-				<div class="col-md-12">
-					<h2 class="signup-header"> Sign Up</h2>
-					<div class="signup-form">
-						<form ng-submit="CreateNewUser()">
-							<span><input type="text" placeholder="Full name" class="n-input" ng-model="fullname" required="true" /></span>
-							<span><input type="text" placeholder="username" class="n-input" ng-model="userInfo.userName" required="true"/></span>
-							<div class="error-msg" ng-show="alreadyUser"><p>Yo! brother <strong>{{firstName}}</strong> someone has taken this name already.</p></div>
-							<span><input type="text" placeholder="location" class="n-input" ng-model="userInfo.location" required="true"/></span>
-							<span><input type="email" placeholder="email" class="n-input" ng-model="userInfo.email" required="true"/></span>
-							<span><input type="password" placeholder="password" class="two n-input" ng-model="userInfo.password" required="true"/>
-							<input type="password" placeholder="confirm password" class="two n-input" ng-model="userInfo.repassword" required="true"/></span>
-						
-							<div class="form-others">
-								<p>By Checking out you agree with our <strong><a href="#">Terms&Conditions</a></strong></p>
-								<!-- <h2 class="btn create-btn" ng-submit="CreateNewUser()">create account</h2> -->
-								<input type="submit" value="create account" class="btn create-btn"/>
+        <div class="creater">
 
-								<div class="vertical-divide acount-divide"></div>
+            <div class="account-header">
+                <h2>create account</h2>
+            </div>
+            <div class="create-account-line"></div>
 
-								<div class="signin-area">
-									<span><p>Already have a pronita account?</p></span>
-									<span><h2 class="btn sign-btn">sign in</h2></span>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
+        </div>
 
-</div>
+        <div class="section-parent account-section">
+            <div class="container section-block">
+                <div class="col-md-12">
+                    <h2 class="signup-header"> Sign Up</h2>
+                    <div class="signup-form">
+                        <form ng-submit="CreateNewUser()">
+                            <span><input type="text" placeholder="First Name" class="two n-input" ng-model="userData.firstName" required="true" />
+							<input type="text" placeholder="Last Name" class="two n-input" ng-model="userData.lastName" required="true" />
+							</span>
+                            <span><input type="text" placeholder="username" class="n-input" ng-model="userData.userName" required="true"/></span>
+                            <div class="error-msg" ng-show="alreadyUser">
+                                <p>Yo! brother <strong>{{firstName}}</strong> someone has taken this name already.</p>
+                            </div>
+                            <span><input type="text" placeholder="location" class="n-input" ng-model="userData.location" required="true"/></span>
+                            <span><input type="email" placeholder="email" class="n-input" ng-model="userData.email" required="true"/></span>
+                            <span><input type="password" placeholder="password" ng-change="pwdLength(userData.password)" class="two n-input" ng-model="userData.password" required="true"/>
+							<input type="password" placeholder="confirm password" ng-change="comparePwd(userData.password, userData.repassword)" class="two n-input" ng-model="userData.repassword" required="true"/></span>
+                            <div class="pwderrormsg" ng-show="showPwdError">
+                                <p>Password does not match</p>
+                            </div>
+                            <div class="pwderrormsg" ng-show="shortPwdmsg">
+                                <p>Password must be more than 6 characters</p>
+                            </div>
+                            <div class="form-others">
+                                <p>By Checking out you agree with our <strong><a href="#">Terms&Conditions</a></strong></p>
+                                <input type="submit" value="create account" class="btn create-btn" />
+                                <div ng-show="showMsg">
+                                    <p ng-class="regMsg" class="">{{userMsg}}</p>
+                                </div>
+                                <!--LOADER START-->
+                                <div class="progress-container" ng-show="showLoader">
+                                    <div class="progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-shadow"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--LOADER END-->
+                                <div class="vertical-divide acount-divide"></div>
+
+                                <div class="signin-area">
+                                    <span><p>Already have a pronita account?</p></span>
+                                    <span><h2 class="btn sign-btn">sign in</h2></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 <get-app></get-app>

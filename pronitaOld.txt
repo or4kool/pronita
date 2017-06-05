@@ -49,10 +49,10 @@
 
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner double-inner">
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <select ng-options="productType for productType in productTypes" ng-model="productData.description"></select>
+                        <select ng-options="productType for productType in productTypes" ng-model="productData.productType"></select>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <select ng-options="duration for duration in durations" ng-model="productData.rate">
+                        <select ng-options="duration for duration in durations" ng-model="productData.duration">
                         </select>
                     </div>
                 </div>
@@ -92,12 +92,11 @@
 
             </div>
 
-            <div class="featured-all">
-                <!--ng-repeat="feature in productData.others.features"-->
+            <div class="featured-all" ng-repeat="feature in productData.others.features">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
 
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
-                        <input type="text" name="" ng-model="productData.others.keyFeatures.title" placeholder="Feature Title">
+                        <input type="text" name="" ng-model="productData.others.features[$index].title" placeholder="Feature Title">
                     </div>
 
                 </div>
@@ -105,7 +104,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
 
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
-                        <textarea rows="10" cols="" ng-model="productData.others.keyFeatures.description" placeholder="Feature Description"></textarea>
+                        <textarea rows="10" cols="" ng-model="productData.others.features[$index].description" placeholder="Feature Description"></textarea>
                     </div>
 
                 </div>
@@ -115,7 +114,7 @@
             </div>
 
 
-            <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
 
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
                     <div class="add-offer" ng-click="addFeatures()">
@@ -124,7 +123,7 @@
                     </div>
                 </div>
 
-            </div>-->
+            </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
 
@@ -134,12 +133,11 @@
 
             </div>
 
-            <div class="featured-all">
-                <!--ng-repeat="specification in productData.others.specification"-->
+            <div class="featured-all" ng-repeat="specification in productData.others.specification">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
 
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
-                        <input type="text" name="" ng-model="productData.others.specifications.title" placeholder="specifications Title">
+                        <input type="text" name="" ng-model="productData.others.specification[$index].title" placeholder="specifications Title">
                     </div>
 
                 </div>
@@ -147,7 +145,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
 
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
-                        <textarea rows="10" cols="" ng-model="productData.others.specifications.description" placeholder="specifications Description"></textarea>
+                        <textarea rows="10" cols="" ng-model="productData.others.specification[$index].description" placeholder="specifications Description"></textarea>
                     </div>
 
                 </div>
@@ -157,7 +155,7 @@
             </div>
 
 
-            <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
 
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
                     <div class="add-offer" ng-click="addSpecifications()">
@@ -166,7 +164,7 @@
                     </div>
                 </div>
 
-            </div>-->
+            </div>
 
             <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 btn-area ">
                 <div class="btn post-btn " ng-click="changeBack()">
@@ -188,12 +186,11 @@
 
             </div>
 
-            <div class="featured-all">
-                <!-- ng-repeat="offerDetail in productData.others.offerDetails"-->
+            <div class="featured-all" ng-repeat="offerDetail in productData.others.offerDetails">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
 
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
-                        <input type="text" name="" ng-model="productData.others.offerDetails.title" placeholder="Offer Detail Title">
+                        <input type="text" name="" ng-model="productData.others.offerDetails[$index].title" placeholder="Offer Detail Title">
                     </div>
 
                 </div>
@@ -201,7 +198,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
 
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
-                        <textarea rows="10" cols="" ng-model="productData.others.offerDetails.description" placeholder="Offer Detail Description"></textarea>
+                        <textarea rows="10" cols="" ng-model="productData.others.offerDetails[$index].description" placeholder="Offer Detail Description"></textarea>
                     </div>
 
                 </div>
@@ -211,7 +208,7 @@
             </div>
 
 
-            <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
 
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
                     <div class="add-offer" ng-click="addOfferDetails()">
@@ -220,7 +217,7 @@
                     </div>
                 </div>
 
-            </div>-->
+            </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
 
@@ -230,12 +227,11 @@
 
             </div>
 
-            <div class="featured-all">
-                <!--ng-repeat="offerCondition in productData.others.offerConditions"-->
+            <div class="featured-all" ng-repeat="offerCondition in productData.others.offerConditions">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
 
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
-                        <input type="text" name="" ng-model="productData.others.offerConditions.title" placeholder="Offer Condition Title">
+                        <input type="text" name="" ng-model="productData.others.offerConditions[$index].title" placeholder="Offer Condition Title">
                     </div>
 
                 </div>
@@ -243,7 +239,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
 
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
-                        <textarea rows="10" cols="" ng-model="productData.others.offerConditions.description" placeholder="Offer Condition Description"></textarea>
+                        <textarea rows="10" cols="" ng-model="productData.others.offerConditions[$index].description" placeholder="Offer Condition Description"></textarea>
                     </div>
 
                 </div>
@@ -253,7 +249,7 @@
             </div>
 
 
-            <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 parent-form-sect">
 
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offer-form-inner">
                     <div class="add-offer" ng-click="addOfferConditions()">
@@ -262,7 +258,7 @@
                     </div>
                 </div>
 
-            </div>-->
+            </div>
             <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 btn-area ">
                 <div class="btn post-btn " ng-click="uploadProduct()">
                     UPLOAD PRODUCT

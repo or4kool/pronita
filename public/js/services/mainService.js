@@ -1,67 +1,115 @@
-pronita.service('mockService', mainServiceDetail);
+pronita.service('mainService', mainServiceDetail);
 
-	mainServiceDetail.$inject = ['$http','$q', '$rootScope'];
+mainServiceDetail.$inject = ['$http', '$q', '$rootScope'];
 
-	function mainServiceDetail($http,$q,$rootScope){
+function mainServiceDetail($http, $q, $rootScope) {
 
-	// this.productBag = [];
+    // this.productBag = [];
 
-	var deffered = $q.defer();
-		
-	this.poster = function(sendData, url){
-		console.log(url + "\n");
-		console.log(sendData);
-		$http({
-				method: 'POST',
-				url: url,
-				data: sendData,
-				headers : {'Content-Type': 'application/json'}
 
-		}).then(function successCallback(response){
 
-				// console.log(response.data.error);
-				deffered.resolve(response.data);
-				// deffered.resolve(response.data);
+    this.poster = function(sendData, url) {
+        var deffered = $q.defer();
+        $http({
+            method: 'POST',
+            url: url,
+            data: sendData,
+            headers: { 'Content-Type': 'application/json' }
 
-				// console.log(deffered.promise);
+        }).then(function successCallback(response) {
 
-		}, function errorCallback(response){
+            // console.log(response.data.error);
+            deffered.resolve(response.data);
+            // deffered.resolve(response.data);
 
-		});
+            // console.log(deffered.promise);
 
-		return deffered.promise;
-	};	
+        }, function errorCallback(response) {
+
+        });
+
+        return deffered.promise;
+    };
+
+    this.imgPoster = function(sendData, url) {
+
+        console.log(sendData);
+        var deffered = $q.defer();
+        $http({
+            method: 'POST',
+            url: url,
+            data: sendData,
+            transformRequest: angular.identity,
+            headers: { 'Content-Type': undefined }
+
+        }).then(function successCallback(response) {
+
+            // console.log(response.data.error);
+            deffered.resolve(response.data);
+            // deffered.resolve(response.data);
+
+            // console.log(deffered.promise);
+
+        }, function errorCallback(response) {
+
+        });
+
+        return deffered.promise;
+    };
+
+
+    this.fetchData = function(url) {
+
+        var deffered = $q.defer();
+
+        $http({
+            method: 'GET',
+            url: url,
+            headers: { 'Content-Type': 'application/json' }
+
+        }).then(function successCallback(response) {
+
+            deffered.resolve(response);
+
+        }, function errorCallback(response) {
+
+        });
+
+        return deffered.promise;
+    };
+
+
 
 
 };
 
-pronita.service('dataFetcher', dataFetcherDetail);
+// pronita.service('dataFetcher', dataFetcherDetail);
 
-	dataFetcherDetail.$inject = ['$http', '$q', '$rootScope'];
+// dataFetcherDetail.$inject = ['$http', '$q', '$rootScope'];
 
-	function dataFetcherDetail($http, $q, $rootScope){
-		
-		this.fetchData = function(url){
+// function dataFetcherDetail($http, $q, $rootScope) {
 
-			var deffered = $q.defer();
+//     this.fetchData = function(url) {
 
-			$http({
-					method: 'GET',
-					url: url,
-					headers : {'Content-Type': 'application/json'}
+//         var deffered = $q.defer();
 
-			}).then(function successCallback(response){
+//         $http({
+//             method: 'GET',
+//             url: url,
+//             headers: { 'Content-Type': 'application/json' }
 
-					deffered.resolve(response);
-					
-			}, function errorCallback(response){
+//         }).then(function successCallback(response) {
 
-			});
+//             deffered.resolve(response);
 
-			return deffered.promise;
-		};
+//         }, function errorCallback(response) {
 
-	};
+//         });
+
+//         return deffered.promise;
+//     };
+
+// };
 
 
 
@@ -69,90 +117,85 @@ pronita.service('dataFetcher', dataFetcherDetail);
 
 pronita.service('addCart', addCartDetails);
 
-		addCartDetails.$inject = ['$rootScope'];
+addCartDetails.$inject = ['$rootScope'];
 
-		function addCartDetails($rootScope){
+function addCartDetails($rootScope) {
 
-			var ad = this;
+    var ad = this;
 
-			ad.cartDot = '';
+    ad.cartDot = '';
 
-			ad.inventory = {
-				productImg:"img/product-display.png",
-				productName:"Rosaline flower pot",
-				productTestPeriod: "1 month",
-				productDelivery: "1-3 working days",
-				productQunatity: 1,
-				proudctPrice: "28000",
-				discountedPrice: "25000"
-			}
+    ad.inventory = {
+        productImg: "img/product-display.png",
+        productName: "Rosaline flower pot",
+        productTestPeriod: "1 month",
+        productDelivery: "1-3 working days",
+        productQunatity: 1,
+        proudctPrice: "28000",
+        discountedPrice: "25000"
+    }
 
-			ad.productBag = [];
+    ad.productBag = [];
 
-			ad.addIt = function(){
-				console.log(ad.productBag.length);
-				if (ad.productBag.length > 0){
-					console.log("YEP EXTRA");
-					for (var i=0; i<ad.productBag.length; i++ ){
-						if (ad.productBag[i].productName){
-							ad.productBag[i].productQunatity += 1;
-						}
-					}
+    ad.addIt = function() {
+        console.log(ad.productBag.length);
+        if (ad.productBag.length > 0) {
+            console.log("YEP EXTRA");
+            for (var i = 0; i < ad.productBag.length; i++) {
+                if (ad.productBag[i].productName) {
+                    ad.productBag[i].productQunatity += 1;
+                }
+            }
 
-				}else{
-					ad.productBag.push({
-					productImg:ad.inventory.productName,
-					productName:ad.inventory.productName,
-					productTestPeriod:ad.inventory.productTestPeriod,
-					productDelivery:ad.inventory.productDelivery,
-					productQunatity:ad.inventory.productQunatity,
-					proudctPrice:ad.inventory.proudctPrice,
-					discountedPrice:ad.inventory.discountedPrice
-				});
-				}
-				
-				
-				// console.log(ad.productBag);
+        } else {
+            ad.productBag.push({
+                productImg: ad.inventory.productName,
+                productName: ad.inventory.productName,
+                productTestPeriod: ad.inventory.productTestPeriod,
+                productDelivery: ad.inventory.productDelivery,
+                productQunatity: ad.inventory.productQunatity,
+                proudctPrice: ad.inventory.proudctPrice,
+                discountedPrice: ad.inventory.discountedPrice
+            });
+        }
 
-				
-			}
 
-		};
+        // console.log(ad.productBag);
+
+
+    }
+
+};
 
 
 
 pronita.service('getproduct', getproductDetails);
 
-getproductDetails.$inject = ['dataFetcher','$rootScope', '$q'];
+getproductDetails.$inject = ['dataFetcher', '$rootScope', '$q'];
 
-function getproductDetails(dataFetcher, rootScope, $q){
+function getproductDetails(dataFetcher, rootScope, $q) {
 
-	  this.getAllProduct = function(url){
+    this.getAllProduct = function(url) {
 
-	  	var def = $q.defer();
+        var def = $q.defer();
 
-	  	this.productData = '';
+        this.productData = '';
 
-	  	var productLists = dataFetcher.fetchData(url);
+        var productLists = dataFetcher.fetchData(url);
 
-	  	productLists.then(function(result){
-	  		// console.log(result.data.products);
-	  		if (result.data.status == 'success'){
-		  		this.productData = result.data.products;
-	  			// console.log(productData);
-	  			def.resolve(productData);
-		  		// return productData;
-	  		}
-	  	});
+        productLists.then(function(result) {
+            // console.log(result.data.products);
+            if (result.data.status == 'success') {
+                this.productData = result.data.products;
+                // console.log(productData);
+                def.resolve(productData);
+                // return productData;
+            }
+        });
 
-	  	// console.log(productData);
-		 return def.promise;
+        // console.log(productData);
+        return def.promise;
 
-	  }
+    }
 
 }
-
-
-	
-
-	

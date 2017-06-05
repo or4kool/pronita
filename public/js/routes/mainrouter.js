@@ -8,7 +8,7 @@ pronita.config(function($routeProvider) {
         .when('/cart', { templateUrl: 'view/cart.html', controller: 'cartController' })
         .when('/user', { templateUrl: 'view/user.html', controller: 'userController' })
         .when('/productupload', { templateUrl: 'view/productupload.html', controller: 'productuploadController' })
-        .when('/new-offer', { templateUrl: 'view/new-offers.html', controller: '' })
+        .when('/new-offer', { templateUrl: 'view/new-offers.html', controller: 'newOfferCtrl' })
         .when('/new-offer1', { templateUrl: 'view/new-offer1.html', controller: 'newOffer1Ctrl' })
         .when('/profile', { templateUrl: 'view/profile.html', controller: 'profileController' })
         .when('/inventory', { templateUrl: 'view/inventory.html', controller: 'inventoryCtrl' })

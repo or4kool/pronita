@@ -64,6 +64,36 @@ pronita.directive('cater', function() {
     }
 })
 
+pronita.directive('showImg', function() {
+    return {
+
+        scope: {
+            // showImg: "&"
+            showImg: "="
+        },
+        link: function(scope, ele, attr) {
+            console.log(scope.showImg);
+            ele.bind('change', function(changeEvent) {
+                console.log(changeEvent.target.files[0]);
+                var imgReader = new FileReader();
+                // console.log(scope.showImg);
+                imgReader.onload = function(loadEvent) {
+                    scope.$apply(function() {
+                        console.log(loadEvent);
+                        scope.showImg = loadEvent.target.result;
+                        // console.log(scope.showImg);
+
+                    })
+                }
+                console.log(changeEvent.target.files[0]);
+                imgReader.readAsDataURL(changeEvent.target.files[0])
+                console.log(imgReader);
+
+            })
+        }
+    }
+})
+
 // pronita.directive('shoppingSign', function(){
 
 // 	return {
