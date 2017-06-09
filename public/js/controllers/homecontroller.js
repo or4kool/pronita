@@ -1,9 +1,9 @@
 pronita.controller('homeController', homeControllerDetails);
 
 
-	homeControllerDetails.$inject = ['$scope', 'dataFetcher','$location','addCart'];
+	homeControllerDetails.$inject = ['$scope', 'mainService','$location','addCart'];
 
-	function homeControllerDetails($scope,dataFetcher,$locationa,ddCart){
+	function homeControllerDetails($scope,mainService,$locationa,ddCart){
 
 			var hc = this;
 
@@ -63,7 +63,7 @@ pronita.controller('homeController', homeControllerDetails);
 
 		  hc.getAllProduct = function(url){
 
-		  	hc.productLists = dataFetcher.fetchData(url);
+		  	hc.productLists = mainService.fetchData(url);
 
 		  	hc.productLists.then(function(result){
 		  		console.log(result.data.products);

@@ -1,4 +1,4 @@
-pronita.filter('topFreeProduct', ['dataFetcher', function(dataFetcher){
+pronita.filter('topFreeProduct', ['mainService', function(mainService){
 	
 	return function(input, partType){
 

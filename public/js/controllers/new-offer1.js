@@ -1,10 +1,16 @@
 pronita.controller('newOffer1Ctrl', newOffer1Detail);
 
-newOffer1Detail.$inject = ['$scope', 'dataFetcher', 'mockService'];
+newOffer1Detail.$inject = ['$scope', 'mainService'];
 
-function newOffer1Detail($scope, dataFetcher, mockService) {
+function newOffer1Detail($scope, mainService) {
 
     var noc = this;
+
+    console.log(mainService.getImg());
+
+
+    // GET PRODUCT IMAGES
+    noc.productImages = mainService.getImg();
 
     // $scope.features = [0];
     $scope.buddy = { title: null, description: null };
@@ -76,6 +82,8 @@ function newOffer1Detail($scope, dataFetcher, mockService) {
         category: $scope.categories[0],
         subCategory: $scope.subCategories[0],
         productManager: '',
+        profilePic: noc.productImages[0],
+        allPic: '',
         location: $scope.locations[0],
         status: 'Active',
         others: {
@@ -109,7 +117,7 @@ function newOffer1Detail($scope, dataFetcher, mockService) {
     $scope.showBack = 0;
 
     $scope.getUserInfo = function() {
-        var userInfo = dataFetcher.fetchData(noc.userUrl);
+        var userInfo = mainService.fetchData(noc.userUrl);
         userInfo.then(function(result) {
             console.log(result.data.user)
             noc.userData = result.data.user;
@@ -133,11 +141,24 @@ function newOffer1Detail($scope, dataFetcher, mockService) {
 
 
     $scope.uploadProduct = function() {
+        
+        // angular.forEach(noc.productImages,function(data){
+            
+        // })
+
+        for (var i=1; i < noc.productImages.length; i++){
+            $scope.productData.allPic += noc.productImages[i];
+            if(i < (noc.productImages.length)-1){
+                $scope.productData.allPic += ',';
+            }
+        }
+
+
         $scope.productData.category = $scope.productData.category.id || null;
         $scope.productData.subCategory = $scope.productData.subCategory.id || null;
         $scope.productData.productManager = noc.userData || '';
         console.log($scope.productData);
-        var doProductUpload = mockService.poster($scope.productData, noc.uploadUrl);
+        var doProductUpload = mainService.poster($scope.productData, noc.uploadUrl);
         doProductUpload.then(function(result) {
             console.log(result);
         })
@@ -194,7 +215,7 @@ function newOffer1Detail($scope, dataFetcher, mockService) {
 
     // LOAD CATEGORY
     $scope.getCategory = function() {
-        var loadCategory = dataFetcher.fetchData(noc.catUrl);
+        var loadCategory = mainService.fetchData(noc.catUrl);
         loadCategory.then(function(result) {
 
             angular.forEach(result.data, function(data) {
@@ -212,7 +233,7 @@ function newOffer1Detail($scope, dataFetcher, mockService) {
         $scope.subCategories = [{ name: 'Select Subcategory' }];
         noc.subCatUrl = '/appActions/subcategory';
         noc.subCatUrl = noc.subCatUrl + '/' + catId;
-        loadSubCategory = dataFetcher.fetchData(noc.subCatUrl);
+        loadSubCategory = mainService.fetchData(noc.subCatUrl);
         loadSubCategory.then(function(result) {
             angular.forEach(result.data, function(data) {
                 $scope.subCategories.push({ id: data._id, name: data.SubCategoryname })
@@ -246,7 +267,7 @@ function newOffer1Detail($scope, dataFetcher, mockService) {
 
 
     $scope.loadInventory = function() {
-        var getInventory = dataFetcher.fetchData(noc.uploadUrl);
+        var getInventory = mainService.fetchData(noc.uploadUrl);
         getInventory.then(function(result) {
             console.log(result);
         })

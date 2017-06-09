@@ -6,6 +6,7 @@ function mainServiceDetail($http, $q, $rootScope) {
 
     // this.productBag = [];
 
+    var productImg = '';
 
 
     this.poster = function(sendData, url) {
@@ -17,13 +18,9 @@ function mainServiceDetail($http, $q, $rootScope) {
             headers: { 'Content-Type': 'application/json' }
 
         }).then(function successCallback(response) {
-
-            // console.log(response.data.error);
+            
             deffered.resolve(response.data);
-            // deffered.resolve(response.data);
-
-            // console.log(deffered.promise);
-
+            
         }, function errorCallback(response) {
 
         });
@@ -33,7 +30,6 @@ function mainServiceDetail($http, $q, $rootScope) {
 
     this.imgPoster = function(sendData, url) {
 
-        console.log(sendData);
         var deffered = $q.defer();
         $http({
             method: 'POST',
@@ -79,40 +75,17 @@ function mainServiceDetail($http, $q, $rootScope) {
     };
 
 
+    this.setImg = function(imgArray){
+        productImg = imgArray;
+    }
+
+    this.getImg = function(){
+        return productImg
+    }
+
 
 
 };
-
-// pronita.service('dataFetcher', dataFetcherDetail);
-
-// dataFetcherDetail.$inject = ['$http', '$q', '$rootScope'];
-
-// function dataFetcherDetail($http, $q, $rootScope) {
-
-//     this.fetchData = function(url) {
-
-//         var deffered = $q.defer();
-
-//         $http({
-//             method: 'GET',
-//             url: url,
-//             headers: { 'Content-Type': 'application/json' }
-
-//         }).then(function successCallback(response) {
-
-//             deffered.resolve(response);
-
-//         }, function errorCallback(response) {
-
-//         });
-
-//         return deffered.promise;
-//     };
-
-// };
-
-
-
 
 
 pronita.service('addCart', addCartDetails);
@@ -171,9 +144,9 @@ function addCartDetails($rootScope) {
 
 pronita.service('getproduct', getproductDetails);
 
-getproductDetails.$inject = ['dataFetcher', '$rootScope', '$q'];
+getproductDetails.$inject = ['mainService', '$rootScope', '$q'];
 
-function getproductDetails(dataFetcher, rootScope, $q) {
+function getproductDetails(mainService, rootScope, $q) {
 
     this.getAllProduct = function(url) {
 
@@ -181,7 +154,7 @@ function getproductDetails(dataFetcher, rootScope, $q) {
 
         this.productData = '';
 
-        var productLists = dataFetcher.fetchData(url);
+        var productLists = mainService.fetchData(url);
 
         productLists.then(function(result) {
             // console.log(result.data.products);

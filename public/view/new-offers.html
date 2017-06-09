@@ -22,38 +22,14 @@
                 <input type="file" id="img-file{{imgUploadNum}}" name="img-file1" class="inputfile" show-img="uploadUrl.img[imgUploadNum]" />
                 <label class="img-upload" for="img-file{{imgUploadNum}}">
                     <div class="add-img" style="overflow: hidden;">
-                        <img  src="{{uploadUrl.img[imgUploadNum]}}" style="height: 100%"/>
+                        <img ng-src="{{uploadUrl.img[imgUploadNum]}}"  src="{{uploadUrled.img[imgUploadNum]}}" style="height: 100%"/>
                     </div>
                 </label>
             </div>
-            <!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 image-input-upload">
-                <input type="file" id="img-file2" name="img-file2" class="inputfile" show-img="imgFile('../img/add-plus.png')" />
-                <label class="img-upload" for="img-file2">
-                    <div class="add-img" style="overflow: hidden;">
-                        <img ng-src="{{imgFile('../img/add-plus.png')}}" src="" style="height: 100%"/>
-                    </div>
-                </label>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 image-input-upload">
-                <input type="file" id="img-file3" class="inputfile" />
-                <label class="img-upload" for="img-file3">
-                    <div class="add-img" style="overflow: hidden;">
-                        <img ng-src="{{imgFile('../img/add-plus.png')}}" src="" style="width: 100%"/>
-                    </div>
-                </label>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 image-input-upload">
-                <input type="file" id="img-file4" class="inputfile" />
-                <label class="img-upload" for="img-file4">
-                    <div class="add-img" style="overflow: hidden;">
-                        <img ng-src="{{imgFile('../img/add-plus.png')}}" src="" style="width: 100%"/>
-                    </div>
-                </label>
-            </div>-->
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 btn-area">
             <div class="btn post-btn" ng-click="uploadProdImg()">
-                POST OFFER
+                NEXT
             </div>
         </div>
     </div>

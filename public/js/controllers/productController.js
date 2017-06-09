@@ -1,9 +1,9 @@
 pronita.controller('productController', productDetail);
 
 
-	productDetail.$inject = ['$scope','$location', 'mockService', 'addCart'];
+	productDetail.$inject = ['$scope','$location', 'mainService', 'addCart'];
 
-	function productDetail($scope,$location, mockService, addCart){
+	function productDetail($scope,$location, mainService, addCart){
 
 		var pc = this;
 

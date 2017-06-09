@@ -1,8 +1,8 @@
 pronita.controller('newOfferCtrl', newOfferDetail);
 
-newOfferDetail.$injector = ['$scope', 'mainService'];
+newOfferDetail.$injector = ['$scope', 'mainService', '$location'];
 
-function newOfferDetail($scope, mainService) {
+function newOfferDetail($scope, mainService, $location) {
 
     var nofc = this
 
@@ -11,27 +11,56 @@ function newOfferDetail($scope, mainService) {
     // }
 
     $scope.uploadUrl = {
+        img: []
+    }
+
+    $scope.uploadUrled = {
         img: ['../img/add-plus.png']
     }
 
-    $scope.imgUploadNums = []
+    $scope.imgUploadNums = [];
 
+    nofc.allImgs = []
+
+
+    var imgNum = '';
+    var countCheck = 0;
 
     $scope.uploadProdImg = function() {
-        for (var i = 0; i < uploadUrl.img.length; i++) {
 
-            console.log(i + ">> " + $scope.uploadUrl.img[i])
+        if(countCheck < 1){
+            imgNum = ($scope.uploadUrl.img.length)-1;
+            var theNum = 0;
+        }
+        for (var i = imgNum; i > theNum; i--) {
+            
             var fData = new FormData();
 
 
             var imgBlob = nofc.dataUri($scope.uploadUrl.img[i]);
+            fData.append('files', ($scope.uploadUrl.img[i]));
             fData.append('files', imgBlob);
-            console.log(i + ">> " + imgBlob.path);
+            
             var url = '/upload'
 
             var sendImg = mainService.imgPoster(fData, url);
             sendImg.then(function(result) {
-                console.log(i + ">> " + result);
+                console.log('====================================');
+                console.log(result);
+                if (result[i]){
+                    nofc.allImgs.push(result[i].filename);
+                }
+                console.log(nofc.allImgs);
+                console.log('====================================');
+                countCheck = 1;
+                $scope.uploadProdImg();
+
+                // MOVE TO THE PRODUCT UPLOAD PART
+                if(i == 0 && result){
+                    mainService.setImg(nofc.allImgs);
+                    $location.path('/new-offer1')
+                }
+                 
             })
         }
     }
@@ -43,7 +72,6 @@ function newOfferDetail($scope, mainService) {
     nofc.doUplodNum = function(num) {
         num = num - 1
         for (var i = 0; num >= i; num--) {
-            // console.log(num);
             $scope.imgUploadNums.push(num)
         }
     }
@@ -52,14 +80,20 @@ function newOfferDetail($scope, mainService) {
 
 
     nofc.dataUri = function(dataUri) {
-        var dataBinary = atob(dataUri.split(',')[1]);
-        var dataMimeString = dataUri.split(',')[0].split(':')[1].split(';')[0];
-        var dArray = [];
 
-        for (var i = 0; i < dataBinary.length; i++) {
-            dArray.push(dataBinary.charCodeAt(i));
+        if (dataUri){
+            var dataBinary = atob(dataUri.split(',')[1]);
+            var dataMimeString = dataUri.split(',')[0].split(':')[1].split(';')[0];
+            var dArray = [];
+
+            for (var i = 0; i < dataBinary.length; i++) {
+                dArray.push(dataBinary.charCodeAt(i));
+            }
+
+            // console.log(dArray);
+
+            return new Blob([new Uint8Array(dArray)], { type: dataMimeString });
         }
-
-        return new Blob([new Uint8Array(dArray)], { type: dataMimeString });
+        
     }
 }

@@ -32,8 +32,8 @@ var appActions = require('./routes/appActions');
 //mongoose configurations
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-// mongoose.connect('mongodb://localhost/pronitaexpress-development')
-mongoose.connect('mongodb://pronitadb:pronitadb@ds157631.mlab.com:57631/pronitadb')
+mongoose.connect('mongodb://localhost/pronitaexpress-development')
+// mongoose.connect('mongodb://pronitadb:pronitadb@ds157631.mlab.com:57631/pronitadb')
     .then(() => console.log('database connected'))
     .catch((err) => console.error(err))
 

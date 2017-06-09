@@ -72,7 +72,6 @@ pronita.directive('showImg', function() {
             showImg: "="
         },
         link: function(scope, ele, attr) {
-            console.log(scope.showImg);
             ele.bind('change', function(changeEvent) {
                 console.log(changeEvent.target.files[0]);
                 var imgReader = new FileReader();
@@ -88,7 +87,6 @@ pronita.directive('showImg', function() {
                 console.log(changeEvent.target.files[0]);
                 imgReader.readAsDataURL(changeEvent.target.files[0])
                 console.log(imgReader);
-
             })
         }
     }
