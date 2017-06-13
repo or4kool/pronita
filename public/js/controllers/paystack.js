@@ -1,4 +1,4 @@
-pronita.controller('paystack', ['$scope','mockService', function($scope,mockService){
+pronita.controller('paystack', ['$scope','mainService', function($scope,mainService){
 
 	var senddata = PaystackPop.setup({
 		key: 'pk_test_8437d5de4e179a4041828c8c5affce04e065eca9',

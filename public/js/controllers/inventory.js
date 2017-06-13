@@ -1,8 +1,8 @@
 pronita.controller('inventoryCtrl', inventoryCtrlDetails);
 
-inventoryCtrlDetails.$inject = ['$scope', 'mockService'];
+inventoryCtrlDetails.$inject = ['$scope', 'mainService'];
 
-function inventoryCtrlDetails($scope, mockService){
+function inventoryCtrlDetails($scope, mainService){
 
 	var ic = this;
 
@@ -20,7 +20,7 @@ function inventoryCtrlDetails($scope, mockService){
 
 		console.log($scope.inventoryData);
 
-		ic.pushInventory = mockService.poster($scope.inventoryData, ic.url);
+		ic.pushInventory = mainService.poster($scope.inventoryData, ic.url);
 
 		ic.pushInventory.then(function(result){
 			console.log(result);

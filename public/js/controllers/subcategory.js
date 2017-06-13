@@ -1,8 +1,8 @@
 pronita.controller('subcategoryCtrl', subcategoryDetail);
 
-subcategoryDetail.$inject = ['$scope', 'mockService', 'dataFetcher', '$timeout'];
+subcategoryDetail.$inject = ['$scope', 'mainService', '$timeout'];
 
-function subcategoryDetail($scope, mockService, dataFetcher, $timeout) {
+function subcategoryDetail($scope, mainService, $timeout) {
 
     var cc = this;
 
@@ -25,7 +25,7 @@ function subcategoryDetail($scope, mockService, dataFetcher, $timeout) {
         $scope.catData.category = catID;
 
         // console.log($scope.catData);
-        var postSubCat = mockService.poster($scope.catData, cc.subUrl);
+        var postSubCat = mainService.poster($scope.catData, cc.subUrl);
         postSubCat.then(function(result) {
             // console.log(result);
             $scope.sendSuccess = result;
@@ -41,7 +41,7 @@ function subcategoryDetail($scope, mockService, dataFetcher, $timeout) {
     }
 
     cc.getCat = function() {
-        var getAllCat = dataFetcher.fetchData(cc.catUrl);
+        var getAllCat = mainService.fetchData(cc.catUrl);
         getAllCat.then(function(result) {
             $scope.catResults = result.data;
             angular.forEach($scope.catResults, function(result) {
@@ -53,7 +53,7 @@ function subcategoryDetail($scope, mockService, dataFetcher, $timeout) {
     cc.getCat();
 
     cc.getSubCat = function() {
-        var getAllSubCat = dataFetcher.fetchData(cc.subUrl);
+        var getAllSubCat = mainService.fetchData(cc.subUrl);
         getAllSubCat.then(function(result) {
             console.log(result);
             $scope.allSubCats = result.data;

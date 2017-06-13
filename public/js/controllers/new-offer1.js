@@ -31,7 +31,7 @@ function newOffer1Detail($scope, mainService) {
     $scope.disabled = 0;
     $scope.showDiscounted = 0;
 
-    $scope.durations = ['Offer Duration', '30 days'];
+    $scope.durations = ['Offer Duration', 30];
     $scope.productTypes = ['Product Type', 'Physical Product', 'Services', 'Software'];
     $scope.categories = [{ name: 'Select Category' }];
     $scope.subCategories = [{ name: 'Select Subcategory' }];

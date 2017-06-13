@@ -1,4 +1,4 @@
-pronita.controller('userController', ['$scope','mockService', function($scope,mockService){
+pronita.controller('userController', ['$scope','mainService', function($scope,mainService){
 
 	$scope.userDetail = {};
 
@@ -14,7 +14,7 @@ pronita.controller('userController', ['$scope','mockService', function($scope,mo
 
 	$scope.loginUser = function(){
 
-		var postData = mockService.poster($scope.userDetail, loginUrl)
+		var postData = mainService.poster($scope.userDetail, loginUrl)
 			.then(function(result){
 				console.log(result);
 			});

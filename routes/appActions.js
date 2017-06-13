@@ -169,7 +169,7 @@ router.get('/subcategory', function(req, res, next) {
 router.get('/:id', function(req, res, next){
     appSchema.inventory.findById(req.params.id, function(err, inventory){
         if(err)return next(err)
-        res.json(post);
+        res.json(inventory);
     })
 });
 router.get('/category/:id', function(req, res, next) {

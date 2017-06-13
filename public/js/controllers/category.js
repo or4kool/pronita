@@ -1,8 +1,8 @@
 pronita.controller('categoryCtrl', categoryDetail);
 
-categoryDetail.$inject = ['$scope', 'mockService', 'dataFetcher', '$timeout'];
+categoryDetail.$inject = ['$scope', 'mainService','$timeout'];
 
-function categoryDetail($scope, mockService, dataFetcher, $timeout) {
+function categoryDetail($scope, mainService, $timeout) {
 
     var cc = this;
 
@@ -16,7 +16,7 @@ function categoryDetail($scope, mockService, dataFetcher, $timeout) {
     $scope.postCat = function() {
 
         console.log($scope.catData);
-        var postCat = mockService.poster($scope.catData, cc.url);
+        var postCat = mainService.poster($scope.catData, cc.url);
         postCat.then(function(result) {
             console.log(result);
             $scope.sendSuccess = result;
@@ -31,7 +31,7 @@ function categoryDetail($scope, mockService, dataFetcher, $timeout) {
     }
 
     cc.getCat = function() {
-        var getAllCat = dataFetcher.fetchData(cc.url);
+        var getAllCat = mainService.fetchData(cc.url);
         getAllCat.then(function(result) {
             $scope.catResults = result.data;
             console.log(result);

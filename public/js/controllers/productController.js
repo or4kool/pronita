@@ -1,9 +1,9 @@
 pronita.controller('productController', productDetail);
 
 
-	productDetail.$inject = ['$scope','$location', 'mainService', 'addCart'];
+	productDetail.$inject = ['$scope','$location', 'mainService', 'addCart', '$routeParams'];
 
-	function productDetail($scope,$location, mainService, addCart){
+	function productDetail($scope,$location, mainService, addCart, $routeParams){
 
 		var pc = this;
 
@@ -14,6 +14,8 @@ pronita.controller('productController', productDetail);
 	pc.liked = 'fa fa-heart';
 	pc.unliked = 'fa fa-heart-o';
 	$scope.confirmLike = pc.unliked;
+
+	pc.url = '/appActions'
 
 	// $scope.selectedproduct = {Rocknrool : 'want one'};
 
@@ -88,5 +90,17 @@ pronita.controller('productController', productDetail);
 		return $scope.confirmLike;
 
 	}
+
+	$scope.getSingleProduct = function(url){
+		var url = url + '/' + $routeParams.productId;
+		console.log(url);
+		var productData = mainService.fetchData(url);
+		productData.then(function(result){
+			$scope.singleProduct = result.data;
+			console.log(result);
+		})
+	}
+
+	$scope.getSingleProduct(pc.url);
 	
 };

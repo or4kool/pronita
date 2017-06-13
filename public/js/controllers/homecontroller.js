@@ -11,7 +11,8 @@ pronita.controller('homeController', homeControllerDetails);
 
 			$scope.productCount = [0,1,2,3];
 
-			hc.url = "../../data.json";
+			hc.url = '/appActions/inventory';
+			// hc.url = "../../data.json";
 			$scope.productData = '';
 
 
@@ -66,14 +67,24 @@ pronita.controller('homeController', homeControllerDetails);
 		  	hc.productLists = mainService.fetchData(url);
 
 		  	hc.productLists.then(function(result){
-		  		console.log(result.data.products);
-		  		if (result.data.status == 'success'){
-			  		$scope.productData = result.data.products;
-		  		}
+				  console.log(result);
+		  		// console.log(result.data.products);
+		  		// if (result.data.status == 'success'){
+			  		$scope.productData = result.data;
+
+					//   if 
+					//   console.log($scope.productData.length);
+		  		// }
 		  	});
 		  }
 
-		  hc.getAllProduct(hc.url);
+		// LOAD ALL PRODUCTS
+		hc.getAllProduct(hc.url);
+
+		$scope.productDetail = function(productId){
+			// console.log(productId);
+			$locationa.url('/product/' + productId)
+		}
 
 
 

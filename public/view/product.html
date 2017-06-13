@@ -1,81 +1,83 @@
 <headie></headie>
 <div class="search-bar">
-	<div class="container">
-		<div class="col-md-12">
-			<div class="col-md-1 search-icon-daddy"><i class="fa fa-search turn-search"></i></div>
-			<div class="col-md-10">
-				<input type="text" placeholder="search offers" class="search-input" />
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="col-md-12">
+            <div class="col-md-1 search-icon-daddy"><i class="fa fa-search turn-search"></i></div>
+            <div class="col-md-10">
+                <input type="text" placeholder="search offers" class="search-input" />
+            </div>
+        </div>
+    </div>
 </div>
 <div class="product-upper">
 
-	<div class="top-dem">
-		<div class="left-line-straight"></div>
-		<div class="back-display"><img src="img/back.png" /><p>back to offers</p></div>
-	</div>
-	<div class="section-parent">
-		<div class="container section-block">
-			<div class="col-md-6">
-				<div class="col-md-12 owner">
-					<span><p>Produced by <strong>roseline abaga</strong></p></span>
-					<span>
+    <div class="top-dem">
+        <div class="left-line-straight"></div>
+        <div class="back-display"><img src="img/back.png" />
+            <p>back to offers</p>
+        </div>
+    </div>
+    <div class="section-parent">
+        <div class="container section-block">
+            <div class="col-md-6">
+                <div class="col-md-12 owner">
+                    <span><p>Produced by <strong>roseline abaga</strong></p></span>
+                    <span>
 						<i class="fa fa-facebook"></i>
 						<i class="fa fa-twitter"></i>
 						<i class="fa fa-instagram"></i>
 					</span>
-				</div>
-				<div class="small-divider"></div>
-				<div class="col-md-12 what-product">
-					<h2>rosaline flower pot</h2>
-					<span>
+                </div>
+                <div class="small-divider"></div>
+                <div class="col-md-12 what-product">
+                    <h2>{{singleProduct.name}}</h2>
+                    <span>
 						<i class="fa fa-star"></i>
 					</span>
-					<span>
-						<p>10 reviews</p>
-					</span>
-				</div>
-				<div class="small-divider"></div>
-				<div class="col-md-12 product-price">
-					<h2>N25,000</h2>
-					<h2><strike>N28,000</strike></h2>
-					<p>offer ends in 3days</p>
-				</div>
-				<div class="col-md-12 order-add-btn">
-					<div class="btn order-product-btn product-review-btn">order now</div>
-					<div class="btn add-product-btn product-review-btn" ng-click="pushToCart()">add to cart</div>
-					<!-- <div class="btn add-product-btn product-review-btn" ng-click="addCarter()">add to cart</div> -->
-				</div>
-				<div class="col-md-12 review-icon">
-					<div class="product-like">
-						<a href="" class="liker" ng-click="productLiked()"><span class="btn"><i class="{{confirmLike}}"></i></span></a>
-						<span><p>{{isLike}}</p></span>
-					</div>
-					<div class="product-comment">
-						<span class="btn"><i class="fa fa-comment-o"></i></span>
-						<span><p>24</p></span>
-					</div>
-				</div>
-			</div>
+                    <!--<span>
+						<p>{{singleProduct.comments.length}} review(s)</p>
+					</span>-->
+                </div>
+                <div class="small-divider"></div>
+                <div class="col-md-12 product-price">
+                    <h2>N25,000</h2>
+                    <h2><strike>N28,000</strike></h2>
+                    <p>offer ends in 3days</p>
+                </div>
+                <div class="col-md-12 order-add-btn">
+                    <div class="btn order-product-btn product-review-btn">order now</div>
+                    <div class="btn add-product-btn product-review-btn" ng-click="pushToCart()">add to cart</div>
+                    <!-- <div class="btn add-product-btn product-review-btn" ng-click="addCarter()">add to cart</div> -->
+                </div>
+                <div class="col-md-12 review-icon">
+                    <div class="product-like">
+                        <a href="" class="liker" ng-click="productLiked()"><span class="btn"><i class="{{confirmLike}}"></i></span></a>
+                        <span><p>{{singleProduct.likes.length}}</p></span>
+                    </div>
+                    <div class="product-comment">
+                        <span class="btn"><i class="fa fa-comment-o"></i></span>
+                        <span><p>{{singleProduct.comments.length}}</p></span>
+                    </div>
+                </div>
+            </div>
 
-			<div class="next-display">
-				<h2>next product</h2>
-				<img src="img/next-card.png" />
-			</div>
+            <div class="next-display">
+                <h2>next product</h2>
+                <img src="img/next-card.png" />
+            </div>
 
-			<div class="col-md-6 product-peep">
-				<img src="img/product-display.png" />
-			</div>
-		</div> 
-	</div>
+            <div class="col-md-6 product-peep">
+                <img src="img/product-display.png" />
+            </div>
+        </div>
+    </div>
 
-	
 
-	<div class="section-parent">
-		<div class="container section-block">
-			<div class="col-md-12 offer-tab product-feat-tab">
-				<span>
+
+    <div class="section-parent">
+        <div class="container section-block">
+            <div class="col-md-12 offer-tab product-feat-tab">
+                <span>
 					<ul>
 						<a href="" linker loc=0><li ng-class="{'selected': productInfo.keyFeatures}">key features</li></a>
 						<a href="" linker loc=1><li ng-class="{'selected': productInfo.specifications}">specifications</li></a>
@@ -85,57 +87,67 @@
 
 					</ul>
 				</span>
-			</div>
-			<div class="col-md-12">
-			
-				<div class="col-md-6 feat-info-block">
-					<h2>This is an introductory text</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-				</div>
-				<div class="col-md-6 feat-info-block">
-					<h2>This is an introductory text</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-				</div>
-				<div class="col-md-6 feat-info-block">
-					<h2>This is an introductory text</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-				</div>
-				<div class="col-md-6 feat-info-block">
-					<h2>This is an introductory text</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-				</div>
-			</div>
-		</div>
-	</div>
+            </div>
+            <div class="col-md-12">
 
-	<div class="other-products">
-		<div class="container section-block">
-			<div class="col-md-12 all-header recommend-header">
-				<div class="col-md-7 no-padding"><h2>other products from seller</h2></div>
-				<div class="col-md-5 vertical-divide"></div>
-				<div class="see-all btn">See all <i class="fa fa-caret-right" aria-hidden="true"></i></div>
-			</div>
-			<div class="col-md-12 trending-products recommend-list">
-				<single-product ng-repeat="recommendations in recommender(4)"></single-product>
-			</div>
-		</div>
-	</div>
-	
+                <div class="col-md-6 feat-info-block">
+                    <h2>This is an introductory text</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                </div>
+                <div class="col-md-6 feat-info-block">
+                    <h2>This is an introductory text</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                </div>
+                <div class="col-md-6 feat-info-block">
+                    <h2>This is an introductory text</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                </div>
+                <div class="col-md-6 feat-info-block">
+                    <h2>This is an introductory text</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="other-products">
+        <div class="container section-block">
+            <div class="col-md-12 all-header recommend-header">
+                <div class="col-md-7 no-padding">
+                    <h2>other products from seller</h2>
+                </div>
+                <div class="col-md-5 vertical-divide"></div>
+                <div class="see-all btn">See all <i class="fa fa-caret-right" aria-hidden="true"></i></div>
+            </div>
+            <div class="col-md-12 trending-products recommend-list">
+                <single-product ng-repeat="recommendations in recommender(4)"></single-product>
+            </div>
+        </div>
+    </div>
+
 </div>
 <div class="top-free-all">
-	<div class="trending-top"><h1 class="tf">Recommendations</h1></div>
-	<div class="top-free">
-		<div class="container">
-			<div class="col-md-12 all-header">
-				<div class="col-md-4 no-padding"><h2>Recommendations</h2></div>
-				<div class="col-md-8 vertical-divide"></div>
-				<div class="see-all btn">See all <i class="fa fa-caret-right" aria-hidden="true"></i></div>
-			</div>
-			<div class="col-md-12 trending-products">
-				<single-product ng-repeat="recommendations in recommender(4)"></single-product>
-			</div>
-		</div>
-	</div>
+    <div class="trending-top">
+        <h1 class="tf">Recommendations</h1>
+    </div>
+    <div class="top-free">
+        <div class="container">
+            <div class="col-md-12 all-header">
+                <div class="col-md-4 no-padding">
+                    <h2>Recommendations</h2>
+                </div>
+                <div class="col-md-8 vertical-divide"></div>
+                <div class="see-all btn">See all <i class="fa fa-caret-right" aria-hidden="true"></i></div>
+            </div>
+            <div class="col-md-12 trending-products">
+                <single-product ng-repeat="recommendations in recommender(4)"></single-product>
+            </div>
+        </div>
+    </div>
 </div>
 
 <get-app></get-app>

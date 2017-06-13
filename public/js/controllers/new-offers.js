@@ -29,29 +29,27 @@ function newOfferDetail($scope, mainService, $location) {
     $scope.uploadProdImg = function() {
 
         if(countCheck < 1){
-            imgNum = ($scope.uploadUrl.img.length)-1;
+            imgNum = ($scope.uploadUrl.img.length);
             var theNum = 0;
         }
-        for (var i = imgNum; i > theNum; i--) {
+        for (var i = (imgNum); i > theNum; i--) {
             
             var fData = new FormData();
 
 
-            var imgBlob = nofc.dataUri($scope.uploadUrl.img[i]);
-            fData.append('files', ($scope.uploadUrl.img[i]));
+            var imgBlob = nofc.dataUri($scope.uploadUrl.img[(i-1)]);
+            fData.append('files', ($scope.uploadUrl.img[(i-1)]));
             fData.append('files', imgBlob);
             
             var url = '/upload'
 
+            // console.log($scope.uploadUrl.img[i]);
+
             var sendImg = mainService.imgPoster(fData, url);
             sendImg.then(function(result) {
-                console.log('====================================');
-                console.log(result);
                 if (result[i]){
                     nofc.allImgs.push(result[i].filename);
                 }
-                console.log(nofc.allImgs);
-                console.log('====================================');
                 countCheck = 1;
                 $scope.uploadProdImg();
 

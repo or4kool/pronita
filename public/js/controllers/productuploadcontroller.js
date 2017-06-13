@@ -1,4 +1,9 @@
-pronita.controller('productuploadController', ['$scope','$q','mockService', function($scope,$q,mockService){
+pronita.controller('productuploadController', productDetailCtrl);
+
+
+productDetailCtrl.$inject = ['$scope','$q','mainService'];
+
+function productDetailCtrl($scope,$q,mainService){
 
 	var url = "/appActions/userLogin";
 	$scope.productInfo = {};
@@ -29,7 +34,7 @@ pronita.controller('productuploadController', ['$scope','$q','mockService', func
 
 		};
 		url="/appActions/inventory";
-		var toUpload = mockService.poster(data, url);
+		var toUpload = mainService.poster(data, url);
 
 		toUpload.then(function(result){
 
@@ -38,7 +43,5 @@ pronita.controller('productuploadController', ['$scope','$q','mockService', func
 		});
 	}
 
+}
 
-
-
-}]);
