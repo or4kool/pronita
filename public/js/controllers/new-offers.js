@@ -27,7 +27,7 @@ function newOfferDetail($scope, mainService, $location) {
     var countCheck = 0;
 
     $scope.uploadProdImg = function() {
-
+console.log($scope.uploadUrl.img);
         if(countCheck < 1){
             imgNum = ($scope.uploadUrl.img.length);
             var theNum = 0;
@@ -37,17 +37,24 @@ function newOfferDetail($scope, mainService, $location) {
             var fData = new FormData();
 
 
-            var imgBlob = nofc.dataUri($scope.uploadUrl.img[(i-1)]);
-            fData.append('files', ($scope.uploadUrl.img[(i-1)]));
-            fData.append('files', imgBlob);
+            // var imgBlob = nofc.dataUri($scope.uploadUrl.img[(i-1)]);
+            // fData.append('files', ($scope.uploadUrl.img[(i-1)]));
+            fData.append('files', $scope.uploadUrl.img[(i-1)]);
+            // fData.append('files', imgBlob);
             
             var url = '/upload'
 
-            // console.log($scope.uploadUrl.img[i]);
+            // console.log(imgBlob);
+
+            // var newName = mainService.bolbToImg(fData, "name" + i + ".jpg");
+            // console.log(newName);
 
             var sendImg = mainService.imgPoster(fData, url);
             sendImg.then(function(result) {
+                console.log(result);
                 if (result[i]){
+                    
+                    // nofc.allImgs.push(newName);
                     nofc.allImgs.push(result[i].filename);
                 }
                 countCheck = 1;
@@ -61,6 +68,7 @@ function newOfferDetail($scope, mainService, $location) {
                  
             })
         }
+        console.log(nofc.allImgs);
     }
 
     $scope.imgFile = function(imag) {

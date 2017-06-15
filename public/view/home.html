@@ -64,7 +64,7 @@
                     <div class="col-md-3" ng-repeat="productsData in productData">
                         <!--<div class="col-md-3" ng-repeat="productsData in productData | topFreeProduct: 'top trending' | limitTo: 4">-->
                         <div class="all-sha">
-                            <img src="{{productsData.profilePic}}" />
+                            <img src="uploads/{{productsData.profilePic}}" />
                             <div class="product-info">
                                 <h2 class="product-name">{{productsData.name}}</h2>
                                 <p>{{productsData.category}} | {{productsData.productManager.location}}</p>

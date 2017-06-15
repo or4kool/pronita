@@ -72,6 +72,20 @@ pronita.controller('homeController', homeControllerDetails);
 		  		// if (result.data.status == 'success'){
 			  		$scope.productData = result.data;
 
+					  var image = new Image();
+					//   image.src = window.URL.createObjectURL(result.data[0].profilePic);
+					var theBlob = result.data[0].profilePic;
+					// theBlob.lastModifiedDate = new Date();
+					// theBlob.name = "picxmate.png";
+
+					// var theFile = new File([theBlob], "picxmate.png");
+					
+					//   console.log(theFile.name);
+
+					// $scope.productData[0].profilePic = theFile.name;
+
+					console.log($scope.productData.profilePic);
+
 					//   if 
 					//   console.log($scope.productData.length);
 		  		// }

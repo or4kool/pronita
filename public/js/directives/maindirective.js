@@ -74,19 +74,22 @@ pronita.directive('showImg', function() {
         link: function(scope, ele, attr) {
             ele.bind('change', function(changeEvent) {
                 console.log(changeEvent.target.files[0]);
-                var imgReader = new FileReader();
-                // console.log(scope.showImg);
-                imgReader.onload = function(loadEvent) {
-                    scope.$apply(function() {
-                        console.log(loadEvent);
-                        scope.showImg = loadEvent.target.result;
-                        // console.log(scope.showImg);
-
-                    })
-                }
                 console.log(changeEvent.target.files[0]);
-                imgReader.readAsDataURL(changeEvent.target.files[0])
-                console.log(imgReader);
+                scope.$apply(function(){
+                    scope.showImg = changeEvent.target.files[0];
+                })
+                // var imgReader = new FileReader();
+                // imgReader.onload = function(loadEvent) {
+                //     scope.$apply(function() {
+                //         console.log(loadEvent);
+                //         scope.showImg = loadEvent.target.result;
+                //         console.log(scope.showImg);
+
+                //     })
+                // }
+                // console.log(changeEvent.target.files[0]);
+                // imgReader.readAsDataURL(changeEvent.target.files[0])
+                // console.log(imgReader);
             })
         }
     }

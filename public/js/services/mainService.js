@@ -29,7 +29,6 @@ function mainServiceDetail($http, $q, $rootScope) {
     };
 
     this.imgPoster = function(sendData, url) {
-
         var deffered = $q.defer();
         $http({
             method: 'POST',
@@ -83,6 +82,12 @@ function mainServiceDetail($http, $q, $rootScope) {
         return productImg
     }
 
+
+this.blobToImg = function(blob, filename){
+    var newFile = new File([blob], filename);
+
+    return newFile;
+}
 
 
 };
