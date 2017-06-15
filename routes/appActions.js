@@ -105,6 +105,28 @@ function updateDocument(id, update, document, result){
         }
     )
 }
+
+function addFilters(req, res, next){
+    req.skip=parseInt(req.query.skip) || 0;
+    req.limit=parseInt(req.query.limit) || 10;
+
+    let conditions= req.query.filters  || {};
+
+    if(typeof conditions!=="object")  conditions=JSON.parse(conditions)
+    req.filters={status:'Active'};
+    for(condition in conditions){
+        req.filters[condition]=conditions[condition];
+    }
+    next();
+}
+function addOrQuery(req, res, next){
+    let queryKeys= {} || req.query.queryKeys.split(',')
+    req.queryKeys={$or:[]};
+    for(key in queryKeys){
+        req.queryKeys.$or.push({_id: queryKeys[key]});
+    }
+    next();
+}
 /* GET users listing. */
 
 router.get('/serverDate', function(req, res, next) {
@@ -117,21 +139,21 @@ router.get('/logOut', function(req, res, next) {
     req.logout();
     res.send(200);
 })
-router.get('/inventory', function(req, res, next) {
-    appSchema.inventory.find({status:'Active'})
-    .populate(
-        {
-            path:'productManager'
-        })
-    .populate(
-        {
-            path:'inventorySettings'
-            // match:{
-            //     startTimeStamp:{$lte:Date.now()},
-            //     closeTimeStamp:{$gte:Date.now()}
-            // }
-        }
-    )
+router.get('/inventory', addFilters, addOrQuery, function(req, res, next) {
+
+    appSchema.inventory.find(req.filters)
+    .skip(req.skip).limit(req.limit)
+    .populate(req.query.populate)
+
+    // .populate(
+    //     {
+    //         path:'inventorySettings'
+    //         match:{
+    //             startTimeStamp:{$lte:Date.now()},
+    //             closeTimeStamp:{$gte:Date.now()}
+    //         }
+    //     }
+    // )
     //  .where('inventorySettings.startTimeStamp').$lte(Date.now())
     //  .where('inventorySettings.closeTimeStamp').$gte(Date.now())
     .sort({dateCreated:-1})
@@ -146,8 +168,6 @@ router.get('/inventory', function(req, res, next) {
 
 });
 router.get('/category', function(req, res, next){
-
-
     appSchema.category.find()
     .populate('subCategories')
     .exec(function(err, category)
@@ -166,8 +186,10 @@ router.get('/subcategory', function(req, res, next) {
 });
 
 //get a particular post
-router.get('/:id', function(req, res, next){
-    appSchema.inventory.findById(req.params.id, function(err, inventory){
+router.get('/inventory/:id', function(req, res, next){
+    appSchema.inventory.findById(req.params.id)
+    .populate(req.query.populate)
+    .exec(function(err, inventory){
         if(err)return next(err)
         res.json(inventory);
     })
@@ -255,28 +277,28 @@ router.post('/subcategory', function(req, res, next){
     })
 
 });
-
-router.post('/biddings', function(req, res, next){
-    appSchema.productManager.create(req.body, function(err, post){
-        if(err) return next(err)
-        appSchema.inventory.findByIdAndUpdate(
-            req.body.inventoryId,
-            {$push:{productManager:post}},
-            {safe: true, upsert: true, new : true},
-            function(err, inventory){
-                if(err)return next(err)
-                appSchema.user.findByIdAndUpdate(
-                    req.body.userId,
-                    {$push:{userTests:inventory}},
-                    function(err, user){
-                    if(err)return next(err)
-                        res.json(inventory);
-                    }
-                )
-            }
-        )
-    })
-});
+//
+// router.post('/biddings', function(req, res, next){
+//     appSchema.productManager.create(req.body, function(err, post){
+//         if(err) return next(err)
+//         appSchema.inventory.findByIdAndUpdate(
+//             req.body.inventoryId,
+//             {$push:{productManager:post}},
+//             {safe: true, upsert: true, new : true},
+//             function(err, inventory){
+//                 if(err)return next(err)
+//                 appSchema.user.findByIdAndUpdate(
+//                     req.body.userId,
+//                     {$push:{userTests:inventory}},
+//                     function(err, user){
+//                     if(err)return next(err)
+//                         res.json(inventory);
+//                     }
+//                 )
+//             }
+//         )
+//     })
+// });
 
 router.post('/user', function(req, res, next){
     appSchema.user.find({$or:[{userName:req.body.userName}, {email:req.body.email}]})
@@ -308,10 +330,10 @@ router.post('/contact', function(req, res, next){
     var params=req.body;
     console.log(params)
     var emailbody='<b>Dear '+params.name+', </b> <br>';
-    emailbody+='Thank you for contacting our Auction House. Our representative will contact you shortly.';
-    emailbody+='<br><br><b>3A Auction House Team</b>';
-    var fromE="3A Auction House<info@3aauctions.com>";
-    var subject="Thanks for contacting 3A Auction House";
+    emailbody+='Thank you for contacting our Auction . Our representative will contact you shortly.';
+    emailbody+='<br><br><b>Pronita Team</b>';
+    var fromE="Pronita <info@pronita.com>";
+    var subject="Thanks for contacting Pronita ";
     console.log(prepareEmail(fromE, params.email, subject, emailbody))
 
     subject = "An Online User contacted you.";
@@ -321,9 +343,9 @@ router.post('/contact', function(req, res, next){
     emailbody+= '<br><b>User Name:</b>'+params.name;
     emailbody+= '<br><b>User Phone Number:</b>'+params.phone;
     emailbody+= '<br><b>User Message:<b> '+params.message;
-    fromE="3A Auction House Webmaster<info@3aauctions.com>";
+    fromE="Pronita Webmaster<info@pronita.com>";
     bcc='sholadedokun@yahoo.com';
-    to='info@3aauctions.com';
+    to='info@pronita.com';
     res.json(prepareEmail(fromE, to, subject, emailbody,bcc));
 });
 router.post('/addSubscriber', function(req, res, next){
@@ -342,10 +364,10 @@ router.post('/addSubscriber', function(req, res, next){
                 // setup e-mail data with unicode symbols
                 emailbody='<b>Dear Subscriber, </b> <br>';
                 emailbody+='Thank you for subscribing to our Newsletter. We are glad to have you on board.';
-                emailbody+='<br><br><b>3A Auction House Team</b>';
+                emailbody+='<br><br><b>Pronita Team</b>';
                 subject='Thanks for subscribing to our Newsletter.';
             })
-            res.json(prepareEmail('3A Auction House<info@3aauctions.com>', req.body.emailAddress, subject, emailbody));
+            res.json(prepareEmail('Pronita <info@pronita.com>', req.body.emailAddress, subject, emailbody));
         }
         else{   res.json({error:'You have already subscribed, thanks for trying again', data:emailSubscriber});   }
     })
