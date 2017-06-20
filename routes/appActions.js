@@ -110,7 +110,8 @@ function addFilters(req, res, next){
     req.skip=parseInt(req.query.skip) || 0;
     req.limit=parseInt(req.query.limit) || 10;
 
-    let conditions= req.query.filters  || {};
+    var conditions= req.query.filters  || {};
+    // let conditions= req.query.filters  || {};
 
     if(typeof conditions!=="object")  conditions=JSON.parse(conditions)
     req.filters={status:'Active'};
@@ -120,7 +121,8 @@ function addFilters(req, res, next){
     next();
 }
 function addOrQuery(req, res, next){
-    let queryKeys= {} || req.query.queryKeys.split(',')
+    var queryKeys= {} || req.query.queryKeys.split(',')
+    // let queryKeys= {} || req.query.queryKeys.split(',')
     req.queryKeys={$or:[]};
     for(key in queryKeys){
         req.queryKeys.$or.push({_id: queryKeys[key]});

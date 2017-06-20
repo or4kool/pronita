@@ -67,9 +67,9 @@
                             <img src="uploads/{{productsData.profilePic}}" />
                             <div class="product-info">
                                 <h2 class="product-name">{{productsData.name}}</h2>
-                                <p>{{productsData.category}} | {{productsData.productManager.location}}</p>
+                                <p>{{productsData.category.name}} | {{productsData.productManager.location}}</p>
                                 <div class="price-btn">
-                                    <h2>&#8358;{{productsData.inventorySettings.price}}</h2>
+                                    <h2>{{productsData.inventorySettings.price}}</h2>
                                     <div class="btn" ng-click="productDetail(productsData._id)">discover</div>
                                 </div>
                             </div>

@@ -3,7 +3,7 @@ pronita.controller('homeController', homeControllerDetails);
 
 	homeControllerDetails.$inject = ['$scope', 'mainService','$location','addCart'];
 
-	function homeControllerDetails($scope,mainService,$locationa,ddCart){
+	function homeControllerDetails($scope,mainService,$location,ddCart){
 
 			var hc = this;
 
@@ -64,31 +64,22 @@ pronita.controller('homeController', homeControllerDetails);
 
 		  hc.getAllProduct = function(url){
 
+			url += '?populate=inventorySettings category offerConditions&limit=1&skip=0'
+
+			console.log(url);
 		  	hc.productLists = mainService.fetchData(url);
 
 		  	hc.productLists.then(function(result){
 				  console.log(result);
-		  		// console.log(result.data.products);
-		  		// if (result.data.status == 'success'){
 			  		$scope.productData = result.data;
 
-					  var image = new Image();
-					//   image.src = window.URL.createObjectURL(result.data[0].profilePic);
-					var theBlob = result.data[0].profilePic;
-					// theBlob.lastModifiedDate = new Date();
-					// theBlob.name = "picxmate.png";
+					  if ($scope.productData[0].inventorySettings.price === null){
+						  $scope.productData[0].inventorySettings.price = "FREE"
+					  }
 
-					// var theFile = new File([theBlob], "picxmate.png");
-					
-					//   console.log(theFile.name);
-
-					// $scope.productData[0].profilePic = theFile.name;
-
-					console.log($scope.productData.profilePic);
-
-					//   if 
-					//   console.log($scope.productData.length);
-		  		// }
+					//   var image = new Image();
+					// var theBlob = result.data[0].profilePic;
+					// console.log($scope.productData.profilePic);
 		  	});
 		  }
 
@@ -97,7 +88,7 @@ pronita.controller('homeController', homeControllerDetails);
 
 		$scope.productDetail = function(productId){
 			// console.log(productId);
-			$locationa.url('/product/' + productId)
+			$location.url('/product/' + productId)
 		}
 
 

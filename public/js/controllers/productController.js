@@ -15,7 +15,7 @@ pronita.controller('productController', productDetail);
 	pc.unliked = 'fa fa-heart-o';
 	$scope.confirmLike = pc.unliked;
 
-	pc.url = '/appActions'
+	pc.url = '/appActions/inventory'
 
 	// $scope.selectedproduct = {Rocknrool : 'want one'};
 
