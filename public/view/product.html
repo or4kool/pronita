@@ -40,8 +40,8 @@
                 </div>
                 <div class="small-divider"></div>
                 <div class="col-md-12 product-price">
-                    <h2>N25,000</h2>
-                    <h2><strike>N28,000</strike></h2>
+                    <h2>{{singleProduct.inventorySettings.price}}</h2>
+                    <h2><strike>{{singleProduct.inventorySettings.discount}}</strike></h2>
                     <p>offer ends in 3days</p>
                 </div>
                 <div class="col-md-12 order-add-btn">
@@ -90,25 +90,9 @@
             </div>
             <div class="col-md-12">
 
-                <div class="col-md-6 feat-info-block">
-                    <h2>This is an introductory text</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                </div>
-                <div class="col-md-6 feat-info-block">
-                    <h2>This is an introductory text</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                </div>
-                <div class="col-md-6 feat-info-block">
-                    <h2>This is an introductory text</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                </div>
-                <div class="col-md-6 feat-info-block">
-                    <h2>This is an introductory text</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                <div class="col-md-6 feat-info-block" ng-repeat="keyFeature in singleProduct.keyFeatures">
+                    <h2>{{keyFeature.title}}</h2>
+                    <p>{{keyFeature.description}}</p>
                 </div>
             </div>
         </div>

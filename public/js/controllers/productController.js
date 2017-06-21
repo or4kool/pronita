@@ -92,11 +92,15 @@ pronita.controller('productController', productDetail);
 	}
 
 	$scope.getSingleProduct = function(url){
-		var url = url + '/' + $routeParams.productId;
+		var url = url + '/' + $routeParams.productId + '?populate=inventorySettings category offerConditions keyFeatures offerDetails specifications';
 		console.log(url);
 		var productData = mainService.fetchData(url);
 		productData.then(function(result){
 			$scope.singleProduct = result.data;
+			if ($scope.singleProduct.inventorySettings.price === null){
+				$scope.singleProduct.inventorySettings.price = 'FREE'
+				$scope.singleProduct.inventorySettings.discount = ''
+			}
 			console.log(result);
 		})
 	}
