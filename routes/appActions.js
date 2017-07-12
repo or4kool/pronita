@@ -280,7 +280,7 @@ router.post('/inventory',  function(req, res, next){
                                         //if there exists an extra feature then make a recursive call
                                         if(newFeature)   nextFeatures(newFeature)
                                         else{
-                                            //else we are done, so send back the updated inventoryuyyyyy
+                                            //else we are done, so send back the updated inventory
                                             res.json({message:"Inventory successfully Added!", updatedInventory});
                                         }
                                     }
