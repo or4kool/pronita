@@ -1,1 +1,1 @@
-var pronita = angular.module('Pronita', ['ngRoute']);
+var pronita = angular.module('Pronita', ['ngRoute', 'ngStorage']);

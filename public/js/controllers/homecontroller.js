@@ -12,8 +12,15 @@ pronita.controller('homeController', homeControllerDetails);
 			$scope.productCount = [0,1,2,3];
 
 			hc.url = '/appActions/inventory';
+
+			hc.loginUrl = "/appActions/userLogin";
+
+			$scope.userDetail = {};
 			// hc.url = "../../data.json";
 			$scope.productData = '';
+
+			$scope.freeProductData = [];
+			$scope.discountedProductData = [];
 
 
 			// var senddata = PaystackPop.setup({
@@ -62,9 +69,10 @@ pronita.controller('homeController', homeControllerDetails);
 
 
 
+			// FETCH ALL MOST LIKED PRODUCT
 		  hc.getAllProduct = function(url){
 
-			url += '?populate=inventorySettings category offerConditions&limit=1&skip=0'
+			url += '?populate=inventorySettings category offerConditions&limit=4&skip=0'
 
 			console.log(url);
 		  	hc.productLists = mainService.fetchData(url);
@@ -73,24 +81,77 @@ pronita.controller('homeController', homeControllerDetails);
 				  console.log(result);
 			  		$scope.productData = result.data;
 
-					  if ($scope.productData[0].inventorySettings.price === null){
-						  $scope.productData[0].inventorySettings.price = "FREE"
-					  }
 
-					//   var image = new Image();
-					// var theBlob = result.data[0].profilePic;
-					// console.log($scope.productData.profilePic);
+			  		angular.forEach($scope.productData, function(data) {
+			  			if (data.inventorySettings.price === null){
+						  data.inventorySettings.price = "FREE"
+					  }
+			  		})
 		  	});
 		  }
 
-		// LOAD ALL PRODUCTS
+		// LOAD ALL MOST LIKED PRODUCTS
 		hc.getAllProduct(hc.url);
+
+		// GET FREE PRODUCTS
+		hc.getFreeproducts = function(url){
+			url += '?populate=inventorySettings category offerConditions&limit=4&skip=0'
+
+			// console.log(url);
+		  	hc.productLists = mainService.fetchData(url);
+
+		  	hc.productLists.then(function(result){
+
+				  angular.forEach(result.data, function(data){
+				  	
+				  	if(!data.inventorySettings.price){
+				  		data.inventorySettings.price = "FREE"
+				  		console.log(data)
+				  		$scope.freeProductData.push(data);
+				  	}
+				  })
+
+		  	});
+		}
+
+		// FETCH FREE PRODUCTS
+		hc.getFreeproducts(hc.url);
+
+		hc.getDiscountedProduct = function(url){
+			url += '?populate=inventorySettings category offerConditions&limit=4&skip=0'
+
+			// console.log(url);
+		  	hc.productLists = mainService.fetchData(url);
+
+		  	hc.productLists.then(function(result){
+
+		  		console.log(result)
+				  angular.forEach(result.data, function(data){
+				  	console.log(data.inventorySettings.discount)
+				  	if(data.inventorySettings.discount){
+				  		console.log("Yeh Yeh I got here")
+				  		$scope.discountedProductData.push(data);
+				  	}
+				  })
+		  	});
+		}
+
+		// FETCH DISCOUNTED PRODUCT
+		hc.getDiscountedProduct(hc.url);
+
 
 		$scope.productDetail = function(productId){
 			// console.log(productId);
-			$location.url('/product/' + productId)
+			$location.url('/product/' + productId);
 		}
 
+
+		$scope.loginUser = function(){
+			var signin = mainService.poster($scope.userDetail, hc.loginUrl);
+			signin.then(function(result){
+				console.log(result);
+			})
+		}
 
 
 	}

@@ -13,20 +13,24 @@
 						    </button>
 						</div>
 						<div id="navbar" class="navbar-collapse collapse">
-						    <div class="col-md-4"><a href="#index"><img src="img/color_logo.png" class="mlogo" /></a></div>
+						    <div class="col-md-3"><a href="#index"><img src="img/color_logo.png" class="mlogo" /></a></div>
 						    <div class="col-md-6">
 						    	<ul class="nav navbar-nav inner-nav navbar-adjust">
 						        <li class="active"><a href="#/">Home<span class="sr-only">(current)</span></a></li>
 						        <li><a href="#/offers">Offers</a></li>
 						        <li><a href="#how-it-works">How it Works</a></li>
 						        <li><a href="#join" class="post-offer">Post an offer</a></li>
-						        <li><a href="" class="sign-in" data-toggle="modal" data-target="#myModal">Sign in</a></li>
+						        <li><a href="" class="sign-in" data-toggle="modal" data-target="#myModal" ng-if="!loggedIn">Sign in</a></li>
 						    	</ul>
 						    </div>
-						    <div class="col-md-2 scart">
+						    <div class="col-md-3 scart">
 						    	<a href="" ng-click="gocart()">
 							    	<img src="img/cart.png" />
 						    		<span ng-class="isProduct()" class="{{isDot}}"></span>
+						    	</a>
+						    	<a href="" ng-if="loggedIn">
+						    		<img src="img/profile.png" alt="" />
+						    		<p>Hello, {{userInfo.firstName}} <i class="fa fa-caret-down"></i></p>
 						    	</a>
 						    </div>
 
@@ -40,6 +44,25 @@
 			</div>
 
 		</div>
-		<pop-up></pop-up>
+		<!-- <pop-up login-user="doSignup()" test-user="userDetail"></pop-up> -->
+
+
+		<!-- MODAL LOGIN POPUP -->
+		<div class="modal fade" id="myModal">
+			<div class="container all-mode modal-content" >
+				<h2>Sign in to your pronita account</h2>
+				<form class="signin-form">
+					<span><input type="text" ng-model="userDetail.identity" placeholder="email" class="n-input" /></span>
+					<span><input type="password" ng-model="userDetail.password" placeholder="passowrd" /></span>
+					<span><input type="submit" value="signin" ng-click="doSignup()" class="btn signin-btn" /></span>
+
+					<a href="#/create-account"><p>forgot passowrd?</p></a>
+				</form>
+
+				<div class="col-md-12 no-account">
+					<p>Don't have a Pronita account? <span>sign up</span></p>
+				</div>
+			</div>
+		</div>
 
 </div>

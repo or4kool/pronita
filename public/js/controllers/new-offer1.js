@@ -24,7 +24,8 @@ function newOffer1Detail($scope, mainService) {
 
     noc.catUrl = '/appActions/category';
     noc.uploadUrl = '/appActions/inventory';
-    noc.userUrl = '/appActions/checkLoggedin'
+    noc.userUrl = '/appActions/checkLoggedin';
+    noc.subCatUrl = '/appActions/subcategory';
 
     // noc.testUrl = 'http://api.getcentre.com/v1/getairports/LOS'
 
@@ -82,7 +83,7 @@ function newOffer1Detail($scope, mainService) {
         category: $scope.categories[0],
         subCategory: $scope.subCategories[0],
         productManager: '',
-        profilePic: noc.productImages[0],
+        profilePic: noc.productImages[((noc.productImages.length)-1)],
         allPic: '',
         location: $scope.locations[0],
         status: 'Active',
@@ -140,6 +141,7 @@ function newOffer1Detail($scope, mainService) {
     }
 
 
+    // UPLOAD PRODUCT
     $scope.uploadProduct = function() {
         
         // angular.forEach(noc.productImages,function(data){
@@ -153,14 +155,24 @@ function newOffer1Detail($scope, mainService) {
             }
         }
 
+        $scope.productData.others.inventorySettings.price = ($scope.offerPrice) ? $scope.offerPrice : $scope.productData.others.inventorySettings.price
 
-        $scope.productData.category = $scope.productData.category.id || null;
-        $scope.productData.subCategory = $scope.productData.subCategory.id || null;
+        if($scope.offerPrice > 0){
+            $scope.productData.others.inventorySettings.price = $scope.offerPrice
+        }
+
+        console.log($scope.productData.others.inventorySettings.price)
+
+        console.log($scope.productData.category.id)
+        $scope.productData.category = $scope.productData.category.id || '';
+
+        $scope.productData.subCategory = $scope.productData.subCategory.id || '';
         $scope.productData.productManager = noc.userData || '';
         console.log($scope.productData);
         var doProductUpload = mainService.poster($scope.productData, noc.uploadUrl);
         doProductUpload.then(function(result) {
-            console.log(result);
+            $scope.productUplaodResult = result.message;
+            console.log($scope.productUplaodResult);
         })
 
     }
@@ -225,13 +237,12 @@ function newOffer1Detail($scope, mainService) {
         })
     }
 
-
+    console.log($scope.categories)
     // INVOKE FUNC
     $scope.getCategory();
 
     $scope.loadSubCat = function(catId) {
         $scope.subCategories = [{ name: 'Select Subcategory' }];
-        noc.subCatUrl = '/appActions/subcategory';
         noc.subCatUrl = noc.subCatUrl + '/' + catId;
         loadSubCategory = mainService.fetchData(noc.subCatUrl);
         loadSubCategory.then(function(result) {
@@ -241,22 +252,39 @@ function newOffer1Detail($scope, mainService) {
         })
     }
 
+    // $scope.getAllSubCat = function(){
+    //     var allSubCat = mainService.fetchData(noc.subCatUrl);
+    //     allSubCat.then(function(result){
+    //         console.log(result);
+    //     })
+    // }
+
+    // $scope.getAllSubCat();
+
     $scope.handleOfferType = function(selectedofferType) {
         switch (selectedofferType) {
             case 'Free':
                 $scope.disabledStyle = 'disabledStyle';
                 $scope.disabled = 1;
                 $scope.showDiscounted = 0;
+                // ENSURE THE PRICE IS SET TO EMPTY
+                $scope.productData.others.inventorySettings.price = ''
                 return $scope.disabled;
             case 'Discounted':
                 $scope.disabledStyle = 'enabledStyle';
                 $scope.disabled = 0;
                 $scope.showDiscounted = 1;
+                // ENSURE THE PRICE IS SET TO EMPTY
+                $scope.productData.others.inventorySettings.price = ''
+                $scope.productData.others.inventorySettings.discount = ''
                 return $scope.showDiscounted;
             case 'Full Price':
                 $scope.disabledStyle = 'enabledStyle';
                 $scope.disabled = 0;
                 $scope.showDiscounted = 0;
+                // ENSURE THE PRICE IS SET TO EMPTY
+                $scope.productData.others.inventorySettings.price = ''
+                $scope.productData.others.inventorySettings.discount = ''
                 return $scope.showDiscounted;
             default:
                 $scope.disabledStyle = 'enabledStyle';
@@ -272,6 +300,15 @@ function newOffer1Detail($scope, mainService) {
             console.log(result);
         })
     }
+
+    // INVOKE FUNCTION
     $scope.loadInventory();
+
+    $scope.displayDiscount = function(){
+        console.log($scope.productData.others.inventorySettings)
+        $scope.offerPrice = $scope.productData.others.inventorySettings.price - $scope.productData.others.inventorySettings.discount
+
+        return $scope.offerPrice = ($scope.offerPrice) ? $scope.offerPrice : 'Offer Price (NGN 0.00)';
+    }
 
 }

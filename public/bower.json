@@ -1,0 +1,18 @@
+{
+  "name": "public",
+  "homepage": "https://github.com/or4kool/pronita",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ngstorage": "^0.3.11"
+  }
+}

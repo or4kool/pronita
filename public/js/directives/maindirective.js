@@ -140,11 +140,17 @@ pronita.directive('showImg', function() {
 
 pronita.directive('headie', function() {
 
-    var cartOn = ['$scope', 'addCart', '$location', function($scope, addCart, $location) {
+
+
+    var cartOn = ['$scope', 'addCart', '$location', 'mainService', '$localStorage', function($scope, addCart, $location, mainService, $localStorage) {
 
         $scope.isDot = '';
         // $scope.on = 1;
         // $scope.off = 0;
+
+        const loginUrl = "/appActions/userLogin";
+        $scope.userDetail = {}
+        $scope.loggedIn = 0;
 
         $scope.isProduct = function() {
             if (addCart.cartDot == '1') {
@@ -171,6 +177,27 @@ pronita.directive('headie', function() {
             $location.url('/cart');
             return $scope.isDot;
         }
+
+        $scope.doSignup = function(){
+            
+            console.log($scope.userDetail)
+            var signin = mainService.poster($scope.userDetail, loginUrl)
+                .then(function(result){
+                    console.log(result);
+
+                    if(result._id){
+                        $scope.userDetail = '';
+                        $scope.loggedIn = 1;
+                        $scope.userInfo = result;
+                        // STORE USER INFORMATION CLEAR ANY PREVIOUSLY INFO
+                        $localStorage.$reset();
+                        var  userLocalInfo = $localStorage.$default({sUserData: result})
+                        // console.log(userLocalInfo);
+                        mainService.setUserData(result)
+                    }
+                    
+            })
+        }
     }];
 
 
@@ -186,17 +213,108 @@ pronita.directive('headie', function() {
 
 });
 
-pronita.directive('popUp', function() {
 
-    return {
-        restirc: 'E',
-        templateUrl: '../view/loginpopup.html',
-        replace: true,
-        scope: {
+pronita.directive('selectAnswer', function($sce, $scope){
 
-        }
+    var allElements = [];
+
+    function handleclick($scope, elem, iAttrs){
+
+        console.log($sce)
+        allElements.push(elem)
+        console.log(allElements)
+
+        elem.bind('click', function(){
+            // angular.forEach(allElements, function(data){
+            //     console.log(data);
+
+            //     data[0].className = 'hide-li';
+
+            // })
+
+            // elem[0].className = 'show-li';
+
+            // console.log(elem[0].className)
+
+            // $scope.sAnswer = allElements.
+
+            var firstTop = allElements[0];
+
+            console.log(elem[0].innerText);
+
+            if(elem[0].innerText === 'Rate with'){
+                console.log('Yeh')
+                elem[0].innerText = 'Rate with' + '<i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>'
+                console.log(elem[0].innerText);
+            }
+            console.log(elem[0].innerText);
+            firstTop[0].innerText = elem[0].innerText;
+        })
     }
+
+    // Runs during compile
+    return {
+        // name: '',
+        // priority: 1,
+        // terminal: true,
+        // scope: {}, // {} = isolate, true = child, false/undefined = no change
+        // controller: function($scope, $element, $attrs, $transclude) {},
+        // require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
+        // restrict: 'A', // E = Element, A = Attribute, C = Class, M = Comment
+        // template: '',
+        // templateUrl: '',
+        // replace: true,
+        // transclude: true,
+        // compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
+        link: handleclick,
+        scope: {
+            sAnswer: '='
+        }
+    };
 });
+
+// pronita.directive('loginUser', function(){
+
+//     console.log("YEP INSIDE LOGINUSER");
+
+//     this.handleLogin = function(scope, ele, attr){
+//         ele.bind('click', function() {
+
+//            console.log("here");
+
+
+//         })
+//     }
+
+//     this.testers = function(){
+//         console.log("Feel alone");
+//     }
+
+//     return{
+//         restric: 'A',
+//         link: handleLogin,
+//         controller: testers,
+//         templateUrl: '../view/loginpopup.html'
+//     }
+
+
+// })
+
+// pronita.directive('popUp', function() {
+
+
+
+
+//     return {
+//         restirc: 'E',
+//         templateUrl: '../view/loginpopup.html',
+//         replace: true,
+//         scope: {
+//             loginUser: "&",
+//             testUser: "="
+//         }
+//     }
+// });
 
 pronita.directive('linker', function() {
 

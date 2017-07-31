@@ -40,13 +40,13 @@
                 </div>
                 <div class="small-divider"></div>
                 <div class="col-md-12 product-price">
-                    <h2>{{singleProduct.inventorySettings.price}}</h2>
-                    <h2><strike>{{singleProduct.inventorySettings.discount}}</strike></h2>
+                    <h2><span ng-if="singleProduct.inventorySettings.price">&#x20A6;</span> {{singleProduct.inventorySettings.price}}</h2>
+                    <h2><strike><span ng-if="singleProduct.inventorySettings.discount">&#x20A6;</span> {{singleProduct.inventorySettings.discount}}</strike></h2>
                     <p>offer ends in 3days</p>
                 </div>
                 <div class="col-md-12 order-add-btn">
                     <div class="btn order-product-btn product-review-btn">order now</div>
-                    <div class="btn add-product-btn product-review-btn" ng-click="pushToCart()">add to cart</div>
+                    <div class="btn add-product-btn product-review-btn" ng-click="pushToCart()">{{btnText}}</div>
                     <!-- <div class="btn add-product-btn product-review-btn" ng-click="addCarter()">add to cart</div> -->
                 </div>
                 <div class="col-md-12 review-icon">
@@ -67,7 +67,8 @@
             </div>
 
             <div class="col-md-6 product-peep">
-                <img src="img/product-display.png" />
+                <img src="uploads/{{singleProduct.profilePic}}" />
+                <img ng-if="otherPic"  ng-repeat="otherPic in otherPics" src="uploads/{{otherPic}}" />
             </div>
         </div>
     </div>
@@ -79,20 +80,58 @@
             <div class="col-md-12 offer-tab product-feat-tab">
                 <span>
 					<ul>
-						<a href="" linker loc=0><li ng-class="{'selected': productInfo.keyFeatures}">key features</li></a>
+						<!-- <a href="" linker loc=0><li ng-class="{'selected': productInfo.keyFeatures}">key features</li></a>
 						<a href="" linker loc=1><li ng-class="{'selected': productInfo.specifications}">specifications</li></a>
 						<a href="" linker loc=2><li ng-class="{'selected': productInfo.offerDetails}">offer details</li></a>
 						<a href="" linker loc=3><li ng-class="{'selected': productInfo.offerConditions}">offer conditions</li></a>
-						<a href="" linker loc=4><li ng-class="{'selected': productInfo.reviews}">reviews</li></a>
+						<a href="" linker loc=4><li ng-class="{'selected': productInfo.reviews}">reviews</li></a> -->
+
+                        <a href=""><li ng-class="productClassTab('keyFeatures')" ng-click="changeTab('keyFeatures')" class="" >key features</li></a>
+                        <a href=""><li ng-class="productClassTab('specifications')" ng-click="changeTab('specifications')" class="">specifications</li></a>
+                        <a href=""><li ng-class="productClassTab('offerDetails')" ng-click="changeTab('offerDetails')" class="">offer details</li></a>
+                        <a href=""><li ng-class="productClassTab('offerConditions')" ng-click="changeTab('offerConditions')" class="">offer conditions</li></a>
+                        <a href=""><li ng-class="productClassTab('reviews')" ng-click="changeTab('reviews')" class="">reviews</li></a>
 
 					</ul>
 				</span>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12" ng-if="getCurrentTab('keyFeatures')">
 
                 <div class="col-md-6 feat-info-block" ng-repeat="keyFeature in singleProduct.keyFeatures">
                     <h2>{{keyFeature.title}}</h2>
                     <p>{{keyFeature.description}}</p>
+                </div>
+            </div>
+
+            <div class="col-md-12" ng-if="getCurrentTab('specifications')">
+
+                <div class="col-md-6 feat-info-block" ng-repeat="specification in singleProduct.specifications">
+                    <h2>{{specification.title}}</h2>
+                    <p>{{specification.description}}</p>
+                </div>
+            </div>
+
+            <div class="col-md-12" ng-if="getCurrentTab('offerDetails')">
+
+                <div class="col-md-6 feat-info-block" ng-repeat="offerDetail in singleProduct.offerDetails">
+                    <h2>{{offerDetail.title}}</h2>
+                    <p>{{offerDetail.description}}</p>
+                </div>
+            </div>
+
+            <div class="col-md-12" ng-if="getCurrentTab('offerConditions')">
+
+                <div class="col-md-6 feat-info-block" ng-repeat="offerCondition in singleProduct.offerConditions">
+                    <h2>{{offerCondition.title}}</h2>
+                    <p>{{offerCondition.description}}</p>
+                </div>
+            </div>
+
+            <div class="col-md-12" ng-if="getCurrentTab('reviews')">
+
+                <div class="col-md-6 feat-info-block" ng-repeat="review in singleProduct.reviews">
+                    <h2>{{review.title}}</h2>
+                    <p>{{review.description}}</p>
                 </div>
             </div>
         </div>
@@ -114,7 +153,7 @@
     </div>
 
 </div>
-<div class="top-free-all">
+<div class="top-free-all" ng-if="recommendedProducts.length > 0">
     <div class="trending-top">
         <h1 class="tf">Recommendations</h1>
     </div>
@@ -128,8 +167,21 @@
                 <div class="see-all btn">See all <i class="fa fa-caret-right" aria-hidden="true"></i></div>
             </div>
             <div class="col-md-12 trending-products">
-                <single-product ng-repeat="recommendations in recommender(4)"></single-product>
-            </div>
+                    <!-- <top-discounted product-data = "productData"></top-discounted> -->
+                    <div class="col-md-3" ng-repeat="recommendedProduct in recommendedProducts">
+                        <div class="all-sha">
+                            <img src="uploads/{{recommendedProduct.profilePic}}" />
+                            <div class="product-info">
+                                <h2 class="product-name">{{recommendedProduct.name}}</h2>
+                                <p>{{recommendedProduct.category.name}} | {{recommendedProduct.location}}</p>
+                                <div class="price-btn">
+                                    <h2><span ng-if="recommendedProduct.inventorySettings.price !== 'FREE'">&#x20A6;</span>{{recommendedProduct.inventorySettings.price}} <span class="price-discount" ng-if="recommendedProduct.inventorySettings.discount">| <strike> &#x20A6;{{recommendedProduct.inventorySettings.discount}}</strike></span></h2>
+                                    <div class="btn" ng-click="productDetail(recommendedProduct._id)">discover</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 </div>

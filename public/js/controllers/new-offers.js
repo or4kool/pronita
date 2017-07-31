@@ -15,7 +15,7 @@ function newOfferDetail($scope, mainService, $location) {
     }
 
     $scope.uploadUrled = {
-        img: ['../img/add-plus.png']
+        img: []
     }
 
     $scope.imgUploadNums = [];
@@ -76,9 +76,13 @@ console.log($scope.uploadUrl.img);
     }
 
     nofc.doUplodNum = function(num) {
-        num = num - 1
-        for (var i = 0; num >= i; num--) {
-            $scope.imgUploadNums.push(num)
+        // num = num - 1
+        // for (var i = 0; num >= i; num--) {
+        //     $scope.imgUploadNums.push(num)
+        // }
+
+        for (var i=0; i < num; i++){
+            $scope.imgUploadNums.push(i)
         }
     }
 
@@ -102,4 +106,33 @@ console.log($scope.uploadUrl.img);
         }
         
     }
+
+    // CLOSE SELECTED IMAGE
+    $scope.closeImg = function(index){
+        console.log(index)
+        console.log($scope.uploadUrled)
+        console.log($scope.uploadUrled.img[0])
+        $scope.uploadUrled.img.splice(index,1)
+        // $scope.uploadUrled.img[index] = '';
+    }
+
+    // GET USER INFORMATION
+    // $scope.userInfo = function(){
+    //     nofc.allUserInfo = minService.userInfo;
+    // }
+
+    nofc.userData = function(){
+        console.log(mainService.getUserData())
+        $scope.loggedUserData = mainService.getUserData();
+
+        // CHECK IF IT HAS TEST PRODUCT OR A STARTUP
+        $scope.loggedUserData.userTests = (Array.isArray($scope.loggedUserData.userTests)) ? $scope.loggedUserData.userTests.length : $scope.loggedUserData.userTests;
+        $scope.loggedUserData.userProducts = (Array.isArray($scope.loggedUserData.userProducts)) ? $scope.loggedUserData.userProducts.length : $scope.loggedUserData.userProducts;
+
+        return $scope.loggedUserData;
+    }
+
+    // INVOKE FUNCTION
+
+    nofc.userData();
 }

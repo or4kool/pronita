@@ -1,10 +1,12 @@
+<!-- DEPRECATED TEMPLATE -->
+
 <div class="modal fade" id="myModal">
 	<div class="container all-mode modal-content" >
 		<h2>Sign in to your pronita account</h2>
 		<form class="signin-form">
-			<span><input type="email" placeholder="email" class="n-input" /></span>
-			<span><input type="password" placeholder="passowrd" /></span>
-			<span><input type="submit" value="signin" class="btn signin-btn" /></span>
+			<span><input type="text" test-user="userDetail.identity" ng-model="userDetail.identity" placeholder="email" class="n-input" /></span>
+			<span><input type="password" ng-model="userDetail.password" placeholder="passowrd" /></span>
+			<span><input type="submit" value="signin" ng-click="loginUser()" class="btn signin-btn" /></span>
 
 			<a href="#/create-account"><p>forgot passowrd?</p></a>
 		</form>

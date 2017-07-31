@@ -1,12 +1,29 @@
 pronita.service('mainService', mainServiceDetail);
 
-mainServiceDetail.$inject = ['$http', '$q', '$rootScope'];
+mainServiceDetail.$inject = ['$http', '$q', '$rootScope', '$localStorage'];
 
-function mainServiceDetail($http, $q, $rootScope) {
+function mainServiceDetail($http, $q, $rootScope, $localStorage) {
 
     // this.productBag = [];
 
+    var ms = this;
+
     var productImg = '';
+
+     ms.productBag = [];
+
+     ms.userData = '';
+     ms.userLogStatus = 0;
+
+
+     this.getUserIn = function() {
+        ms.userLogStatus = 1;
+         $localStorage.$default({loginChecker:ms.userLogStatus});
+     }
+
+     this.getUserOut = function() {
+         $localStorage.$reset(sess_key);
+     }
 
 
     this.poster = function(sendData, url) {
@@ -27,6 +44,26 @@ function mainServiceDetail($http, $q, $rootScope) {
 
         return deffered.promise;
     };
+
+    // this.postMail = function(sendData, url) {
+    //     var deffered = $q.defer();
+    //     $http({
+    //         method: 'POST',
+    //         url: url,
+    //         data: sendData,
+    //         api: 'key-b31976182374697da33c2150c326de5e'
+    //         headers: { 'Content-Type': 'application/json' }
+
+    //     }).then(function successCallback(response) {
+            
+    //         deffered.resolve(response.data);
+            
+    //     }, function errorCallback(response) {
+
+    //     });
+
+    //     return deffered.promise;
+    // };
 
     this.imgPoster = function(sendData, url) {
         var deffered = $q.defer();
@@ -82,12 +119,30 @@ function mainServiceDetail($http, $q, $rootScope) {
         return productImg
     }
 
+    this.setUserData = function(data){
+        ms.userData = data;
+    }
 
-this.blobToImg = function(blob, filename){
-    var newFile = new File([blob], filename);
+    this.getUserData = function(){  
+        var storedUserData = $localStorage.sUserData;
 
-    return newFile;
-}
+        if (!ms.userData){
+
+            if (!storedUserData.userTests){
+                storedUserData.userTests = 0;
+            }else if(!storedUserData.userProducts){
+                storedUserData.userProducts = 0;
+            }
+            
+            return storedUserData
+        }
+        else{
+            return ms.userData;
+        }
+    }
+
+
+
 
 
 };

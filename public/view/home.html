@@ -47,7 +47,7 @@
             </div>
         </div>
     </div>
-    <div class="trending-all">
+    <div class="trending-all" ng-if="productData.length > 0">
         <div class="trending-top">
             <h1 class="trend">Trending</h1>
         </div>
@@ -63,13 +63,15 @@
                     <!-- <single-product product-detail = "addCarter()" product-data = "productData"></single-product> -->
                     <div class="col-md-3" ng-repeat="productsData in productData">
                         <!--<div class="col-md-3" ng-repeat="productsData in productData | topFreeProduct: 'top trending' | limitTo: 4">-->
-                        <div class="all-sha">
-                            <img src="uploads/{{productsData.profilePic}}" />
+                        <div class="all-sha" ng-click="productDetail(productsData._id)">
+                            <div class="product-img-holder">
+                                <img src="uploads/{{productsData.profilePic}}" />
+                            </div>
                             <div class="product-info">
                                 <h2 class="product-name">{{productsData.name}}</h2>
                                 <p>{{productsData.category.name}} | {{productsData.productManager.location}}</p>
                                 <div class="price-btn">
-                                    <h2>{{productsData.inventorySettings.price}}</h2>
+                                    <h2><span ng-if="productsData.inventorySettings.price !== 'FREE'">&#x20A6;</span>{{productsData.inventorySettings.price}} <span class="price-discount" ng-if="productsData.inventorySettings.discount">| <strike> &#x20A6;{{productsData.inventorySettings.discount}}</strike></span></h2>
                                     <div class="btn" ng-click="productDetail(productsData._id)">discover</div>
                                 </div>
                             </div>
@@ -79,9 +81,9 @@
             </div>
         </div>
     </div>
-    <div class="top-free-all">
+    <div class="top-free-all" ng-if="freeProductData.length > 0">
         <div class="trending-top">
-            <h1 class="tf">Top&amp;nbspFree</h1>
+            <h1 class="tf">Top&nbsp;Free</h1>
         </div>
         <div class="top-free">
             <div class="container">
@@ -96,15 +98,17 @@
                 </div>
                 <div class="col-md-12 trending-products">
                     <!-- <top-free product-data = "productData"></top-free> -->
-                    <div class="col-md-3" ng-repeat="productsData in productData | topFreeProduct: 'top free' | limitTo: 4">
+                    <div class="col-md-3" ng-repeat="freeProductsData in freeProductData">
                         <div class="all-sha">
-                            <img src="{{productsData.img}}" />
+                            <div class="product-img-holder">
+                                <img src="uploads/{{freeProductsData.profilePic}}" />
+                            </div>
                             <div class="product-info">
-                                <h2 class="product-name">{{productsData.name}}</h2>
-                                <p>{{productsData.category}} | {{productsData.location}}</p>
+                                <h2 class="product-name">{{freeProductsData.name}}</h2>
+                                <p>{{freeProductsData.category.name}} | {{freeProductsData.location}}</p>
                                 <div class="price-btn">
-                                    <h2>&#8358;{{productsData.amount}}</h2>
-                                    <div class="btn" ng-click="productDetail()">discover</div>
+                                    <h2><span ng-if="freeProductsData.inventorySettings.price !== 'FREE'">&#x20A6;</span>{{freeProductsData.inventorySettings.price}}</h2>
+                                    <div class="btn" ng-click="productDetail(freeProductsData._id)">discover</div>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +117,7 @@
             </div>
         </div>
     </div>
-    <div class="top-discounted-all">
+    <div class="top-discounted-all" ng-if="discountedProductData.length > 0">
         <div class="trending-top">
             <h1 class="discount">Discounted</h1>
         </div>
@@ -130,15 +134,15 @@
                 </div>
                 <div class="col-md-12 trending-products">
                     <!-- <top-discounted product-data = "productData"></top-discounted> -->
-                    <div class="col-md-3" ng-repeat="productsData in productData | topFreeProduct: 'top discounted' | limitTo: 4">
+                    <div class="col-md-3" ng-repeat="discountedProductsData in discountedProductData">
                         <div class="all-sha">
-                            <img src="{{productsData.img}}" />
+                            <img src="uploads/{{discountedProductsData.profilePic}}" />
                             <div class="product-info">
-                                <h2 class="product-name">{{productsData.name}}</h2>
-                                <p>{{productsData.category}} | {{productsData.location}}</p>
+                                <h2 class="product-name">{{discountedProductsData.name}}</h2>
+                                <p>{{discountedProductsData.category.name}} | {{discountedProductsData.location}}</p>
                                 <div class="price-btn">
-                                    <h2>&#8358;{{productsData.amount}}</h2>
-                                    <div class="btn" ng-click="productDetail()">discover</div>
+                                    <h2><span ng-if="discountedProductsData.inventorySettings.price !== 'FREE'">&#x20A6;</span>{{discountedProductsData.inventorySettings.price}} <span class="price-discount" ng-if="discountedProductsData.inventorySettings.discount">| <strike> &#x20A6;{{discountedProductsData.inventorySettings.discount}}</strike></span></h2>
+                                    <div class="btn" ng-click="productDetail(discountedProductsData._id)">discover</div>
                                 </div>
                             </div>
                         </div>

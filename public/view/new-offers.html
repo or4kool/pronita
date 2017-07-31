@@ -4,11 +4,11 @@
             <img src="img/profile.png" alt="">
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 offer-username">
-            <p>kemi olaosebikan</p><span><i class="fa fa-check-circle-o"></i></span>
+            <p>{{loggedUserData.firstName}} {{loggedUserData.lastName}}</p><span><i class="fa fa-check-circle-o"></i></span>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 offer-tested">
-            <p>Offers <span>6</span></p> |
-            <p>Tested <span>0</span></p>
+            <p>Offers <span>{{loggedUserData.userProducts}}</span></p> |
+            <p>Tested <span>{{loggedUserData.userTests}}</span></p>
         </div>
     </div>
 </div>
@@ -22,10 +22,13 @@
                 <input type="file" id="img-file{{imgUploadNum}}" name="img-file1" class="inputfile" show-img="uploadUrl.img[imgUploadNum]" another-show="uploadUrled.img[imgUploadNum]" />
                 <label class="img-upload" for="img-file{{imgUploadNum}}">
                     <div class="add-img" style="overflow: hidden;">
-                        <img ng-src="{{uploadUrl.img[imgUploadNum]}}"  src="{{uploadUrled.img[imgUploadNum]}}" style="height: 100%"/>
-                        <img ng-src="{{uploadUrl.img[imgUploadNum]}}"  style="height: 100%"/>
+                    <p class="plus-add" ng-if="(!uploadUrled.img[imgUploadNum])"><span><i class="fa fa-plus"></i></span>Add Image</p>
+                        <img ng-if="uploadUrled.img[imgUploadNum]" src="{{uploadUrled.img[imgUploadNum]}}" style="height: 100%"/>
+                        <!-- <img ng-src="{{uploadUrl.img[imgUploadNum]}}"  src="{{uploadUrled.img[imgUploadNum]}}" style="height: 100%"/> -->
+                        <!-- <img ng-src="{{uploadUrl.img[imgUploadNum]}}"  style="height: 100%"/> -->
                     </div>
                 </label>
+                <div ng-if="(uploadUrled.img[imgUploadNum])" class="close-img" ng-click="closeImg($index)"><span>X</span></div>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 btn-area">

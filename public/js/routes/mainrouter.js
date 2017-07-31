@@ -13,7 +13,40 @@ pronita.config(function($routeProvider) {
         .when('/profile', { templateUrl: 'view/profile.html', controller: 'profileController' })
         .when('/inventory', { templateUrl: 'view/inventory.html', controller: 'inventoryCtrl' })
         .when('/category', { templateUrl: 'view/category.html', controller: 'categoryCtrl' })
-        .when('/subcategory', { templateUrl: 'view/subcategory.html', controller: 'subcategoryCtrl' });
+        .when('/pricing', { templateUrl: 'view/pricing.html', controller: '' })
+        .when('/subcategory', { templateUrl: 'view/subcategory.html', controller: 'subcategoryCtrl' })
+        .when('/question', { templateUrl: 'view/question.html', controller: '' })
+        .when('/question-review', { templateUrl: 'view/question-review.html', controller: 'questionReviewCtrl' });
 
 
+});
+
+
+pronita.run(function($rootScope, $location, $localStorage, mainService){
+    
+    // console.log(mainService);
+    $rootScope.$on('$routeChangeStart', 
+        function(event, next, prev){ 
+            // event.preventDefault();
+            console.log("ALLLOVE " + next.$$route.originalPath.indexOf('new-offer'))
+
+
+            if(next.$$route.originalPath.indexOf('new-offer') === 1){
+                                
+                if(!$localStorage.loginChecker){
+                    event.preventDefault();
+                    $location.path('/')
+                }
+                
+
+            }
+
+            // if($localStorage.loginChecker){
+
+            // }
+        })
+    
+    $rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams){
+        console.log(to)
+    })
 });

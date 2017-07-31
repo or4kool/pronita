@@ -47,27 +47,27 @@
 							<p>unit price</p>
 						</div>
 					</div>
-					<div class="listing-product" ng-repeat="products in selectedProduct()">
+					<div class="listing-product" ng-repeat="product in selectedProduct()">
 						<div class="col-md-5">
-							<img src="img/product-display.png" class="product-img" />
+							<img src="uploads/{{product.pics}}" class="product-img" />
 							<div class="listed-product-info">
-								<h2>{{products.productName}}</h2>
-								<p>testing period:<strong>{{products.productTestPeriod}}</strong></p>
+								<h2>{{product.name}}</h2>
+								<p>testing period:<strong>{{product.productTestPeriod}}</strong></p>
 							</div>
 						</div>
 						<div class="col-md-2 listing-statement">
-							<p>{{products.productDelivery}}</p>
+							<p>{{product.productDelivery}}</p>
 						</div>
 						<div class="col-md-2 listing-statement">
-							<p class="product-num">{{products.productQunatity}}</p>
+							<p class="product-num">{{product.productQunatity}}</p>
 							<div class="up-down-btn">
-								<a href="" ng-click="moreQuantity()"><img src="img/drop_down.png" class="up-btn " /></a>
-								<a href="" ng-click="lessQuantity()"><img src="img/drop_down.png" class="down-btn" /></a>
+								<a href="" ng-click="moreQuantity($index, product.price)"><img src="img/drop_down.png" class="up-btn " /></a>
+								<a href="" ng-click="lessQuantity($index, product.price)"><img src="img/drop_down.png" class="down-btn" /></a>
 							</div>
 						</div>
 						<div class="col-md-3 listing-statement lisitng-product-price">
-							<p><strike>N28,000</strike></p>
-							<p>{{products.proudctPrice}}</p>
+							<p><strike>&#x20A6; {{product.discount}}</strike></p>
+							<p><span>&#x20A6;</span> {{product.price}}</p>
 							<p class="btn" ng-click="closeOrder($index)">X</p>
 						</div>
 					</div>
@@ -83,7 +83,7 @@
 						<div class="col-md-6">
 							<div class="product-total">
 								<p>total:</p>
-								<h2>N {{selectedProduct()[0].proudctPrice}}</h2>
+								<h2><span>&#x20A6;</span> {{totalPrice}}</h2>
 							</div>
 						</div>
 					</div>
