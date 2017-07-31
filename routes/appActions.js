@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var mongoose=require('mongoose');
-var appSchema=require('../app/models/appSchema.js');
+var mongoose =require('mongoose');
+var appSchema = require('../app/models/appSchema.js');
 var nodemailer = require('nodemailer');
+let _ = require('lodash');
+
 //passport for authentication
 var passport = require('passport')
 LocalStrategy = require('passport-local').Strategy;
@@ -105,13 +107,22 @@ function updateDocument(id, update, document, result){
         }
     )
 }
+function pushDocument(id, update, document, result){
+    appSchema[document].findByIdAndUpdate(id,
+        {$push: update},
+        {new : true},
+        function(err, updates){
+           if(err) result(err, null);
+           else { result(null, updates)}
+        }
+    )
+}
 
 function addFilters(req, res, next){
     req.skip=parseInt(req.query.skip) || 0;
     req.limit=parseInt(req.query.limit) || 10;
 
-    var conditions= req.query.filters  || {};
-    // let conditions= req.query.filters  || {};
+    let conditions= req.query.filters  || {};
 
     if(typeof conditions!=="object")  conditions=JSON.parse(conditions)
     req.filters={status:'Active'};
@@ -121,8 +132,7 @@ function addFilters(req, res, next){
     next();
 }
 function addOrQuery(req, res, next){
-    var queryKeys= {} || req.query.queryKeys.split(',')
-    // let queryKeys= {} || req.query.queryKeys.split(',')
+    let queryKeys= {} || req.query.queryKeys.split(',')
     req.queryKeys={$or:[]};
     for(key in queryKeys){
         req.queryKeys.$or.push({_id: queryKeys[key]});
@@ -143,10 +153,10 @@ router.get('/logOut', function(req, res, next) {
 })
 router.get('/inventory', addFilters, addOrQuery, function(req, res, next) {
 
+    let toPopulate = req.query.populate || 'productManager inventorySettings'
     appSchema.inventory.find(req.filters)
     .skip(req.skip).limit(req.limit)
-    .populate(req.query.populate)
-
+    .populate(toPopulate)
     // .populate(
     //     {
     //         path:'inventorySettings'
@@ -189,12 +199,14 @@ router.get('/subcategory', function(req, res, next) {
 
 //get a particular post
 router.get('/inventory/:id', function(req, res, next){
+    let toPopulate = req.query.populate || 'productManager inventorySettings';
     appSchema.inventory.findById(req.params.id)
-    .populate(req.query.populate)
+    .populate(toPopulate)
     .exec(function(err, inventory){
         if(err)return next(err)
         res.json(inventory);
     })
+
 });
 router.get('/category/:id', function(req, res, next) {
     appSchema.category.findById(req.params.id, function(err, category){
@@ -223,44 +235,67 @@ router.get('/userProfile/:id', function(req, res, next) {
 });
 
 // send a post
-
 router.post('/inventory',  function(req, res, next){
     appSchema.inventory.create( req.body, function(err, inventory){
         if(err) res.send(err);
+        //if the inventory is added with extra features
         else if(req.body.others){
             inventoryExtra=req.body.others
-            // OVER HERE
-            var update={};
-            // let update={};
-            a=0;
-            for(var  key in inventoryExtra){
-                updateD=key;
 
-                inventoryExtra[key].inventoryId=inventory._id;
-                // add each to the database
-                addDocument(key, inventoryExtra[key], function(err, result, dkey){
-                    if(err) res.send(err)
-                    else{
-                        update[dkey]=result._id
-                        updateDocument(inventory._id, update, 'inventory', function(err, updates){
-                            if(err) res.send(err)
-                            else{
-                                inventory=updates;
-                                if(a==Object.keys(inventoryExtra).length-1){
-                                    res.json({message:"Inventory successfully Added!", inventory});
+            //take out the first feature enrty in the array
+            features=inventoryExtra.shift()
+            nextFeatures(features)
+            function nextFeatures(Features){
+
+                // extract the features from the object value
+                var FeaturesValue=Features.value;
+                var totalFeatures=Features.value.length;
+
+                saveAll();
+                function saveAll() {
+                    var update={};
+                    //etract the first feature from the features
+                    currentFeatures = FeaturesValue.shift();
+                    //assign the inventory's Id so that it can be easily referenced later
+                    currentFeatures.inventoryId=inventory._id;
+
+                    //send the features off to be added to the datbase
+                    addDocument(Features.title, currentFeatures, function(err, result, dkey){
+                        if(err) res.send(err)
+                        else{
+                            //set the returned id with the update object for the inventory's update task
+                            update[dkey]=result._id
+                            //update the inventory
+                            pushDocument(inventory._id, update, 'inventory', function(err, updatedInventory){
+                                if(err) res.send(err)
+                                else{
+                                    //check if there are still features remaining to ass
+                                    if (--totalFeatures){
+                                        saveAll(); //then make a recursive call
+                                    }
+                                    else{
+                                        // get a new extra feature
+                                        newFeature = inventoryExtra.shift()
+
+                                        //if there exists an extra feature then make a recursive call
+                                        if(newFeature)   nextFeatures(newFeature)
+                                        else{
+                                            //else we are done, so send back the updated inventory
+                                            res.json({message:"Inventory successfully Added!", updatedInventory});
+                                        }
+                                    }
+
                                 }
-                                a++
-                            }
-                        });
-                    }
-                });
+                            });
+                        }
+                    });
+                }
 
             }
         }
         else{
             res.json({message:"Inventory successfully Added!", inventory});
         }
-
     })
 });
 
@@ -279,28 +314,7 @@ router.post('/subcategory', function(req, res, next){
     })
 
 });
-//
-// router.post('/biddings', function(req, res, next){
-//     appSchema.productManager.create(req.body, function(err, post){
-//         if(err) return next(err)
-//         appSchema.inventory.findByIdAndUpdate(
-//             req.body.inventoryId,
-//             {$push:{productManager:post}},
-//             {safe: true, upsert: true, new : true},
-//             function(err, inventory){
-//                 if(err)return next(err)
-//                 appSchema.user.findByIdAndUpdate(
-//                     req.body.userId,
-//                     {$push:{userTests:inventory}},
-//                     function(err, user){
-//                     if(err)return next(err)
-//                         res.json(inventory);
-//                     }
-//                 )
-//             }
-//         )
-//     })
-// });
+
 
 router.post('/user', function(req, res, next){
     appSchema.user.find({$or:[{userName:req.body.userName}, {email:req.body.email}]})
