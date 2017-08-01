@@ -140,7 +140,6 @@ function addOrQuery(req, res, next){
     next();
 }
 /* GET users listing. */
-
 router.get('/serverDate', function(req, res, next) {
     res.json({date:Date.now()});
 })
@@ -152,7 +151,6 @@ router.get('/logOut', function(req, res, next) {
     res.send(200);
 })
 router.get('/inventory', addFilters, addOrQuery, function(req, res, next) {
-
     let toPopulate = req.query.populate || 'productManager inventorySettings'
     appSchema.inventory.find(req.filters)
     .skip(req.skip).limit(req.limit)
@@ -241,7 +239,6 @@ router.post('/inventory',  function(req, res, next){
         //if the inventory is added with extra features
         else if(req.body.others){
             inventoryExtra=req.body.others
-
             //take out the first feature enrty in the array
             features=inventoryExtra.shift()
             nextFeatures(features)
@@ -254,7 +251,7 @@ router.post('/inventory',  function(req, res, next){
                 saveAll();
                 function saveAll() {
                     var update={};
-                    //etract the first feature from the features
+                    //extract the first feature from the features
                     currentFeatures = FeaturesValue.shift();
                     //assign the inventory's Id so that it can be easily referenced later
                     currentFeatures.inventoryId=inventory._id;
@@ -269,7 +266,7 @@ router.post('/inventory',  function(req, res, next){
                             pushDocument(inventory._id, update, 'inventory', function(err, updatedInventory){
                                 if(err) res.send(err)
                                 else{
-                                    //check if there are still features remaining to ass
+                                    //check if there are still features remaining to add
                                     if (--totalFeatures){
                                         saveAll(); //then make a recursive call
                                     }
@@ -284,13 +281,11 @@ router.post('/inventory',  function(req, res, next){
                                             res.json({message:"Inventory successfully Added!", updatedInventory});
                                         }
                                     }
-
                                 }
                             });
                         }
                     });
                 }
-
             }
         }
         else{
@@ -298,8 +293,6 @@ router.post('/inventory',  function(req, res, next){
         }
     })
 });
-
-
 router.post('/category', function(req, res, next){
     appSchema.category.create(req.body, function(err, post){
         if(err) return next(err);
@@ -314,8 +307,6 @@ router.post('/subcategory', function(req, res, next){
     })
 
 });
-
-
 router.post('/user', function(req, res, next){
     appSchema.user.find({$or:[{userName:req.body.userName}, {email:req.body.email}]})
     .exec(function(err, user){
@@ -341,12 +332,11 @@ router.post('/user', function(req, res, next){
         else{   res.json({error:'User Already Exist', data:user});   }
     })
 });
-
 router.post('/contact', function(req, res, next){
     var params=req.body;
     console.log(params)
     var emailbody='<b>Dear '+params.name+', </b> <br>';
-    emailbody+='Thank you for contacting our Auction . Our representative will contact you shortly.';
+    emailbody+='Thank you for contacting us. Our representative will contact you shortly.';
     emailbody+='<br><br><b>Pronita Team</b>';
     var fromE="Pronita <info@pronita.com>";
     var subject="Thanks for contacting Pronita ";
@@ -391,6 +381,14 @@ router.post('/addSubscriber', function(req, res, next){
 router.post('/userLogin', passport.authenticate('local'), function(req, res, next) {
     res.json(req.user);
 });
+router.post('/likes',  function(req, res, next) {
+    appSchema.likes.create(req.body, function(err, post){
+        if(err) res.send(err)
+        pushDocument(post.inventoryId, { likes:post._id }, 'inventory', function(err, updatedInventory){
+            res.json({message:'Post was successfully liked', post, updatedInventory});
+        })
+    })
+});
 router.put('/:id', function(req, res, next){
     Inventory.findByIdAndUpdate(req.params.id, req.body, function(err, post){
         if(err)return next(err)
@@ -403,6 +401,5 @@ router.delete('/:id', function(req, res, next){
         res.json(post);
     })
 })
-
 
 module.exports = router;
