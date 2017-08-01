@@ -52,8 +52,8 @@ var offerConditionsSchema= new Schema({
     dateCreated:{type: Date, default: Date.now}
 });
 var likesSchema= new Schema({
-    user: {type:Schema.Types.ObjectId, ref:'user'},
-    inventoryId:{type:Schema.Types.ObjectId, ref:'inventory'},
+    user: {type:Schema.Types.ObjectId, ref:'user', required:true},
+    inventoryId:{type:Schema.Types.ObjectId, ref:'inventory', required:true},
     dateCreated:{type: Date, default: Date.now}
 });
 var commentsSchema= new Schema({
