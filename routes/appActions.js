@@ -231,6 +231,29 @@ router.get('/userProfile/:id', function(req, res, next) {
         res.json(user)
     })
 });
+router.get('/likes/:id', function(req, res, next) {
+    let objectToFind={};
+    let populateField = (req.query.type !='user') ? 'user': '';
+    objectToFind[req.query.type]=req.params.id
+    console.log(objectToFind, populateField)
+    appSchema.likes.find(objectToFind)
+    .populate(populateField)
+    .exec(function(err, user){
+        if(err) return next(err);
+        res.json(user)
+    })
+});
+router.get('/comments/:id', function(req, res, next) {
+    let objectToFind={};
+    let populateField = (req.query.type !='user') ? 'user': '';
+    objectToFind[req.query.type]=req.params.id
+    appSchema.comments.find(objectToFind)
+    .populate(populateField)
+    .exec(function(err, user){
+        if(err) return next(err);
+        res.json(user)
+    })
+});
 
 // send a post
 router.post('/inventory',  function(req, res, next){
@@ -384,21 +407,56 @@ router.post('/userLogin', passport.authenticate('local'), function(req, res, nex
 router.post('/likes',  function(req, res, next) {
     appSchema.likes.create(req.body, function(err, post){
         if(err) res.send(err)
-        pushDocument(post.inventoryId, { likes:post._id }, 'inventory', function(err, updatedInventory){
-            res.json({message:'Post was successfully liked', post, updatedInventory});
+        appSchema.likes.find({objectId:post.objectId}, function(err, object){
+            if(err)return next(err);
+            res.json({message:'Post was successfully liked', id:post.id, totalLikes:object.length});
         })
     })
 });
+router.post('/comments',  function(req, res, next) {
+    appSchema.comments.create(req.body, function(err, post){
+        if(err) res.send(err)
+        appSchema.comments.find({objectId:post.objectId}, function(err, object){
+            if(err)return next(err);
+            res.json({message:'Post comment was successfully', id:post.id, totalComment:object.length});
+        })
+    })
+});
+
 router.put('/:id', function(req, res, next){
     Inventory.findByIdAndUpdate(req.params.id, req.body, function(err, post){
         if(err)return next(err)
         res.json(post)
     })
 });
+router.put('/comments/:id', function(req, res, next){
+    updateDocument(req.params.id, req.body, 'comments', function(err, post){
+        if(err)return next(err)
+        res.json({message:'Comment update was successfully', comment:post})
+    })
+});
 router.delete('/:id', function(req, res, next){
-    Inventory.findByIdAndRemove(req.params.id, re.body, function(err, post){
+    Inventory.findByIdAndRemove(req.params.id, req.body, function(err, post){
         if(err)return next(err);
         res.json(post);
+    })
+})
+router.delete('/likes/:id', function(req, res, next){
+    appSchema.likes.findByIdAndRemove(req.params.id, {user:req.body.user}, function(err, post){
+        if(err)return next(err);
+        appSchema.likes.find({objectId:post.objectId}, function(err, object){
+            if(err)return next(err);
+            res.json({message:'Post was successfully removed', totalLikes: object.length});
+        })
+    })
+})
+router.delete('/comments/:id', function(req, res, next){
+    appSchema.comments.findByIdAndRemove(req.params.id, {user:req.body.user}, function(err, post){
+        if(err)return next(err);
+        appSchema.comments.find({objectId:post.objectId}, function(err, object){
+            if(err)return next(err);
+            res.json({message:'Post comments was successfully removed', totalComments: object.length});
+        })
     })
 })
 
