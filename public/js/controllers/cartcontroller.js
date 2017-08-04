@@ -145,4 +145,18 @@ pronita.controller('cartController',cartControllerDetails);
 
 		// INVOKE FUNC
 		$scope.productTotal();
+
+		$scope.continueBtn = function(){
+			if($scope.shoppingCart){
+				console.log('ShoppingCart')
+			}else if($scope.signin){
+				console.log('signin')
+			}
+			else if($scope.shippingDetail){
+				console.log('shippingDetail')
+			}
+			else{
+				console.log('payment')
+			}
+		}
 }

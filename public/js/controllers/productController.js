@@ -22,7 +22,7 @@ pronita.controller('productController', productDetail);
 
 	// $scope.selectedproduct = {Rocknrool : 'want one'};
 
-	$scope.isLike = 118;
+	$scope.isLike = 0;
 	$scope.showTab = 1;
 	$scope.hideTab = 0;
 	pc.isproduct = 0;
@@ -76,6 +76,7 @@ pronita.controller('productController', productDetail);
 
 	// $scope.pushToCart();
 
+	// LIKE PRODUCT
 	$scope.productLiked = function(){
 
 		if ($scope.confirmLike == pc.unliked){
@@ -83,10 +84,16 @@ pronita.controller('productController', productDetail);
 
 			//add one to the like array for product
 			$scope.isLike += 1;
+			$scope.productLikes.push($scope.isLike);
+			console.log($scope.productLikes)
 		}
 		else{
+			console.log('Yo Got here First');
 			$scope.confirmLike = pc.unliked;
-			$scope.isLike -= 1
+			$scope.isLike = ($scope.singleProduct.likes[($scope.singleProduct.likes.length-1)])-1;
+			// $scope.isLike -= 1
+			$scope.productLikes.push($scope.isLike);
+			console.log($scope.productLikes)
 			//pop one from the like array for product
 		}
 
@@ -111,10 +118,37 @@ pronita.controller('productController', productDetail);
 				$scope.singleProduct.inventorySettings.discount = ''
 			}
 			// console.log(result);
+
+			// INVOKE LIKES
+			pc.getLikes();
 		})
 	}
 
 	$scope.getSingleProduct(pc.url);
+
+	// FETCH LIKES
+	pc.getLikes = function(){
+		pc.likeUrl = 'appActions/likes/';
+
+		pc.likeUrl += $scope.singleProduct._id + 'type=user'
+		console.log(pc.likeUrl)
+
+		var allLikes = mainService.fetchData(pc.likeUrl);
+			allLikes.then(function(result){
+				console.log({LIKES:result})
+				// $scope.productLikes = result.data ? result.data :
+
+				if(!result.data){
+					result.data.push(0);
+				}else{
+					$scope.productLikes = result.data;
+				}
+
+			})
+	}
+
+	// INVOKE PRODUCT LIKES
+	// pc.getLikes();
 
 
 	// HANDLE TAB ONCLICK
@@ -220,7 +254,16 @@ pronita.controller('productController', productDetail);
 
 	// GET OTHER USER PRODUCT
 	pc.getOtheruserproduct = function(){
-		
+		url += '?populate=inventorySettings category offerConditions&limit=4&skip=0&filters={"description":"Physical Product"}'
+
+			// console.log(url);
+		  	pc.productLists = mainService.fetchData(url);
+
+		  	pc.productLists.then(function(result){
+		  		console.log(result)
+		  		$scope.recommendedProducts = result.data;
+		  		console.log($scope.recommendedProduct)
+		  	});
 	}
 	
 };

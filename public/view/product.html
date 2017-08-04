@@ -52,7 +52,7 @@
                 <div class="col-md-12 review-icon">
                     <div class="product-like">
                         <a href="" class="liker" ng-click="productLiked()"><span class="btn"><i class="{{confirmLike}}"></i></span></a>
-                        <span><p>{{singleProduct.likes.length}}</p></span>
+                        <span><p>{{productLikes.length}}</p></span>
                     </div>
                     <div class="product-comment">
                         <span class="btn"><i class="fa fa-comment-o"></i></span>
@@ -97,6 +97,10 @@
             </div>
             <div class="col-md-12" ng-if="getCurrentTab('keyFeatures')">
 
+                <div ng-if="!keyFeature.description">
+                    <h2>No key Features</h2>
+                </div>
+
                 <div class="col-md-6 feat-info-block" ng-repeat="keyFeature in singleProduct.keyFeatures">
                     <h2>{{keyFeature.title}}</h2>
                     <p>{{keyFeature.description}}</p>
@@ -104,6 +108,10 @@
             </div>
 
             <div class="col-md-12" ng-if="getCurrentTab('specifications')">
+
+                <div ng-if="!specification.description">
+                    <h2>No Specifications</h2>
+                </div>
 
                 <div class="col-md-6 feat-info-block" ng-repeat="specification in singleProduct.specifications">
                     <h2>{{specification.title}}</h2>
@@ -113,6 +121,10 @@
 
             <div class="col-md-12" ng-if="getCurrentTab('offerDetails')">
 
+                <div ng-if="!offerDetail.description">
+                    <h2>No Offer Details</h2>
+                </div>
+
                 <div class="col-md-6 feat-info-block" ng-repeat="offerDetail in singleProduct.offerDetails">
                     <h2>{{offerDetail.title}}</h2>
                     <p>{{offerDetail.description}}</p>
@@ -121,6 +133,10 @@
 
             <div class="col-md-12" ng-if="getCurrentTab('offerConditions')">
 
+                <div ng-if="!offerCondition.description">
+                    <h2>No Offer Conditions</h2>
+                </div>
+
                 <div class="col-md-6 feat-info-block" ng-repeat="offerCondition in singleProduct.offerConditions">
                     <h2>{{offerCondition.title}}</h2>
                     <p>{{offerCondition.description}}</p>
@@ -128,6 +144,10 @@
             </div>
 
             <div class="col-md-12" ng-if="getCurrentTab('reviews')">
+
+                <div ng-if="!review.description">
+                    <h2>No Reviews</h2>
+                </div>
 
                 <div class="col-md-6 feat-info-block" ng-repeat="review in singleProduct.reviews">
                     <h2>{{review.title}}</h2>
@@ -147,7 +167,7 @@
                 <div class="see-all btn">See all <i class="fa fa-caret-right" aria-hidden="true"></i></div>
             </div>
             <div class="col-md-12 trending-products recommend-list">
-                <single-product ng-repeat="recommendations in recommender(4)"></single-product>
+                <!-- <single-product ng-repeat="recommendations in recommender(4)"></single-product> -->
             </div>
         </div>
     </div>
